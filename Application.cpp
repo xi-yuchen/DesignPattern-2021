@@ -1,4 +1,5 @@
 #include<iostream>
+#include "UserInterface.h"
 
 using namespace std;
 
@@ -16,6 +17,9 @@ int main() {
             /*
              * Client for users Code.
              */
+            auto* a=new CustomerInterface();
+            a->mainInterface();
+            delete a;
         } else if (login_status == 2) {
             /*
              * Client for sellers Code.
