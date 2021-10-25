@@ -7,22 +7,21 @@
 using std::string;
 using std::list;
 
-class Seller;
+class Shop;
 
 class Commodity {
 protected:
     string name, type; // 商品名
     int ID, price; // 价格, 数量
-    Seller* owner; // 商品拥有者(店铺)
+    Shop* shop; // 商品拥有者(店铺)
 
 public:
-    Commodity(int ID, string name, int price, Seller* seller);
+    Commodity(int ID, string name, int price, Shop* shop);
 
-    int GetID() { return this->ID; }
     string GetName() { return this->name; }
     string GetType() { return this->type; }
     int GetPrice() { return this->price; }
-    Seller* GetOwner() { return this->owner; }
+    Shop* GetShop() { return this->shop; }
 
     virtual bool Add(Commodity* commodity);
     virtual bool Remove(Commodity* commodity);
@@ -38,7 +37,7 @@ protected:
     int amount; // 商品库存数量
 
 public:
-    SingleCommodity(int ID, string name, int price, Seller* seller, int amount);
+    SingleCommodity(int ID, string name, int price, Shop* shop, int amount);
 
     virtual bool HasCommodity(Commodity* commodity);
     virtual bool Enough(int amount);
@@ -51,7 +50,7 @@ protected:
     list<Commodity*> commodity_list;
 
 public:
-    CompositeCommodity(int ID, string name, int price, Seller* seller);
+    CompositeCommodity(int ID, string name, int price, Shop* shop);
 
     bool Add(Commodity* commodity);
     bool Remove(Commodity* commodity);

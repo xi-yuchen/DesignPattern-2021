@@ -1,17 +1,18 @@
 #include <iostream>
 #include <iomanip>
 #include "Commodity.h"
+#include "shop.h"
 
 using std::cout;
 using std::endl;
 
 //===================== Commodity 商品虚基类========================
 
-Commodity::Commodity(int ID, string name, int price, Seller* seller) {
+Commodity::Commodity(int ID, string name, int price, Shop* shop) {
     this->ID = ID;
     this->name = name;
     this->price = price;
-    this->owner = seller;
+    this->shop = shop;
 }
 
 /**
@@ -32,8 +33,8 @@ bool Commodity::Remove(Commodity* commodity) {
 
 //===================== SingleCommodity 单件商品类 ========================
 
-SingleCommodity::SingleCommodity(int ID, string name, int price, Seller* seller, int amount)
-    : Commodity(ID, name, price, seller) {
+SingleCommodity::SingleCommodity(int ID, string name, int price, Shop* shop, int amount)
+    : Commodity(ID, name, price, shop) {
     this->amount = amount;
 }
 
@@ -80,13 +81,15 @@ void SingleCommodity::Display() {
     cout << std::left << std::setw(6) << this->amount;
     cout << "价格: ";
     cout << std::left << std::setw(6) << this->ID;
+    cout << "商铺: ";
+    cout << std::left << std::setw(8) << this->shop->getShopName();
     cout << endl;
 }
 
 //===================== CompositeCommodity 组合商品类 ========================
 
-CompositeCommodity::CompositeCommodity(int ID, string name, int price, Seller* seller)
-    : Commodity(ID, name, price, seller) { }
+CompositeCommodity::CompositeCommodity(int ID, string name, int price, Shop* shop)
+    : Commodity(ID, name, price, shop) { }
 
 /**
  * 功能: 在商品组合中添加商品
@@ -165,6 +168,8 @@ void CompositeCommodity::Display() {
     cout << std::left << std::setw(4) << this->ID;
     cout << "商品组合: ";
     cout << std::left << std::setw(10) << this->name;
+    cout << "商铺: ";
+    cout << std::left << std::setw(8) << this->shop->getShopName();
     cout << endl;
     cout << "{" << endl;
     for(auto my_commodity : this->commodity_list) {
