@@ -4,8 +4,12 @@
 
 #include "CartCommand.h"
 
+void CartCommand::setCart(Cart *cart) {
+    this->cart = cart;
+}
+
 void AddCommodity::operation() {
-    cart->add(*commodity);
+    cart->add(commodity);
 }
 
 void RemoveCommodity::operation() {
@@ -32,6 +36,10 @@ void PaySomeCommodity::operation() {
     cart->pay(id, amount);
 }
 
+void ExecuteCommands::setCart(Cart *cart) {
+    this->cart = cart;
+}
+
 void ExecuteCommands::addCommand(CartCommand *command) {
     commands.push_back(command);
 }
@@ -41,6 +49,8 @@ void ExecuteCommands::removeCommand(CartCommand *command) {
 }
 
 void ExecuteCommands::execute() {
-    for (auto command : commands)
-        command->operation();
+    for (auto command : commands) {
+        (*command).setCart(this->cart);
+        (*command).operation();
+    }
 }
