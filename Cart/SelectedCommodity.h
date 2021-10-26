@@ -22,23 +22,20 @@ class SelectedCommodity {
 private:
     string name, type;
     int id, price, amount;
-//    Store* store;
-//    Cart* cart;
 public:
     SelectedCommodity(int id, string name, string type, int price, int amount);
-//    SelectedCommodity(SelectedCommodity &commodity);
-    int getID() const { return id; }
-    string getName() const { return name; }
-    string getType() const { return type; }
-    int getPrice() const { return price; }
-    int getAmount() const { return amount; }
+//    SelectedCommodity(const SelectedCommodity &commodity);
+    int getID() const;
+    string getName() const;
+    string getType() const;
+    int getPrice() const;
+    int getAmount() const;
+//    SelectedCommodity getThis() const { return this; }
 
     void setAmount(int amount);
 
     void add(int amount);
     bool remove(int amount);
-
-//    void setCart(Cart* cart);
 
     void display();
 };

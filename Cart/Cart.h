@@ -25,51 +25,61 @@ using namespace std;
  * （意思就是Observer模式在这里就暂时没有写）
  */
 
+/**
+ * 2021.10.26 12：40修改
+ * 调整了Cart中的SelectedCommodity的存储方式 => 从直接存储实例改成了存储指针
+ * 因为之前列表元素存指针的时候不知道迭代器怎么调用成员函数（现在知道怎么写了）
+ * 然后给广告类的接口就可以实现了，但暂时没写
+ */
+
 class SelectedCommodity;
 
+/**
+ * 构造函数不允许声明为虚函数，所以只能在Order(订单类)内部先声明一个list
+ */
+
 class Order {
-    list<SelectedCommodity> commodityList;
-//    int ID = 1123;
+    list<SelectedCommodity*> commodityList;
+//    int id = 1123;
 public:
-    Order(list<SelectedCommodity> commodityList) { this->commodityList = commodityList; }
-//    int getID() const { return this->ID; }
+    Order(list<SelectedCommodity*> commodityList) { this->commodityList = commodityList; }
+//    int getID() const { return id; }
 };
+
+/**
+ * OrderList(订单列表类)是一个纯抽象类(接口)
+ */
 class OrderList {
-    list<Order> orderList;
+//    list<Order*> orderList;
 public:
-    virtual void addOrder(Order &order);
-//    void addOrder(Order &order) {
-//        this->orderList.push_back(order);
+    virtual void addOrder(Order &order); // 这里是接口
+//    void addOrder(Order *order) {
+//        orderList.push_back(order);
 //    }
 //    void display() {
 //        cout << "This is the list of you orders:" << endl;
-//        for (auto &order : this->orderList)
-//            cout << order.getID() << endl;
+//        for (auto order : orderList)
+//            cout << (*order).getID() << endl;
 //    }
 };
 
 class Cart {
 private:
-    list<SelectedCommodity> commodityList;
+    list<SelectedCommodity*> commodityList;
     OrderList* orderList;
 public:
     void connectOrderList(OrderList *orderList);
 
-    void add(SelectedCommodity &commodity);
+    void add(SelectedCommodity *commodity);
     void remove(int id);
     void remove(int id, int amount);
-    // 为简化业务逻辑所以太具体的功能就暂时不实现了，只实现最基本的功能
-//    void removeByName(string name);
-//    void removeByType(string type);
     void display();
     void pay();
     void pay(int id);
     void pay(int id, int amount);
 
     // 给广告类提供的接口（虽然格式不太对），暂时不懂业务逻辑也不知道在购物车类里要怎么实现广告这个模块，就先这样搁着了
-    list<SelectedCommodity> getAllCommodity() { return this->commodityList; }
-//    void payByName(string name);
-//    void payByType(string type);
+    list<SelectedCommodity*> getAllCommodity() { return commodityList; }
 };
 
 #endif //SOFTWARE_DESIGN_PATTERNS_TASK_CART_H
