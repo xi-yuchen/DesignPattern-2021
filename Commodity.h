@@ -10,77 +10,105 @@ using std::list;
 
 class Shop;
 
-class Commodity {
+class CommodityInformation {
 protected:
     string name, type; // 商品名
-    int ID, price; // 价格, 数量
+    int ID, price; // 价格
     Shop* shop; // 商品拥有者(店铺)
-    list<Commodity*> commodity_list; // 用于Iterator
 
 public:
-    Commodity(int ID, string name, int price, Shop* shop);
+    friend class CommodityInformaitonReader;
+    friend class CommodityInformaitonSetter;
 
-    string GetName() { return this->name; }
-    string GetType() { return this->type; }
-    int GetPrice() { return this->price; }
-    Shop* GetShop() { return this->shop; }
+    CommodityInformation(int ID, string name, int price, Shop* shop);
     
-    virtual bool Add(Commodity* commodity);
-    virtual bool Remove(Commodity* commodity);
+    virtual bool Add(CommodityInformation* commodity);
+    virtual bool Remove(CommodityInformation* commodity);
 
-    virtual bool HasCommodity(Commodity* commodity) = 0;
+    virtual bool HasCommodity(CommodityInformation* commodity) = 0;
     virtual bool Enough(int amount) = 0;
     virtual bool Sell(int amount) = 0;
     virtual void Display() = 0;
-
-    // 用于Iterator
-    list<Commodity*>* GetCommodityList() { return &commodity_list; };
-    CommodityIterator& begin() { return CommodityIterator(commodity_list.begin()); }
-    CommodityIterator& end() { return CommodityIterator(commodity_list.end()); }
-    int size() { return commodity_list.size(); }
 };
 
-class SingleCommodity : public Commodity {
+class CommodityInformaitonReader{
+private:
+    CommodityInformation* source;
+public:
+    CommodityInformaitonReader() = default;
+    void setCommodityInformation(CommodityInformation* info){
+        source = info;
+    }
+    string getName() { return  source->name; }
+    int getID() { return  source->ID; }
+    string getType() { return  source->type; }
+    int getPrice() { return source->price; }
+    Shop* getShop() { return source->shop; }
+};
+
+class CommodityInformaitonSetter{
+private:
+    CommodityInformation* source;
+public:
+    CommodityInformaitonSetter() = default;
+    void setCommodityInformation(CommodityInformation* info){
+        source = info;
+    }
+    void setName(string name) { source->name = name; }
+    void setID(int id) { source->ID = id; }
+    void setType(string type) { source->type = type; }
+    void setPrice(int price) { source->price = price; }
+    bool addCommodity(CommodityInformation* commodity) { return source->Add(commodity); }
+    bool removeCommodity(CommodityInformation* commodity) { return source->Remove(commodity); }
+};
+
+class SingleCommodity : public CommodityInformation {
 protected:
     int amount; // 商品库存数量
 
 public:
     SingleCommodity(int ID, string name, int price, Shop* shop, int amount);
 
-    list<Commodity*>* GetCommodityList() { return &commodity_list; } ; // 用于Iterator
-
-    virtual bool HasCommodity(Commodity* commodity);
+    virtual bool HasCommodity(CommodityInformation* commodity);
     virtual bool Enough(int amount);
     virtual bool Sell(int amount);
     virtual void Display();
 };
 
-class CompositeCommodity : public Commodity {
+class CompositeCommodity : public CommodityInformation {
+private:
+    list<CommodityInformation*> commodity_list;
 public:
     CompositeCommodity(int ID, string name, int price, Shop* shop);
 
-    bool Add(Commodity* commodity);
-    bool Remove(Commodity* commodity);
+    bool Add(CommodityInformation* commodity);
+    bool Remove(CommodityInformation* commodity);
 
-    virtual bool HasCommodity(Commodity* commodity);
+    virtual bool HasCommodity(CommodityInformation* commodity);
     virtual bool Enough(int amount);
     virtual bool Sell(int amount);
     virtual void Display();
+
+    // 用于Iterator
+    list<CommodityInformation*>* GetCommodityList() { return &commodity_list; };
+    CompositeCommodityIterator& begin() { return CompositeCommodityIterator(commodity_list.begin()); }
+    CompositeCommodityIterator& end() { return CompositeCommodityIterator(commodity_list.end()); }
+    int size() { return commodity_list.size(); }
 };
 
-class CommodityIterator : public std::iterator<std::input_iterator_tag, Commodity> {
+class CompositeCommodityIterator : public std::iterator<std::input_iterator_tag, CompositeCommodity> {
 protected:
-    list<Commodity*>::iterator current;
+    list<CommodityInformation*>::iterator current;
 
 public:
-    CommodityIterator(list<Commodity*>::iterator commodity);
+    CompositeCommodityIterator(list<CommodityInformation*>::iterator commodity);
 
-    CommodityIterator& operator= (const CommodityIterator& iter);
-    bool operator!= (const CommodityIterator& iter);
-    bool operator== (const CommodityIterator& iter);
-    CommodityIterator& operator++ ();
-    CommodityIterator& operator++ (int);
-    Commodity& operator* () { return **current; }
+    CompositeCommodityIterator& operator= (const CompositeCommodityIterator& iter);
+    bool operator!= (const CompositeCommodityIterator& iter);
+    bool operator== (const CompositeCommodityIterator& iter);
+    CompositeCommodityIterator& operator++ ();
+    CompositeCommodityIterator& operator++ (int);
+    CommodityInformation& operator* () { return **current; }
 };
 
 #endif
