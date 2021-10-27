@@ -35,6 +35,7 @@ bool Commodity::Remove(Commodity* commodity) {
 
 SingleCommodity::SingleCommodity(int ID, string name, int price, Shop* shop, int amount)
     : Commodity(ID, name, price, shop) {
+    commodity_list.push_back(this);
     this->amount = amount;
 }
 
@@ -176,4 +177,34 @@ void CompositeCommodity::Display() {
         my_commodity->Display();
     }
     cout << "}" << endl;
+}
+
+//===================== CommodityIterator 商品迭代器 ========================
+
+CommodityIterator::CommodityIterator(list<Commodity*>::iterator commodity) {
+    current = commodity;
+}
+
+CommodityIterator& CommodityIterator::operator= (const CommodityIterator& iter) {
+    this->current = iter.current;
+    return *this;
+}
+
+bool CommodityIterator::operator!= (const CommodityIterator& iter) {
+    return this->current != iter.current;
+}
+
+bool CommodityIterator::operator== (const CommodityIterator& iter) {
+    return this->current == iter.current;
+}
+
+CommodityIterator& CommodityIterator::operator++ () {
+    current++;
+    return *this;
+}
+
+CommodityIterator& CommodityIterator::operator++ (int) {
+    CommodityIterator temp = *this;
+    current++;
+    return temp;
 }
