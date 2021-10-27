@@ -8,7 +8,7 @@ using std::endl;
 
 //===================== Commodity 商品虚基类========================
 
-Commodity::Commodity(int ID, string name, int price, Shop* shop) {
+CommodityInformation::CommodityInformation(int ID, string name, int price, Shop* shop) {
     this->ID = ID;
     this->name = name;
     this->price = price;
@@ -19,7 +19,7 @@ Commodity::Commodity(int ID, string name, int price, Shop* shop) {
  * 功能: 在商品组合中添加商品
  * 默认返回false
  */
-bool Commodity::Add(Commodity* commodity) {
+bool CommodityInformation::Add(CommodityInformation* commodity) {
     return false;
 }
 
@@ -27,15 +27,14 @@ bool Commodity::Add(Commodity* commodity) {
  * 功能: 在商品组合中移除商品
  * 默认返回false
  */
-bool Commodity::Remove(Commodity* commodity) {
+bool CommodityInformation::Remove(CommodityInformation* commodity) {
     return false;
 }
 
 //===================== SingleCommodity 单件商品类 ========================
 
 SingleCommodity::SingleCommodity(int ID, string name, int price, Shop* shop, int amount)
-    : Commodity(ID, name, price, shop) {
-    commodity_list.push_back(this);
+    : CommodityInformation(ID, name, price, shop) {
     this->amount = amount;
 }
 
@@ -44,7 +43,7 @@ SingleCommodity::SingleCommodity(int ID, string name, int price, Shop* shop, int
  * 参数: 指向商品基类的指针
  * 对于SingleCommodity类, 仅判断函数参数指向的商品是否是自己
  */
-bool SingleCommodity::HasCommodity(Commodity* commodity) {
+bool SingleCommodity::HasCommodity(CommodityInformation* commodity) {
     if(commodity = this) return true;
     else return false;
 }
@@ -90,13 +89,13 @@ void SingleCommodity::Display() {
 //===================== CompositeCommodity 组合商品类 ========================
 
 CompositeCommodity::CompositeCommodity(int ID, string name, int price, Shop* shop)
-    : Commodity(ID, name, price, shop) { }
+    : CommodityInformation(ID, name, price, shop) { }
 
 /**
  * 功能: 在商品组合中添加商品
  * 如果组合中已经有此商品则返回false, 否则添加商品并返回true
  */
-bool CompositeCommodity::Add(Commodity* commodity) {
+bool CompositeCommodity::Add(CommodityInformation* commodity) {
     if(HasCommodity(commodity)) { // 组合商品中已经存在此商品
         return false;
     }
@@ -110,7 +109,7 @@ bool CompositeCommodity::Add(Commodity* commodity) {
  * 功能: 在商品组合中移除商品
  * 如果组合中没有此商品则返回false, 否则移除商品并返回true
  */
-bool CompositeCommodity::Remove(Commodity* commodity) {
+bool CompositeCommodity::Remove(CommodityInformation* commodity) {
     if(HasCommodity(commodity)) { // 组合商品中存在此商品
         this->commodity_list.remove(commodity);
         return true;
@@ -123,7 +122,7 @@ bool CompositeCommodity::Remove(Commodity* commodity) {
  * 参数: 指向商品基类的指针
  * 对于CompositeCommodity类, 依次判断组合中的每个商品是否含有此商品
  */
-bool CompositeCommodity::HasCommodity(Commodity* commodity) {
+bool CompositeCommodity::HasCommodity(CommodityInformation* commodity) {
     for(auto my_commodity : this->commodity_list) {
         if(my_commodity->HasCommodity(commodity)) { // 如果某件商品含有此商品
             return true;
@@ -181,30 +180,30 @@ void CompositeCommodity::Display() {
 
 //===================== CommodityIterator 商品迭代器 ========================
 
-CommodityIterator::CommodityIterator(list<Commodity*>::iterator commodity) {
+CompositeCommodityIterator::CompositeCommodityIterator(list<CommodityInformation*>::iterator commodity) {
     current = commodity;
 }
 
-CommodityIterator& CommodityIterator::operator= (const CommodityIterator& iter) {
+CompositeCommodityIterator& CompositeCommodityIterator::operator= (const CompositeCommodityIterator& iter) {
     this->current = iter.current;
     return *this;
 }
 
-bool CommodityIterator::operator!= (const CommodityIterator& iter) {
+bool CompositeCommodityIterator::operator!= (const CompositeCommodityIterator& iter) {
     return this->current != iter.current;
 }
 
-bool CommodityIterator::operator== (const CommodityIterator& iter) {
+bool CompositeCommodityIterator::operator== (const CompositeCommodityIterator& iter) {
     return this->current == iter.current;
 }
 
-CommodityIterator& CommodityIterator::operator++ () {
+CompositeCommodityIterator& CompositeCommodityIterator::operator++ () {
     current++;
     return *this;
 }
 
-CommodityIterator& CommodityIterator::operator++ (int) {
-    CommodityIterator temp = *this;
+CompositeCommodityIterator& CompositeCommodityIterator::operator++ (int) {
+    CompositeCommodityIterator temp = *this;
     current++;
     return temp;
 }
