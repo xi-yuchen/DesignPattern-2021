@@ -17,8 +17,10 @@ int main() {
             /*
              * Client for users Code.
              */
-            auto* a=new CustomerInterface();
+            auto *a = new CustomerInterface();
             a->mainInterface();
+            cout << "--用户信息展示--" << endl;
+            a->showUserInformation();
             delete a;
         } else if (login_status == 2) {
             /*

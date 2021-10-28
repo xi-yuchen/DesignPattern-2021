@@ -44,7 +44,7 @@ SingleCommodity::SingleCommodity(int ID, string name, int price, Shop* shop, int
  * 对于SingleCommodity类, 仅判断函数参数指向的商品是否是自己
  */
 bool SingleCommodity::HasCommodity(CommodityInformation* commodity) {
-    if(commodity = this) return true;
+    if(commodity == this) return true;
     else return false;
 }
 
@@ -80,7 +80,7 @@ void SingleCommodity::Display() {
     cout << "库存数量: ";
     cout << std::left << std::setw(6) << this->amount;
     cout << "价格: ";
-    cout << std::left << std::setw(6) << this->ID;
+    cout << std::left << std::setw(6) << this->price;
     cout << "商铺: ";
     cout << std::left << std::setw(8) << this->shop->getShopName();
     cout << endl;
@@ -99,7 +99,7 @@ bool CompositeCommodity::Add(CommodityInformation* commodity) {
     if(HasCommodity(commodity)) { // 组合商品中已经存在此商品
         return false;
     }
-    else { // 组合商品中不存在此商品 
+    else { // 组合商品中不存在此商品
         this->commodity_list.push_back(commodity);
         return true;
     }
@@ -168,6 +168,8 @@ void CompositeCommodity::Display() {
     cout << std::left << std::setw(4) << this->ID;
     cout << "商品组合: ";
     cout << std::left << std::setw(10) << this->name;
+    cout << "价格: ";
+    cout << std::left << std::setw(6) << this->price;
     cout << "商铺: ";
     cout << std::left << std::setw(8) << this->shop->getShopName();
     cout << endl;
@@ -203,7 +205,7 @@ CompositeCommodityIterator& CompositeCommodityIterator::operator++ () {
 }
 
 CompositeCommodityIterator& CompositeCommodityIterator::operator++ (int) {
-    CompositeCommodityIterator temp = *this;
+    CompositeCommodityIterator* temp = new CompositeCommodityIterator(*this);
     current++;
-    return temp;
+    return *temp;
 }
