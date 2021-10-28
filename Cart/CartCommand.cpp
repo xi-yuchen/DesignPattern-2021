@@ -9,7 +9,8 @@ void CartCommand::setCart(Cart *cart) {
 }
 
 void AddCommodity::operation() {
-    cart->add(commodity);
+//    cout << "Operating add commodity command" << endl;
+    cart->add(infoReader, amount);
 }
 
 void RemoveCommodity::operation() {
@@ -53,4 +54,5 @@ void ExecuteCommands::execute() {
         (*command).setCart(this->cart);
         (*command).operation();
     }
+    commands.clear();
 }

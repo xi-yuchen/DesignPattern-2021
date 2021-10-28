@@ -5,7 +5,6 @@
 #ifndef CART_CARTCOMMAND_H
 #define CART_CARTCOMMAND_H
 
-#include "SelectedCommodity.h"
 #include "Cart.h"
 
 #include <list>
@@ -44,10 +43,12 @@ public:
 
 class AddCommodity : public CartCommand {
 private:
-    SelectedCommodity* commodity;
+//    SelectedCommodity* commodity;
 //    Cart* cart;
+    CommodityInformationReader *infoReader;
+    int amount;
 public:
-    AddCommodity(SelectedCommodity *commodity) : commodity(commodity) {}
+    AddCommodity(CommodityInformationReader *infoReader, int amount) : infoReader(infoReader), amount(amount) {}
     void operation();
 };
 
