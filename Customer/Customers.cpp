@@ -3,6 +3,10 @@
 //
 
 #include "Customers.h"
+#include<vector>
+#include <algorithm>
+
+using namespace std;
 
 void WelcomeMessage::addCustomer(Customer *customer) {
     broadcast();
@@ -14,8 +18,8 @@ void WelcomeMessage::deleteCustomer(Customer *customer) {
 }
 
 void WelcomeMessage::broadcast() {
-    for(auto customer:_customers){
-        if(customer!= nullptr)
+    for (auto customer:_customers) {
+        if (customer != nullptr)
             customer->sendMessage("有新账号上线，请注意设备安全\n");
         else
             _customers.remove(customer);
@@ -24,17 +28,18 @@ void WelcomeMessage::broadcast() {
 
 void CustomerSet::addCustomer(Customer *customer) {
     _customers.push_back(customer);
-    _index=(int)_customers.size()-1;
+    _index = (int) _customers.size() - 1;
 }
 
 void CustomerSet::deleteCustomer(Customer *customer) {
-    std::remove(_customers.begin(),_customers.end(),customer);
+    remove(_customers.begin(), _customers.end(), customer);
+    return;
 }
 
 bool CustomerSet::switchCustomer(int index) {
-    if(index>=0&&index<_customers.size()){
-        _index=index;
-    }else
+    if (index >= 0 && index < _customers.size()) {
+        _index = index;
+    } else
         return false;
     return true;
 }
@@ -48,4 +53,4 @@ vector<Customer *> CustomerSet::getCustomers() {
 }
 
 
-CustomerSet* CustomerSet::_instance= nullptr;
+CustomerSet *CustomerSet::_instance = nullptr;

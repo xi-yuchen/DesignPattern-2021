@@ -7,4 +7,4 @@ set(CMAKE_CXX_STANDARD 14)
 file(GLOB SRC_LIST "./Customer/*.*")
 
 add_executable(DesignPattern_2021
-        ${SRC_LIST})
+        Application.cpp)

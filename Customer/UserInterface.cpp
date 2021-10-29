@@ -22,7 +22,7 @@ void CustomerInterface::setUserInformation() {
     cout<<"请输入用户邮箱";
     cin>>email;
     setter.setEmail(email);
-    setter.setId((int)random());
+    setter.setId((int)rand());
     setter.setPoints(0);
     auto* oldInfo=new CustomerInformation(*(this->customer->getInfo()));
     CustomerInformationOriginator originator{};

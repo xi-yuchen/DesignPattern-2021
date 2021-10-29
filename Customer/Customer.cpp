@@ -76,7 +76,7 @@ void Customer::inputInformation() {
     cout<<"请输入用户邮箱";
     cin>>email;
     setter->setEmail(email);
-    setter->setId((int)random());
+    setter->setId((int)rand());
     setter->setPoints(0);
     backup();
 }
