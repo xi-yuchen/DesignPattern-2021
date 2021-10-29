@@ -116,6 +116,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named DPlib
+
+# Build rule for target.
+DPlib: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 DPlib
+.PHONY : DPlib
+
+# fast build rule for target.
+DPlib/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/build
+.PHONY : DPlib/fast
+
+#=============================================================================
 # Target rules for targets named DesignPattern_2021
 
 # Build rule for target.
@@ -152,6 +165,102 @@ Application.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DesignPattern_2021.dir\build.make CMakeFiles/DesignPattern_2021.dir/Application.cpp.s
 .PHONY : Application.cpp.s
 
+Basic/welcome.obj: Basic/welcome.cpp.obj
+.PHONY : Basic/welcome.obj
+
+# target to build an object file
+Basic/welcome.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Basic/welcome.cpp.obj
+.PHONY : Basic/welcome.cpp.obj
+
+Basic/welcome.i: Basic/welcome.cpp.i
+.PHONY : Basic/welcome.i
+
+# target to preprocess a source file
+Basic/welcome.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Basic/welcome.cpp.i
+.PHONY : Basic/welcome.cpp.i
+
+Basic/welcome.s: Basic/welcome.cpp.s
+.PHONY : Basic/welcome.s
+
+# target to generate assembly for a file
+Basic/welcome.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Basic/welcome.cpp.s
+.PHONY : Basic/welcome.cpp.s
+
+Shop/shop.obj: Shop/shop.cpp.obj
+.PHONY : Shop/shop.obj
+
+# target to build an object file
+Shop/shop.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Shop/shop.cpp.obj
+.PHONY : Shop/shop.cpp.obj
+
+Shop/shop.i: Shop/shop.cpp.i
+.PHONY : Shop/shop.i
+
+# target to preprocess a source file
+Shop/shop.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Shop/shop.cpp.i
+.PHONY : Shop/shop.cpp.i
+
+Shop/shop.s: Shop/shop.cpp.s
+.PHONY : Shop/shop.s
+
+# target to generate assembly for a file
+Shop/shop.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Shop/shop.cpp.s
+.PHONY : Shop/shop.cpp.s
+
+Shop/shopFilter.obj: Shop/shopFilter.cpp.obj
+.PHONY : Shop/shopFilter.obj
+
+# target to build an object file
+Shop/shopFilter.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Shop/shopFilter.cpp.obj
+.PHONY : Shop/shopFilter.cpp.obj
+
+Shop/shopFilter.i: Shop/shopFilter.cpp.i
+.PHONY : Shop/shopFilter.i
+
+# target to preprocess a source file
+Shop/shopFilter.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Shop/shopFilter.cpp.i
+.PHONY : Shop/shopFilter.cpp.i
+
+Shop/shopFilter.s: Shop/shopFilter.cpp.s
+.PHONY : Shop/shopFilter.s
+
+# target to generate assembly for a file
+Shop/shopFilter.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Shop/shopFilter.cpp.s
+.PHONY : Shop/shopFilter.cpp.s
+
+Shop/shopInterface.obj: Shop/shopInterface.cpp.obj
+.PHONY : Shop/shopInterface.obj
+
+# target to build an object file
+Shop/shopInterface.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Shop/shopInterface.cpp.obj
+.PHONY : Shop/shopInterface.cpp.obj
+
+Shop/shopInterface.i: Shop/shopInterface.cpp.i
+.PHONY : Shop/shopInterface.i
+
+# target to preprocess a source file
+Shop/shopInterface.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Shop/shopInterface.cpp.i
+.PHONY : Shop/shopInterface.cpp.i
+
+Shop/shopInterface.s: Shop/shopInterface.cpp.s
+.PHONY : Shop/shopInterface.s
+
+# target to generate assembly for a file
+Shop/shopInterface.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Shop/shopInterface.cpp.s
+.PHONY : Shop/shopInterface.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -160,10 +269,23 @@ help:
 	@echo ... depend
 	@echo ... edit_cache
 	@echo ... rebuild_cache
+	@echo ... DPlib
 	@echo ... DesignPattern_2021
 	@echo ... Application.obj
 	@echo ... Application.i
 	@echo ... Application.s
+	@echo ... Basic/welcome.obj
+	@echo ... Basic/welcome.i
+	@echo ... Basic/welcome.s
+	@echo ... Shop/shop.obj
+	@echo ... Shop/shop.i
+	@echo ... Shop/shop.s
+	@echo ... Shop/shopFilter.obj
+	@echo ... Shop/shopFilter.i
+	@echo ... Shop/shopFilter.s
+	@echo ... Shop/shopInterface.obj
+	@echo ... Shop/shopInterface.i
+	@echo ... Shop/shopInterface.s
 .PHONY : help
 
 

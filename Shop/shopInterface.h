@@ -13,6 +13,7 @@ using namespace std;
 #include <string>
 #include "shop.h"
 #include "shopFilter.h"
+#include "../Basic/welcome.h"
 
 class ShopFactory {
 public:

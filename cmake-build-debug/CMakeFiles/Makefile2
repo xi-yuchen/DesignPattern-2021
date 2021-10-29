@@ -62,6 +62,7 @@ CMAKE_BINARY_DIR = C:\Users\liruijie666\Documents\TestCode\DesignPattern-2021\cm
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
+all: CMakeFiles/DPlib.dir/all
 all: CMakeFiles/DesignPattern_2021.dir/all
 .PHONY : all
 
@@ -70,22 +71,49 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
+clean: CMakeFiles/DPlib.dir/clean
 clean: CMakeFiles/DesignPattern_2021.dir/clean
 .PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/DPlib.dir
+
+# All Build rule for target.
+CMakeFiles/DPlib.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\liruijie666\Documents\TestCode\DesignPattern-2021\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4,5 "Built target DPlib"
+.PHONY : CMakeFiles/DPlib.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/DPlib.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\liruijie666\Documents\TestCode\DesignPattern-2021\cmake-build-debug\CMakeFiles 5
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/DPlib.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\liruijie666\Documents\TestCode\DesignPattern-2021\cmake-build-debug\CMakeFiles 0
+.PHONY : CMakeFiles/DPlib.dir/rule
+
+# Convenience name for target.
+DPlib: CMakeFiles/DPlib.dir/rule
+.PHONY : DPlib
+
+# clean rule for target.
+CMakeFiles/DPlib.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/clean
+.PHONY : CMakeFiles/DPlib.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/DesignPattern_2021.dir
 
 # All Build rule for target.
-CMakeFiles/DesignPattern_2021.dir/all:
+CMakeFiles/DesignPattern_2021.dir/all: CMakeFiles/DPlib.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DesignPattern_2021.dir\build.make CMakeFiles/DesignPattern_2021.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DesignPattern_2021.dir\build.make CMakeFiles/DesignPattern_2021.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\liruijie666\Documents\TestCode\DesignPattern-2021\cmake-build-debug\CMakeFiles --progress-num=1,2 "Built target DesignPattern_2021"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\liruijie666\Documents\TestCode\DesignPattern-2021\cmake-build-debug\CMakeFiles --progress-num=6,7 "Built target DesignPattern_2021"
 .PHONY : CMakeFiles/DesignPattern_2021.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/DesignPattern_2021.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\liruijie666\Documents\TestCode\DesignPattern-2021\cmake-build-debug\CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\liruijie666\Documents\TestCode\DesignPattern-2021\cmake-build-debug\CMakeFiles 7
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/DesignPattern_2021.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\liruijie666\Documents\TestCode\DesignPattern-2021\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/DesignPattern_2021.dir/rule

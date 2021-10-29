@@ -1,10 +1,11 @@
 cmake_minimum_required(VERSION 3.20)
 project(DesignPattern_2021)
-
 set(CMAKE_CXX_STANDARD 14)
 
 
 file(GLOB SRC_LIST "./Customer/*.*")
-
+add_library(DPlib Basic/welcome.cpp Basic/welcome.h
+        Shop/shop.cpp Shop/shop.h Shop/shopFilter.cpp Shop/shopFilter.h Shop/shopInterface.h Shop/shopInterface.cpp)
 add_executable(DesignPattern_2021
         Application.cpp)
+target_link_libraries(DesignPattern_2021 DPlib)

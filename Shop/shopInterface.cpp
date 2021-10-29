@@ -202,11 +202,12 @@ void shopInterface::checkGoods(int ID) {
 }
 
 void shopInterface::mainInterface() {
+    showUserShopCmds showUserShopCmds;
     int choice_status;
     int ID;
     initialize();
     while (1) {
-        cout << "-- Welcome to Explore SHOPS in TMALL 11.11! --" << endl;
+        showUserShopCmds.showUserCmds();
         cin >> choice_status;
         if (choice_status == 0)
             break;
@@ -228,14 +229,15 @@ void shopInterface::mainInterface() {
                 checkShop(ID);
                 break;
             }
+
             case 5: {
-                cin >> ID;
-                manageGoods(ID);
+                showAllGoodsInShops();
                 break;
             }
 
             case 6: {
-                showAllGoodsInShops();
+                cin >> ID;
+                checkGoods(ID);
                 break;
             }
 
