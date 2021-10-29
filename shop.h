@@ -94,16 +94,6 @@ public:
     }
 };
 
-class foodShop : public Shop {
-public:
-    void execute();
-
-    void accept(Visitor& v);
-
-    foodShop(const string& shopName, int shopId, const string& shopType, const string& shopDate, int shopStorage,
-        const list<ShopRemark*>& shopRemarks);
-};
-
 class Visitor {
 public:
     virtual void visit(Shop* shop) = 0;
@@ -115,10 +105,16 @@ class infoVisitor : public Visitor {
     }
 };
 
-void foodShop::accept(Visitor& v) {
-    v.visit(this);
-}
+class foodShop : public Shop {
+public:
+    void execute();
 
+    void accept(Visitor& v);
+    
+    foodShop::foodShop(const string& shopName, int shopId, const string& shopType, const string& shopDate, int shopStorage,
+    const list<ShopRemark*>& shopRemarks) : Shop(shopName, shopId, shopType, shopDate, shopStorage,
+        shopRemarks) {}
+};
 
 void foodShop::execute() {
     cout << "Shop Name: " + _shopName << endl;
@@ -130,9 +126,9 @@ void foodShop::execute() {
     }
 }
 
-foodShop::foodShop(const string& shopName, int shopId, const string& shopType, const string& shopDate, int shopStorage,
-    const list<ShopRemark*>& shopRemarks) : Shop(shopName, shopId, shopType, shopDate, shopStorage,
-        shopRemarks) {}
+void foodShop::accept(Visitor& v) {
+    v.visit(this);
+}
 
 class clothesShop : public Shop {
 public:
@@ -181,6 +177,184 @@ void nullShop::execute() {
 }
 
 void nullShop::accept(Visitor& v) {
+    v.visit(this);
+}
+
+
+class drinkShop : public Shop {
+public:
+    void execute();
+
+    void accept(Visitor& v);
+
+    drinkShop(const string& shopName, int shopId, const string& shopType, const string& shopDate, int shopStorage,
+        const list<ShopRemark*>& shopRemarks) : Shop(shopName, shopId, shopType, shopDate, shopStorage,
+            shopRemarks) {}
+};
+
+void drinkShop::execute() {
+    cout << "Shop Name: " + _shopName << endl;
+    cout << "Shop ID: " << _shopID << endl;
+    cout << "Shop Type: " + _shopType << endl;
+    cout << "Shop Date: " + _shopDate << endl;
+    for (auto remark : _shopRemarks) {
+        remark->getRemark();
+    }
+}
+
+void drinkShop::accept(Visitor& v) {
+    v.visit(this);
+}
+
+
+class digitalShop : public Shop {
+public:
+    void execute();
+
+    void accept(Visitor& v);
+
+    digitalShop(const string& shopName, int shopId, const string& shopType, const string& shopDate, int shopStorage,
+        const list<ShopRemark*>& shopRemarks) : Shop(shopName, shopId, shopType, shopDate, shopStorage,
+            shopRemarks) {}
+};
+
+void digitalShop::execute() {
+    cout << "Shop Name: " + _shopName << endl;
+    cout << "Shop ID: " << _shopID << endl;
+    cout << "Shop Type: " + _shopType << endl;
+    cout << "Shop Date: " + _shopDate << endl;
+    for (auto remark : _shopRemarks) {
+        remark->getRemark();
+    }
+}
+
+void digitalShop::accept(Visitor& v) {
+    v.visit(this);
+}
+
+
+class bookShop : public Shop {
+public:
+    void execute();
+
+    void accept(Visitor& v);
+
+    bookShop(const string& shopName, int shopId, const string& shopType, const string& shopDate, int shopStorage,
+        const list<ShopRemark*>& shopRemarks) : Shop(shopName, shopId, shopType, shopDate, shopStorage,
+            shopRemarks) {}
+};
+
+void bookShop::execute() {
+    cout << "Shop Name: " + _shopName << endl;
+    cout << "Shop ID: " << _shopID << endl;
+    cout << "Shop Type: " + _shopType << endl;
+    cout << "Shop Date: " + _shopDate << endl;
+    for (auto remark : _shopRemarks) {
+        remark->getRemark();
+    }
+}
+
+void bookShop::accept(Visitor& v) {
+    v.visit(this);
+}
+
+class dailyShop : public Shop {
+public:
+    void execute();
+
+    void accept(Visitor& v);
+
+    nullShop(const string& shopName, int shopId, const string& shopType, const string& shopDate, int shopStorage,
+        const list<ShopRemark*>& shopRemarks) : Shop(shopName, shopId, shopType, shopDate, shopStorage,
+            shopRemarks) {}
+};
+
+void dailyShop::execute() {
+    cout << "Shop Name: " + _shopName << endl;
+    cout << "Shop ID: " << _shopID << endl;
+    cout << "Shop Type: " + _shopType << endl;
+    cout << "Shop Date: " + _shopDate << endl;
+    for (auto remark : _shopRemarks) {
+        remark->getRemark();
+    }
+}
+
+void dailyShop::accept(Visitor& v) {
+    v.visit(this);
+}
+
+class furnitureShop : public Shop {
+public:
+    void execute();
+
+    void accept(Visitor& v);
+
+    nullShop(const string& shopName, int shopId, const string& shopType, const string& shopDate, int shopStorage,
+        const list<ShopRemark*>& shopRemarks) : Shop(shopName, shopId, shopType, shopDate, shopStorage,
+            shopRemarks) {}
+};
+
+void furnitureShop::execute() {
+    cout << "Shop Name: " + _shopName << endl;
+    cout << "Shop ID: " << _shopID << endl;
+    cout << "Shop Type: " + _shopType << endl;
+    cout << "Shop Date: " + _shopDate << endl;
+    for (auto remark : _shopRemarks) {
+        remark->getRemark();
+    }
+}
+
+void furnitureShop::accept(Visitor& v) {
+    v.visit(this);
+}
+
+class stationeryShop : public Shop {
+public:
+    void execute();
+
+    void accept(Visitor& v);
+
+    nullShop(const string& shopName, int shopId, const string& shopType, const string& shopDate, int shopStorage,
+        const list<ShopRemark*>& shopRemarks) : Shop(shopName, shopId, shopType, shopDate, shopStorage,
+            shopRemarks) {}
+};
+
+void stationeryShop::execute() {
+    cout << "Shop Name: " + _shopName << endl;
+    cout << "Shop ID: " << _shopID << endl;
+    cout << "Shop Type: " + _shopType << endl;
+    cout << "Shop Date: " + _shopDate << endl;
+    for (auto remark : _shopRemarks) {
+        remark->getRemark();
+    }
+}
+
+void stationeryShop::accept(Visitor& v) {
+    v.visit(this);
+}
+
+class sportShop : public Shop {
+public:
+    void execute();
+
+    void accept(Visitor& v);
+
+    sportShop(const string& shopName, int shopId, const string& shopType, const string& shopDate, int shopStorage,
+        const list<ShopRemark*>& shopRemarks) : Shop(shopName, shopId, shopType, shopDate, shopStorage,
+            shopRemarks) {}
+};
+
+void sportShop::execute() {
+    cout << "Shop Name: " + _shopName << endl;
+    cout << "Shop ID: " << _shopID << endl;
+    cout << "Shop Type: " + _shopType << endl;
+    cout << "Shop Date: " + _shopDate << endl;
+    for (auto remark : _shopRemarks) {
+        remark->getRemark();
+    }
+}
+
+void sportShop::accept(Visitor& v) {
     v.visit(this);
 }
 #endif //SOFTWAREARC_SHOP_H
