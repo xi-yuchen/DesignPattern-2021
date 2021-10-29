@@ -3,5 +3,8 @@ project(DesignPattern_2021)
 
 set(CMAKE_CXX_STANDARD 14)
 
+
+file(GLOB SRC_LIST "./Customer/*.*")
+
 add_executable(DesignPattern_2021
-        Application.cpp UserInterface.cpp UserInterface.h)
+        ${SRC_LIST})
