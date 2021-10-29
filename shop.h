@@ -159,4 +159,28 @@ void clothesShop::accept(Visitor& v) {
     v.visit(this);
 }
 
+class nullShop : public Shop {
+public:
+    void execute();
+
+    void accept(Visitor& v);
+
+    nullShop(const string& shopName, int shopId, const string& shopType, const string& shopDate, int shopStorage,
+        const list<ShopRemark*>& shopRemarks) : Shop(shopName, shopId, shopType, shopDate, shopStorage,
+            shopRemarks) {}
+};
+
+void nullShop::execute() {
+    cout << "Shop Name: " + _shopName << endl;
+    cout << "Shop ID: " << _shopID << endl;
+    cout << "Shop Type: " + _shopType << endl;
+    cout << "Shop Date: " + _shopDate << endl;
+    for (auto remark : _shopRemarks) {
+        remark->getRemark();
+    }
+}
+
+void nullShop::accept(Visitor& v) {
+    v.visit(this);
+}
 #endif //SOFTWAREARC_SHOP_H
