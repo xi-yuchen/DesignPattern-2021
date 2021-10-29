@@ -1,9 +1,11 @@
 //
-// Created by TJ_Lty on 2021/10/23.
+// Created by TJ_Lty on 2021/10/28.
 //
 
-#ifndef DESIGNPATTERN_2021_USERINTERFACE_H
-#define DESIGNPATTERN_2021_USERINTERFACE_H
+#ifndef DESIGNPATTERN_2021_INFORMATION_H
+#define DESIGNPATTERN_2021_INFORMATION_H
+
+
 #include <iostream>
 #include <list>
 #include <vector>
@@ -18,6 +20,11 @@ private:
     int _points;
     friend class VirtualCustomerInformationSetter;
     friend class VirtualCustomerInformationReader;
+public:
+    CustomerInformation* clone(){
+        auto* result=new CustomerInformation(*this);
+        return result;
+    }
 };
 
 class VirtualCustomerInformationSetter{
@@ -31,7 +38,7 @@ public:
     virtual void setEmail(string email);
     virtual void setPoints(int points);
     //拷贝，Template Pattern
-    void copy(CustomerInformation*);
+    void copy(CustomerInformation*,bool Deep=false);
 };
 
 class VirtualCustomerInformationReader{
@@ -62,19 +69,19 @@ public:
 };
 class CustomerInformationOriginator{
 private:
-    CustomerInformation* state;
+    CustomerInformation* _state;
 public:
     void setState(CustomerInformation* state){
-        this->state=state;
+        this->_state=state;
     }
     CustomerInformation* getstate(){
-        return state;
+        return _state;
     }
     CustomerInformationMemento* saveStateToMemento(){
-        return new CustomerInformationMemento(state);
+        return new CustomerInformationMemento(_state);
     }
     void getStateFromMemento(CustomerInformationMemento* Memento){
-        state=Memento->getState();
+        _state=Memento->getState();
     }
 };
 class CustomerInformationCareTaker{
@@ -92,45 +99,14 @@ public:
     }
     CustomerInformationMemento* pop(){
         if(mementoList.size()>1){
-           delete mementoList.top();
-           mementoList.pop();
+            delete mementoList.top();
+            mementoList.pop();
         }
         return mementoList.top();
     }
 };
 
 
-class Customer{
-private:
-    CustomerInformation* info;
-    CustomerInformationCareTaker* careTaker;
-public:
-    Customer(){
-        info=new CustomerInformation();
-        careTaker=new CustomerInformationCareTaker();
-    }
-    ~Customer(){
-        delete careTaker;
-        delete info;
-    }
-    CustomerInformation* getInfo(){return this->info;}
-    CustomerInformationCareTaker* getCareTaker(){
-        return this->careTaker;
-    }
-};
-
-//中介者模式
-class CustomerInterface {
-private:
-    Customer* customer;
-public:
-    CustomerInterface(){customer=new Customer();}
-    virtual void setUserInformation();
-    virtual void showUserInformation();
-    virtual void changeUserInformation();
-    virtual void rollback();
-    void mainInterface();
-};
 
 
-#endif //DESIGNPATTERN_2021_USERINTERFACE_H
+#endif //DESIGNPATTERN_2021_INFORMATION_H

@@ -129,53 +129,149 @@ DesignPattern_2021/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/DesignPattern_2021.dir/build.make CMakeFiles/DesignPattern_2021.dir/build
 .PHONY : DesignPattern_2021/fast
 
-Application.o: Application.cpp.o
-.PHONY : Application.o
+Customer/ChatRoom.o: Customer/ChatRoom.cpp.o
+.PHONY : Customer/ChatRoom.o
 
 # target to build an object file
-Application.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DesignPattern_2021.dir/build.make CMakeFiles/DesignPattern_2021.dir/Application.cpp.o
-.PHONY : Application.cpp.o
+Customer/ChatRoom.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DesignPattern_2021.dir/build.make CMakeFiles/DesignPattern_2021.dir/Customer/ChatRoom.cpp.o
+.PHONY : Customer/ChatRoom.cpp.o
 
-Application.i: Application.cpp.i
-.PHONY : Application.i
+Customer/ChatRoom.i: Customer/ChatRoom.cpp.i
+.PHONY : Customer/ChatRoom.i
 
 # target to preprocess a source file
-Application.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DesignPattern_2021.dir/build.make CMakeFiles/DesignPattern_2021.dir/Application.cpp.i
-.PHONY : Application.cpp.i
+Customer/ChatRoom.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DesignPattern_2021.dir/build.make CMakeFiles/DesignPattern_2021.dir/Customer/ChatRoom.cpp.i
+.PHONY : Customer/ChatRoom.cpp.i
 
-Application.s: Application.cpp.s
-.PHONY : Application.s
+Customer/ChatRoom.s: Customer/ChatRoom.cpp.s
+.PHONY : Customer/ChatRoom.s
 
 # target to generate assembly for a file
-Application.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DesignPattern_2021.dir/build.make CMakeFiles/DesignPattern_2021.dir/Application.cpp.s
-.PHONY : Application.cpp.s
+Customer/ChatRoom.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DesignPattern_2021.dir/build.make CMakeFiles/DesignPattern_2021.dir/Customer/ChatRoom.cpp.s
+.PHONY : Customer/ChatRoom.cpp.s
 
-UserInterface.o: UserInterface.cpp.o
-.PHONY : UserInterface.o
+Customer/Customer.o: Customer/Customer.cpp.o
+.PHONY : Customer/Customer.o
 
 # target to build an object file
-UserInterface.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DesignPattern_2021.dir/build.make CMakeFiles/DesignPattern_2021.dir/UserInterface.cpp.o
-.PHONY : UserInterface.cpp.o
+Customer/Customer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DesignPattern_2021.dir/build.make CMakeFiles/DesignPattern_2021.dir/Customer/Customer.cpp.o
+.PHONY : Customer/Customer.cpp.o
 
-UserInterface.i: UserInterface.cpp.i
-.PHONY : UserInterface.i
+Customer/Customer.i: Customer/Customer.cpp.i
+.PHONY : Customer/Customer.i
 
 # target to preprocess a source file
-UserInterface.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DesignPattern_2021.dir/build.make CMakeFiles/DesignPattern_2021.dir/UserInterface.cpp.i
-.PHONY : UserInterface.cpp.i
+Customer/Customer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DesignPattern_2021.dir/build.make CMakeFiles/DesignPattern_2021.dir/Customer/Customer.cpp.i
+.PHONY : Customer/Customer.cpp.i
 
-UserInterface.s: UserInterface.cpp.s
-.PHONY : UserInterface.s
+Customer/Customer.s: Customer/Customer.cpp.s
+.PHONY : Customer/Customer.s
 
 # target to generate assembly for a file
-UserInterface.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DesignPattern_2021.dir/build.make CMakeFiles/DesignPattern_2021.dir/UserInterface.cpp.s
-.PHONY : UserInterface.cpp.s
+Customer/Customer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DesignPattern_2021.dir/build.make CMakeFiles/DesignPattern_2021.dir/Customer/Customer.cpp.s
+.PHONY : Customer/Customer.cpp.s
+
+Customer/CustomerMain.o: Customer/CustomerMain.cpp.o
+.PHONY : Customer/CustomerMain.o
+
+# target to build an object file
+Customer/CustomerMain.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DesignPattern_2021.dir/build.make CMakeFiles/DesignPattern_2021.dir/Customer/CustomerMain.cpp.o
+.PHONY : Customer/CustomerMain.cpp.o
+
+Customer/CustomerMain.i: Customer/CustomerMain.cpp.i
+.PHONY : Customer/CustomerMain.i
+
+# target to preprocess a source file
+Customer/CustomerMain.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DesignPattern_2021.dir/build.make CMakeFiles/DesignPattern_2021.dir/Customer/CustomerMain.cpp.i
+.PHONY : Customer/CustomerMain.cpp.i
+
+Customer/CustomerMain.s: Customer/CustomerMain.cpp.s
+.PHONY : Customer/CustomerMain.s
+
+# target to generate assembly for a file
+Customer/CustomerMain.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DesignPattern_2021.dir/build.make CMakeFiles/DesignPattern_2021.dir/Customer/CustomerMain.cpp.s
+.PHONY : Customer/CustomerMain.cpp.s
+
+Customer/Customers.o: Customer/Customers.cpp.o
+.PHONY : Customer/Customers.o
+
+# target to build an object file
+Customer/Customers.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DesignPattern_2021.dir/build.make CMakeFiles/DesignPattern_2021.dir/Customer/Customers.cpp.o
+.PHONY : Customer/Customers.cpp.o
+
+Customer/Customers.i: Customer/Customers.cpp.i
+.PHONY : Customer/Customers.i
+
+# target to preprocess a source file
+Customer/Customers.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DesignPattern_2021.dir/build.make CMakeFiles/DesignPattern_2021.dir/Customer/Customers.cpp.i
+.PHONY : Customer/Customers.cpp.i
+
+Customer/Customers.s: Customer/Customers.cpp.s
+.PHONY : Customer/Customers.s
+
+# target to generate assembly for a file
+Customer/Customers.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DesignPattern_2021.dir/build.make CMakeFiles/DesignPattern_2021.dir/Customer/Customers.cpp.s
+.PHONY : Customer/Customers.cpp.s
+
+Customer/Information.o: Customer/Information.cpp.o
+.PHONY : Customer/Information.o
+
+# target to build an object file
+Customer/Information.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DesignPattern_2021.dir/build.make CMakeFiles/DesignPattern_2021.dir/Customer/Information.cpp.o
+.PHONY : Customer/Information.cpp.o
+
+Customer/Information.i: Customer/Information.cpp.i
+.PHONY : Customer/Information.i
+
+# target to preprocess a source file
+Customer/Information.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DesignPattern_2021.dir/build.make CMakeFiles/DesignPattern_2021.dir/Customer/Information.cpp.i
+.PHONY : Customer/Information.cpp.i
+
+Customer/Information.s: Customer/Information.cpp.s
+.PHONY : Customer/Information.s
+
+# target to generate assembly for a file
+Customer/Information.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DesignPattern_2021.dir/build.make CMakeFiles/DesignPattern_2021.dir/Customer/Information.cpp.s
+.PHONY : Customer/Information.cpp.s
+
+Customer/UserInterface.o: Customer/UserInterface.cpp.o
+.PHONY : Customer/UserInterface.o
+
+# target to build an object file
+Customer/UserInterface.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DesignPattern_2021.dir/build.make CMakeFiles/DesignPattern_2021.dir/Customer/UserInterface.cpp.o
+.PHONY : Customer/UserInterface.cpp.o
+
+Customer/UserInterface.i: Customer/UserInterface.cpp.i
+.PHONY : Customer/UserInterface.i
+
+# target to preprocess a source file
+Customer/UserInterface.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DesignPattern_2021.dir/build.make CMakeFiles/DesignPattern_2021.dir/Customer/UserInterface.cpp.i
+.PHONY : Customer/UserInterface.cpp.i
+
+Customer/UserInterface.s: Customer/UserInterface.cpp.s
+.PHONY : Customer/UserInterface.s
+
+# target to generate assembly for a file
+Customer/UserInterface.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DesignPattern_2021.dir/build.make CMakeFiles/DesignPattern_2021.dir/Customer/UserInterface.cpp.s
+.PHONY : Customer/UserInterface.cpp.s
 
 # Help Target
 help:
@@ -186,12 +282,24 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... DesignPattern_2021"
-	@echo "... Application.o"
-	@echo "... Application.i"
-	@echo "... Application.s"
-	@echo "... UserInterface.o"
-	@echo "... UserInterface.i"
-	@echo "... UserInterface.s"
+	@echo "... Customer/ChatRoom.o"
+	@echo "... Customer/ChatRoom.i"
+	@echo "... Customer/ChatRoom.s"
+	@echo "... Customer/Customer.o"
+	@echo "... Customer/Customer.i"
+	@echo "... Customer/Customer.s"
+	@echo "... Customer/CustomerMain.o"
+	@echo "... Customer/CustomerMain.i"
+	@echo "... Customer/CustomerMain.s"
+	@echo "... Customer/Customers.o"
+	@echo "... Customer/Customers.i"
+	@echo "... Customer/Customers.s"
+	@echo "... Customer/Information.o"
+	@echo "... Customer/Information.i"
+	@echo "... Customer/Information.s"
+	@echo "... Customer/UserInterface.o"
+	@echo "... Customer/UserInterface.i"
+	@echo "... Customer/UserInterface.s"
 .PHONY : help
 
 
