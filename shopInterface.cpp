@@ -2,27 +2,35 @@
 
 Shop* ShopFactory::createShop(string type) {
     if (type == "")
-        return nullptr;
-    if (type == "food")
-        return new foodShop("Îßºş´óË¾ÂíÈâµ°´Ğ¼¦×¨Óªµê",
+        return new nullShop("æš‚æ— ", 
+                            0,
+                            "æš‚æ— ",
+                            "æš‚æ— ", 
+                            0,
+                            list<ShopRemark*>());
+    
+    else if (type == "food")
+        return new foodShop("èŠœæ¹–å¤§å¸é©¬è‚‰è›‹è‘±é¸¡ä¸“è¥åº—",
             2,
             "food",
             "2013-09-18",
             10029,
             list<ShopRemark*>());
+    
     else if (type == "clothes")
-        return new clothesShop("Îßºş·¢²¡ÃŞ°À×ÔÓªÆì½¢µê",
+        return new clothesShop("èŠœæ¹–å‘ç—…æ£‰è¢„è‡ªè¥æ——èˆ°åº—",
             192,
             "clothes",
             "2004-12-01",
             2912,
             list<ShopRemark*>());
+    
 }
 
 void shopInterface::showAllShops() {
     for (auto _shop : _shopList) {
-        cout << "µêÃû: " << _shop->getShopName() << endl;
-        cout << "¿â´æ: " << _shop->getShopStorage() << endl << endl;
+        cout << "åº—å: " << _shop->getShopName() << endl;
+        cout << "åº“å­˜: " << _shop->getShopStorage() << endl << endl;
     }
 }
 
@@ -35,25 +43,25 @@ void shopInterface::editStorage(int ID) {
     {
         for (auto _shop : _shopList) {
             if (ID == _shop->getShopId()) {
-                cout << "ÇëĞŞ¸Ä±¾µê¿â´æ£º" << endl;
+                cout << "è¯·ä¿®æ”¹æœ¬åº—åº“å­˜ï¼š" << endl;
                 int new_storage;
                 cin >> new_storage;
                 _shop->setShopStorage(new_storage);
                 return;
             }
         }
-        cout << "Î´ÖªµÄµêÆÌID" << endl;
+        cout << "æœªçŸ¥çš„åº—é“ºID" << endl;
     }
 }
 
 void shopInterface::initialize() {
-    _shopList.push_back(new foodShop("ÎßºşÈâµ°´Ğ¼¦×¨Óªµê",
+    _shopList.push_back(new foodShop("èŠœæ¹–è‚‰è›‹è‘±é¸¡ä¸“è¥åº—",
         2,
         "food",
         "2013-09-18",
         10029,
         list<ShopRemark*>()));
-    _shopList.push_back(new clothesShop("Îßºş·¢²¡ÃŞ°À×¨Óªµê",
+    _shopList.push_back(new clothesShop("èŠœæ¹–å‘ç—…æ£‰è¢„ä¸“è¥åº—",
         192,
         "clothes",
         "2004-12-01",
@@ -67,8 +75,8 @@ void shopInterface::mainInterface() {
     int ID;
     initialize();
     while (1) {
-        cout << "»¶Ó­Äú£¡ÄúÕıÔÚä¯ÀÀµêÆÌÏà¹ØĞÅÏ¢£¡" << endl;
-        cout << "°´1²é¿´ËùÓĞµêÆÌÁĞ±í£»°´2ĞŞ¸ÄµêÆÌ¿â´æ£»°´0ÍË³ö" << endl;
+        cout << "æ¬¢è¿æ‚¨ï¼æ‚¨æ­£åœ¨æµè§ˆåº—é“ºç›¸å…³ä¿¡æ¯ï¼" << endl;
+        cout << "æŒ‰1æŸ¥çœ‹æ‰€æœ‰åº—é“ºåˆ—è¡¨ï¼›æŒ‰2ä¿®æ”¹åº—é“ºåº“å­˜ï¼›æŒ‰0é€€å‡º" << endl;
         cin >> choice_status;
         if (choice_status == 0)
             break;
@@ -77,13 +85,13 @@ void shopInterface::mainInterface() {
             showAllShops();
             break;
         case 2: {
-            cout << "ÇëÊäÈëÄúÒªĞŞ¸Ä¿â´æµÄµêÆÌID£¡" << endl;
+            cout << "è¯·è¾“å…¥æ‚¨è¦ä¿®æ”¹åº“å­˜çš„åº—é“ºIDï¼" << endl;
             cin >> ID;
             editStorage(ID);
             break;
         }
         default:
-            cout << "Î´ÖªÃüÁî£¬ÇëÖØĞÂÊäÈë£¡" << endl;
+            cout << "æœªçŸ¥å‘½ä»¤ï¼Œè¯·é‡æ–°è¾“å…¥ï¼" << endl;
             break;
         }
     }
