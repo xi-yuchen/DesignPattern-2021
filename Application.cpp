@@ -3,7 +3,7 @@
 #include "Shop/shopInterface.h"
 #include "Customer/UserInterface.h"
 #include "Commodity/CommodityInterface.h"
-#include "AC_ADSystem/AdvertisingSystem.h"
+#include "AC_ADSystem/Facade.h"
 
 using namespace std;
 
@@ -12,6 +12,7 @@ int main() {
     showUserInterfaceCmds showUserInterfaceCmds;
     CustomerInterface customerInterface;
     shopInterface shopInterface;
+    Facade facade;
     shopInterface.initialize();
     CommodityInterface commodityInterface;
     commodityInterface.Initialize(shopInterface);
@@ -37,7 +38,24 @@ int main() {
                         shopInterface.manageGoods(1, shopInterface);
                         break;
                     }
-                    case 4:{
+                    case 4: {
+                        facade.BrowseAd();
+                        facade.BrowseAc();
+                        break;
+                    }
+                    case 5: {
+
+                    }
+                    case 6: {
+
+                    }
+                    case 7: {
+
+                    }
+                    case 8: {
+
+                    }
+                    case 9: {
 
                     }
                     case 0: {
