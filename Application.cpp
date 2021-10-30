@@ -3,6 +3,7 @@
 #include "Shop/shopInterface.h"
 #include "Customer/UserInterface.h"
 #include "Commodity/CommodityInterface.h"
+#include "AC_ADSystem/AdvertisingSystem.h"
 
 using namespace std;
 
@@ -28,13 +29,16 @@ int main() {
                         customerInterface.mainInterface();
                         break;
                     }
-                    case 3: {
+                    case 2: {
                         shopInterface.mainInterface(customerInterface.getCustomer());
                         break;
                     }
-                    case 4: {
+                    case 3: {
                         shopInterface.manageGoods(1, shopInterface);
                         break;
+                    }
+                    case 4:{
+
                     }
                     case 0: {
                         break;

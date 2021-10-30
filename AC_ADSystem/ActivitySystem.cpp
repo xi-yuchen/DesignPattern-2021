@@ -1,12 +1,12 @@
 ﻿#include "ActivitySystem.h"
-#include "Commodity.h"
+#include "../Commodity/Commodity.h"
 #include "AcVisitor.h"
 #include "../Customer/Customer.h"
 #include "../Customer/Customers.h"
 ActivitySystem* ActivitySystem::AcSystemInstance = nullptr;
 
 
-AcNode_Discount::AcNode_Discount(int ID, string Cont, vector<int>& CommodityInformationReaderIDList, float DisRate) : AcNode(ID, Cont)
+AcNode_Discount::AcNode_Discount(int ID, string Cont, vector<int>& CommodityInformationIDList, float DisRate) : AcNode(ID, Cont)
 {
     SatisfyCommodityInformationIDList = CommodityInformationIDList;
     DiscountRate = DisRate;
@@ -26,9 +26,11 @@ float AcNode_Discount::ExecuteActivity(CommodityInformation* BuyCommodityInforma
 
 bool AcNode_Discount::IsSatisfy(CommodityInformation* BuyCommodityInformation)
 {
+    auto* reader=CustomerSet::getInstance()->getCustomer()->getCommodityReader();
+    reader->setCommodityInformation(BuyCommodityInformation);
     for (vector<int>::iterator iter = SatisfyCommodityInformationIDList.begin(); iter != SatisfyCommodityInformationIDList.end(); ++iter)
     {
-        if (BuyCommodityInformation->getID() == *iter)
+        if (reader->getID() == *iter)
             return true;
     }
     return false;

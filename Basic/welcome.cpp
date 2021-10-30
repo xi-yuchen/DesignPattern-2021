@@ -30,8 +30,14 @@ void showUserInterfaceCmds::showUserCmds() {
     cout << endl;
     cout << "欢迎光临天猫双十一购物节！请选择操作！" << endl;
     cout << "1 - 用户信息" << endl;
-    cout << "3 - 店铺" << endl;
-    cout << "4 - 商品" << endl;
+    cout << "2 - 店铺" << endl;
+    cout << "3 - 商品" << endl;
+    cout << "4 - 活动与广告" << endl;
+    cout << "5 - 计算折扣与满减" << endl;
+    cout << "6 - 将指定商品加入购物车" << endl;
+    cout << "7 - 查看购物车" << endl;
+    cout << "8 - 结算购物车" << endl;
+    cout << "9 - 查看订单列表" << endl;
     cout << "0 - 退出" << endl;
 }
 
