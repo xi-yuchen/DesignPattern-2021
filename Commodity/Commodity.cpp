@@ -8,11 +8,11 @@ using std::endl;
 
 //===================== Commodity 商品虚基类========================
 
-CommodityInformation::CommodityInformation(int ID, string name, int price, Shop* shop) {
+CommodityInformation::CommodityInformation(int ID, string name, int price, int shopID) {
     this->ID = ID;
     this->name = name;
     this->price = price;
-    this->shop = shop;
+    this->shopID = shopID;
 }
 
 /**
@@ -33,8 +33,8 @@ bool CommodityInformation::Remove(CommodityInformation* commodity) {
 
 //===================== SingleCommodity 单件商品类 ========================
 
-SingleCommodity::SingleCommodity(int ID, string name, int price, Shop* shop, int amount)
-    : CommodityInformation(ID, name, price, shop) {
+SingleCommodity::SingleCommodity(int ID, string name, int price, int shopID,int amount)
+: CommodityInformation(ID, name, price, shopID) {
     this->amount = amount;
 }
 
@@ -81,15 +81,15 @@ void SingleCommodity::Display() {
     cout << std::left << std::setw(6) << this->amount;
     cout << "价格: ";
     cout << std::left << std::setw(6) << this->price;
-    cout << "商铺: ";
-    cout << std::left << std::setw(8) << this->shop->getShopName();
+    cout << "商铺ID: ";
+    cout << std::left << std::setw(8) << this->shopID;
     cout << endl;
 }
 
 //===================== CompositeCommodity 组合商品类 ========================
 
-CompositeCommodity::CompositeCommodity(int ID, string name, int price, Shop* shop)
-    : CommodityInformation(ID, name, price, shop) { }
+CompositeCommodity::CompositeCommodity(int ID, string name, int price, int shopID)
+: CommodityInformation(ID, name, price, shopID) { }
 
 /**
  * 功能: 在商品组合中添加商品
@@ -114,7 +114,7 @@ bool CompositeCommodity::Remove(CommodityInformation* commodity) {
         this->commodity_list.remove(commodity);
         return true;
     }
-    else return false; // 组合商品中不存在此商品 
+    else return false; // 组合商品中不存在此商品
 }
 
 /**
@@ -170,8 +170,8 @@ void CompositeCommodity::Display() {
     cout << std::left << std::setw(10) << this->name;
     cout << "价格: ";
     cout << std::left << std::setw(6) << this->price;
-    cout << "商铺: ";
-    cout << std::left << std::setw(8) << this->shop->getShopName();
+    cout << "商铺ID: ";
+    cout << std::left << std::setw(8) << this->shopID;
     cout << endl;
     cout << "{" << endl;
     for(auto my_commodity : this->commodity_list) {
