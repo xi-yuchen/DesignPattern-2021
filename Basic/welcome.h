@@ -6,6 +6,8 @@
 #define DESIGNPATTERN_2021_WELCOME_H
 
 #include <iostream>
+#include "../Shop/shopInterface.h"
+#include "../Customer/Customer.h"
 
 using namespace std;
 
@@ -19,4 +21,15 @@ public:
     void showUserCmds();
 };
 
+class showUserInfoCmds : public showCmds {
+public:
+    void showUserCmds();
+};
+
+class showUserInterfaceCmds : public showCmds {
+public:
+    void showUserCmds();
+};
+
+void Initial();
 #endif //DESIGNPATTERN_2021_WELCOME_H

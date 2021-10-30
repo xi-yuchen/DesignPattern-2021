@@ -14,6 +14,8 @@ using namespace std;
 #include "shop.h"
 #include "shopFilter.h"
 #include "../Basic/welcome.h"
+#include "../Customer/Customer.h"
+#
 
 class ShopFactory {
 public:
@@ -32,7 +34,7 @@ public:
 
     Shop* createShop(string type); // Create a shop by admin.
 
-    void addRemark(int ID); // Add remarks to a certain shop.
+    void addRemark(int ID, Customer* customer); // Add remarks to a certain shop.
 
     void editStorage(int ID); //Edit the shop's storage.
 
@@ -40,7 +42,7 @@ public:
 
     void initialize(); //Initial the start data to operate.
 
-    void mainInterface(); // Main interface of the shop manage part.
+    void mainInterface(Customer* customer); // Main interface of the shop manage part.
 
     void filterShopByScore(); // Filter all the shops by their score.
 

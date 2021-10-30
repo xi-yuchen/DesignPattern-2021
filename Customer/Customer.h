@@ -5,7 +5,7 @@
 #ifndef DESIGNPATTERN_2021_CUSTOMER_H
 #define DESIGNPATTERN_2021_CUSTOMER_H
 #include "Information.h"
-#include "../Commodity.h"
+#include "../Commodity/Commodity.h"
 using namespace std;
 
 class Customer {

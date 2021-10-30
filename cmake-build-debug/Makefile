@@ -189,6 +189,150 @@ Basic/welcome.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Basic/welcome.cpp.s
 .PHONY : Basic/welcome.cpp.s
 
+Customer/ChatRoom.obj: Customer/ChatRoom.cpp.obj
+.PHONY : Customer/ChatRoom.obj
+
+# target to build an object file
+Customer/ChatRoom.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Customer/ChatRoom.cpp.obj
+.PHONY : Customer/ChatRoom.cpp.obj
+
+Customer/ChatRoom.i: Customer/ChatRoom.cpp.i
+.PHONY : Customer/ChatRoom.i
+
+# target to preprocess a source file
+Customer/ChatRoom.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Customer/ChatRoom.cpp.i
+.PHONY : Customer/ChatRoom.cpp.i
+
+Customer/ChatRoom.s: Customer/ChatRoom.cpp.s
+.PHONY : Customer/ChatRoom.s
+
+# target to generate assembly for a file
+Customer/ChatRoom.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Customer/ChatRoom.cpp.s
+.PHONY : Customer/ChatRoom.cpp.s
+
+Customer/Customer.obj: Customer/Customer.cpp.obj
+.PHONY : Customer/Customer.obj
+
+# target to build an object file
+Customer/Customer.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Customer/Customer.cpp.obj
+.PHONY : Customer/Customer.cpp.obj
+
+Customer/Customer.i: Customer/Customer.cpp.i
+.PHONY : Customer/Customer.i
+
+# target to preprocess a source file
+Customer/Customer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Customer/Customer.cpp.i
+.PHONY : Customer/Customer.cpp.i
+
+Customer/Customer.s: Customer/Customer.cpp.s
+.PHONY : Customer/Customer.s
+
+# target to generate assembly for a file
+Customer/Customer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Customer/Customer.cpp.s
+.PHONY : Customer/Customer.cpp.s
+
+Customer/CustomerMain.obj: Customer/CustomerMain.cpp.obj
+.PHONY : Customer/CustomerMain.obj
+
+# target to build an object file
+Customer/CustomerMain.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Customer/CustomerMain.cpp.obj
+.PHONY : Customer/CustomerMain.cpp.obj
+
+Customer/CustomerMain.i: Customer/CustomerMain.cpp.i
+.PHONY : Customer/CustomerMain.i
+
+# target to preprocess a source file
+Customer/CustomerMain.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Customer/CustomerMain.cpp.i
+.PHONY : Customer/CustomerMain.cpp.i
+
+Customer/CustomerMain.s: Customer/CustomerMain.cpp.s
+.PHONY : Customer/CustomerMain.s
+
+# target to generate assembly for a file
+Customer/CustomerMain.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Customer/CustomerMain.cpp.s
+.PHONY : Customer/CustomerMain.cpp.s
+
+Customer/Customers.obj: Customer/Customers.cpp.obj
+.PHONY : Customer/Customers.obj
+
+# target to build an object file
+Customer/Customers.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Customer/Customers.cpp.obj
+.PHONY : Customer/Customers.cpp.obj
+
+Customer/Customers.i: Customer/Customers.cpp.i
+.PHONY : Customer/Customers.i
+
+# target to preprocess a source file
+Customer/Customers.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Customer/Customers.cpp.i
+.PHONY : Customer/Customers.cpp.i
+
+Customer/Customers.s: Customer/Customers.cpp.s
+.PHONY : Customer/Customers.s
+
+# target to generate assembly for a file
+Customer/Customers.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Customer/Customers.cpp.s
+.PHONY : Customer/Customers.cpp.s
+
+Customer/Information.obj: Customer/Information.cpp.obj
+.PHONY : Customer/Information.obj
+
+# target to build an object file
+Customer/Information.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Customer/Information.cpp.obj
+.PHONY : Customer/Information.cpp.obj
+
+Customer/Information.i: Customer/Information.cpp.i
+.PHONY : Customer/Information.i
+
+# target to preprocess a source file
+Customer/Information.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Customer/Information.cpp.i
+.PHONY : Customer/Information.cpp.i
+
+Customer/Information.s: Customer/Information.cpp.s
+.PHONY : Customer/Information.s
+
+# target to generate assembly for a file
+Customer/Information.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Customer/Information.cpp.s
+.PHONY : Customer/Information.cpp.s
+
+Customer/UserInterface.obj: Customer/UserInterface.cpp.obj
+.PHONY : Customer/UserInterface.obj
+
+# target to build an object file
+Customer/UserInterface.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Customer/UserInterface.cpp.obj
+.PHONY : Customer/UserInterface.cpp.obj
+
+Customer/UserInterface.i: Customer/UserInterface.cpp.i
+.PHONY : Customer/UserInterface.i
+
+# target to preprocess a source file
+Customer/UserInterface.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Customer/UserInterface.cpp.i
+.PHONY : Customer/UserInterface.cpp.i
+
+Customer/UserInterface.s: Customer/UserInterface.cpp.s
+.PHONY : Customer/UserInterface.s
+
+# target to generate assembly for a file
+Customer/UserInterface.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Customer/UserInterface.cpp.s
+.PHONY : Customer/UserInterface.cpp.s
+
 Shop/shop.obj: Shop/shop.cpp.obj
 .PHONY : Shop/shop.obj
 
@@ -277,6 +421,24 @@ help:
 	@echo ... Basic/welcome.obj
 	@echo ... Basic/welcome.i
 	@echo ... Basic/welcome.s
+	@echo ... Customer/ChatRoom.obj
+	@echo ... Customer/ChatRoom.i
+	@echo ... Customer/ChatRoom.s
+	@echo ... Customer/Customer.obj
+	@echo ... Customer/Customer.i
+	@echo ... Customer/Customer.s
+	@echo ... Customer/CustomerMain.obj
+	@echo ... Customer/CustomerMain.i
+	@echo ... Customer/CustomerMain.s
+	@echo ... Customer/Customers.obj
+	@echo ... Customer/Customers.i
+	@echo ... Customer/Customers.s
+	@echo ... Customer/Information.obj
+	@echo ... Customer/Information.i
+	@echo ... Customer/Information.s
+	@echo ... Customer/UserInterface.obj
+	@echo ... Customer/UserInterface.i
+	@echo ... Customer/UserInterface.s
 	@echo ... Shop/shop.obj
 	@echo ... Shop/shop.i
 	@echo ... Shop/shop.s

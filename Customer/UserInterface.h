@@ -6,7 +6,7 @@
 #define DESIGNPATTERN_2021_USERINTERFACE_H
 
 #include "Customer.h"
-
+#include "../Basic/welcome.h"
 class CustomerInterface {
 private:
     Customer* customer;
@@ -16,6 +16,7 @@ public:
     virtual void showUserInformation();
     virtual void changeUserInformation();
     virtual void rollback();
+    Customer* getCustomer();
     void mainInterface();
 };
 

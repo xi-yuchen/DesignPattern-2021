@@ -1,7 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include "Commodity.h"
-#include "Shop/shop.h"
+#include "../Shop/shop.h"
 
 using std::cout;
 using std::endl;

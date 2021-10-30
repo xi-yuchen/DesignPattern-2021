@@ -4,6 +4,7 @@
 infoVisitor infoVisitor;
 filterVisitor filterVisitor;
 
+
 /*  DesignPattern - 'Null Object Pattern'
  *  If the argument 'type' is null:
  *      The shop factory will create a nullshop with some default 'null' or 'empty' values
@@ -66,7 +67,7 @@ void shopInterface::checkShop(int ID) {
             return;
         }
     }
-    cout << "No such ID shop." << endl;
+    cout << "未知的店铺ID！" << endl;
 }
 
 void shopInterface::editStorage(int ID) {
@@ -79,7 +80,7 @@ void shopInterface::editStorage(int ID) {
             return;
         }
     }
-    cout << "未知的店铺ID" << endl;
+    cout << "未知的店铺ID！" << endl;
 }
 
 void shopInterface::initialize() {
@@ -110,21 +111,22 @@ void shopInterface::initialize() {
     _shopList.push_back(new nullShop("", 0, "", "", 0, 0, defaultRemarkList, defaultGoodsList));
 }
 
-void shopInterface::addRemark(int ID) {
+void shopInterface::addRemark(int ID, Customer *customer) {
+    VirtualCustomerInformationReader reader(customer->getInfo());
     for (auto _shop:_shopList) {
         if (ID == _shop->getShopId()) {
             string _remarkDate, _remarkBody;
             int _remarkScore;
-            cout << "Please add your remark date,remark user and remark score here:" << endl;
+            cout << "请输入评价时间，评价内容以及评价分数:" << endl;
             cin.ignore();
             getline(cin, _remarkDate);
             getline(cin, _remarkBody);
             cin >> _remarkScore;
-            _shop->addShopRemarks(_remarkDate, "User", _remarkBody, _remarkScore);
+            _shop->addShopRemarks(_remarkDate, reader.getName(), _remarkBody, _remarkScore);
             return;
         }
     }
-    cout << "Invalid ID." << endl;
+    cout << "该店铺ID不存在." << endl;
 }
 
 void shopInterface::filterShopByScore() {
@@ -142,19 +144,19 @@ void shopInterface::filterShopByScore() {
     LowShopFilter lowShopFilter;
     shoplistLow = lowShopFilter.selectShop(_shopList);
 
-    cout << "High Score Shops:" << shoplistHigh.size() << endl;
+    cout << "高分店铺：" << shoplistHigh.size() << endl;
     for (auto _shop:shoplistHigh) {
         filterVisitor.visit(_shop);
     }
     cout << endl;
 
-    cout << "Mid Score Shops:" << shoplistMid.size() << endl;
+    cout << "中分店铺：" << shoplistMid.size() << endl;
     for (auto _shop:shoplistMid) {
         filterVisitor.visit(_shop);
     }
     cout << endl;
 
-    cout << "Low Score Shops:" << shoplistLow.size() << endl;
+    cout << "低分店铺：" << shoplistLow.size() << endl;
     for (auto _shop:shoplistLow) {
         filterVisitor.visit(_shop);
     }
@@ -179,34 +181,30 @@ void shopInterface::manageGoods(int ID) {
 
 void shopInterface::showAllGoodsInShops() {
     for (Shop *_shop:_shopList) {
-        cout << "Shop: " << _shop->getShopName() << endl;
-        cout << "Shop Menu:" << endl;
-        for (auto _metaItem:_shop->getItemList()) {
+        cout << "店铺：" << _shop->getShopName() << endl;
+        cout << "货品菜单：" << endl;
+        for (const auto &_metaItem:_shop->getItemList()) {
             cout << _metaItem.first << ": " << _metaItem.second << endl;
         }
         cout << endl;
     }
-    return;
 }
 
 void shopInterface::checkGoods(int ID) {
     for (Shop *_shop:_shopList) {
         if (_shop->getShopId() == ID) {
-            for (auto _metaItem:_shop->getItemList()) {
+            for (const auto &_metaItem:_shop->getItemList()) {
                 cout << _metaItem.first << ": " << _metaItem.second << endl;
             }
         }
         cout << endl;
     }
-    return;
 }
 
-void shopInterface::mainInterface() {
+void shopInterface::mainInterface(Customer *customer) {
     showUserShopCmds showUserShopCmds;
-    int choice_status;
-    int ID;
-    initialize();
-    while (1) {
+    int choice_status, ID;
+    while (true) {
         showUserShopCmds.showUserCmds();
         cin >> choice_status;
         if (choice_status == 0)
@@ -217,7 +215,7 @@ void shopInterface::mainInterface() {
                 break;
             case 2: {
                 cin >> ID;
-                addRemark(ID);
+                addRemark(ID, customer);
                 break;
             }
             case 3: {
@@ -229,20 +227,17 @@ void shopInterface::mainInterface() {
                 checkShop(ID);
                 break;
             }
-
             case 5: {
                 showAllGoodsInShops();
                 break;
             }
-
             case 6: {
                 cin >> ID;
                 checkGoods(ID);
                 break;
             }
-
             default:
-                cout << "input again!" << endl;
+                cout << "不存在的命令！请重新输入！" << endl;
                 break;
         }
     }
