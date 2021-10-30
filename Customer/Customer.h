@@ -103,4 +103,6 @@ class ChatRoom {
 public:
     static void showMessage(Customer* customer,const string& message);
 };
+
+
 #endif //DESIGNPATTERN_2021_CUSTOMER_H

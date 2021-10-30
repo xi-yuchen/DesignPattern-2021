@@ -26,6 +26,8 @@ int main(){
     welcome->addCustomer(builder->getCustomer());
     customers->addCustomer(builder->getCustomer());
 
-
+    Customer* customer= customers->getCustomer();
+    CommodityInformationReader* reader=customer->getCommodityReader();
+    reader->setCommodityInformation()
     cout<<"helloworld"<<endl;
 }

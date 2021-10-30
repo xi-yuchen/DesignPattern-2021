@@ -25,15 +25,15 @@ public:
     //Ac
     void BrowseAc();
     void BrowseAc(int BrowseAcID);
-    void AddAcD(int ID, string Cont, vector<int>& CommodityInformaitonReaderList, float DisRate);//添加打折类活动
+    void AddAcD(int ID, string Cont, vector<int>& CommodityInformationReaderList, float DisRate);//添加打折类活动
     void AddAcF(int ID, string Cont, float Thd, float RedAmount);//添加满减类活动
 
-    float CalOptimalDecision(map<CommodityInformaitonReader*, int>& BuyCommodityInformaitonReaderMap);//寻求最优惠价格，并打印此时活动列表
-    void RecommendActivity(vector<CommodityInformaitonReader*>& RelatedCommodityInformaitonReaderList);//打印与商品相关的所有活动
-    void RecommendActivity(map<CommodityInformaitonReader*, int>& RelatedCommodityInformaitonReaderMap);//打印与商品相关的所有活动
+    float CalOptimalDecision(map<CommodityInformation*, int>& BuyCommodityInformationReaderMap);//寻求最优惠价格，并打印此时活动列表
+    void RecommendActivity(vector<CommodityInformation*>& RelatedCommodityInformationReaderList);//打印与商品相关的所有活动
+    void RecommendActivity(map<CommodityInformation*, int>& RelatedCommodityInformationReaderMap);//打印与商品相关的所有活动
 
 private:
-
+    
     AdvertisingSystem* AdSystemInstance;
     ActivitySystem* AcSystemInstance;
     Interpreter* ActivityInterpreter;
