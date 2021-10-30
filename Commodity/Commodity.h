@@ -13,7 +13,8 @@ class Shop;
 class CommodityInformation {
 protected:
     string name, type; // 商品名
-    int ID, price; // 价格
+    int ID; // ID
+    float price; // 价格
     Shop* shop; // 商品拥有者(店铺)
     int shopID;
 
@@ -27,15 +28,16 @@ protected:
 
 public:
     friend class CommodityInformationReader;
+    friend class CommodityInformationVipReader;
     friend class CommodityInformationSetter;
     friend class CommoditySale;
     friend class CommodityDisplay;
 
-    CommodityInformation(int ID, string name, int price, int shopID);
+    CommodityInformation(int ID, string name, float price, int shopID);
 };
 
 class CommodityInformationReader {
-private:
+protected:
     CommodityInformation* source;
 public:
     CommodityInformationReader() = default;
@@ -46,9 +48,14 @@ public:
     string getName() { return  source->name; }
     int getID() { return  source->ID; }
     string getType() { return  source->type; }
-    int getPrice() { return source->price; }
+    virtual float getPrice() { return source->price; }
     Shop* getShop() { return source->shop; }
     int getShopID(){return source->shopID;}
+};
+
+class CommodityInformationVipReader : CommodityInformationReader {
+public:
+    float getPrice() override { return source->price * 0.8; } // vip用户打八折
 };
 
 class CommodityInformationSetter {
@@ -63,7 +70,7 @@ public:
     void setName(string name) { source->name = name; }
     void setID(int id) { source->ID = id; }
     void setType(string type) { source->type = type; }
-    void setPrice(int price) { source->price = price; }
+    void setPrice(float price) { source->price = price; }
     bool addCommodity(CommodityInformation* commodity) { return source->Add(commodity); }
     bool removeCommodity(CommodityInformation* commodity) { return source->Remove(commodity); }
 };
@@ -100,7 +107,7 @@ protected:
     virtual bool HasCommodity(CommodityInformation* commodity);
 
 public:
-    SingleCommodity(int ID, string name, int price,int shopID, int amount);
+    SingleCommodity(int ID, string name, float price,int shopID, int amount);
 
     virtual bool Enough(int amount);
     virtual bool Sell(int amount);
@@ -130,7 +137,7 @@ protected:
     virtual bool HasCommodity(CommodityInformation* commodity);
 
 public:
-    CompositeCommodity(int ID, string name, int price, int shopID);
+    CompositeCommodity(int ID, string name, float price, int shopID);
 
     bool Add(CommodityInformation* commodity);
     bool Remove(CommodityInformation* commodity);

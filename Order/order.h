@@ -1,4 +1,4 @@
-#include "Commodity.h"
+#include "../Commodity/Commodity.h"
 
 #include<iostream>
 #include<list>
@@ -34,22 +34,24 @@ public:
     int value(){return 2;}
     virtual void Handle(Order* pOrder){cout << "Paid";}
 };
+
 class Order {
 private:
     string orderid;//订单识别号
     int amount; //订单条目数量
-    map<CommodityInformaitonReader *,int>items;//订单内容(订单项)        
+    map<CommodityInformation *,int>items;//订单内容(订单项)
     float Price = 0;
     State* m_pState;
+    int Customerid;
 public:
-    Order(map<CommodityInformaitonReader *,int>Items,double price);
+    Order(map<CommodityInformation *,int>Items,float price,int customerid);
 
     // string state = "no";
     int getOrderedAmount()  { return items.size(); }
     string getID() const { return orderid; }
-    
+    int getcustomerid() {return Customerid;}
 
-    void setPrice(float price);
+    //void setPrice(float price);
     
 
     void Request();
@@ -61,7 +63,7 @@ public:
     // void pay(int orderid);
     // void pay(vector <int> orderid);
 
-    void display();
+//    void display();
 
     //virtual void accept(Visitor& v) = 0;
 
@@ -75,24 +77,25 @@ public:
         this->totalPrice = totalPrice;
     }*/
 };
-class OrderList {
-private:
-    vector<Order>orders;
-public:
-    void addorder(Order &order);//在订单中增加一个订单项
-    void removeorder(string orderno);//在订单中删除一个订单项
+//class OrderList {
+//private:
+//
+//    vector<Order*>orders;
+//public:
+//    void addorder(Order &order);//在订单中增加一个订单项
+//    void removeorder(string orderno);//在订单中删除一个订单项
+//
+//    void display(int id);
+//
+//
+//};
 
-    void display();
 
 
-};
-
-
-
-class Command {
-public:
-    virtual void generatingCommand() = 0;
-};
+//class Command {
+//public:
+//    virtual void generatingCommand() = 0;
+//};
 // class PaySingleOrder : public Command {
 // private:
 //     Order *order;
@@ -116,46 +119,46 @@ public:
 // };
 
 
-class AddorderTolist : public Command {
-private:
-    OrderList* list;
-    Order* order;
-public:
-    AddorderTolist(OrderList* list, Order* order) : list(list), order(order) {}
-    void generatingCommand() {
-        list->addorder(*order);
-    }
-};
-
-class removeorderTolist : public Command {
-private:
-    OrderList* list;
-    string orderno;
-public:
-    removeorderTolist(OrderList* list, string orderno) : list(list), orderno(orderno) {}
-    void generatingCommand() {
-        list->removeorder(orderno);
-    }
-};
-
-
-
-
-
-class CommandGenerator {
-private:
-    std::list<Command*> commandList;
-    Command* command;
-public:
-    void addCommand(Command* command) {
-        commandList.push_back(command);
-    }
-    void removeCommand(Command* command) {
-        commandList.remove(command);
-    }
-    void executeCommand() {
-        for (auto command : commandList)
-            command->generatingCommand();
-    }
-};
+//class AddorderTolist : public Command {
+//private:
+//    OrderList* list;
+//    Order* order;
+//public:
+//    AddorderTolist(OrderList* list, Order* order) : list(list), order(order) {}
+//    void generatingCommand() {
+//        list->addorder(*order);
+//    }
+//};
+//
+//class removeorderTolist : public Command {
+//private:
+//    OrderList* list;
+//    string orderno;
+//public:
+//    removeorderTolist(OrderList* list, string orderno) : list(list), orderno(orderno) {}
+//    void generatingCommand() {
+//        list->removeorder(orderno);
+//    }
+//};
+//
+//
+//
+//
+//
+//class CommandGenerator {
+//private:
+//    std::list<Command*> commandList;
+//    Command* command;
+//public:
+//    void addCommand(Command* command) {
+//        commandList.push_back(command);
+//    }
+//    void removeCommand(Command* command) {
+//        commandList.remove(command);
+//    }
+//    void executeCommand() {
+//        for (auto command : commandList)
+//            command->generatingCommand();
+//    }
+//};
 #endif //SOFTWAREARC_ORDER_H
