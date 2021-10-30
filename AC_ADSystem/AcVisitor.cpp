@@ -1,13 +1,14 @@
 ﻿#include "AcVisitor.h"
 #include "ActivitySystem.h"
-#include "Commodity.h"
+#include "../Commodity/Commodity.h"
 #include <set>
-
-AcVisitor_Recommend::AcVisitor_Recommend(vector<CommodityInformaitonReader*>& RelatedCommodityInformaitonReaderList)
+#include "../Customer/Customers.h"
+#include "../Customer/Customer.h"
+AcVisitor_Recommend::AcVisitor_Recommend(vector<CommodityInformation*>& RelatedCommodityInformationList)
 {
-    for (auto BuyCommodityInformaitonReader : RelatedCommodityInformaitonReaderList)
+    for (auto BuyCommodityInformation : RelatedCommodityInformationList)
     {
-        SaveRelatedCommodityInformaitonReaderList.push_back(BuyCommodityInformaitonReader);
+        SaveRelatedCommodityInformationList.push_back(BuyCommodityInformation);
     }
 }
 
@@ -19,11 +20,11 @@ void AcVisitor_Recommend::Visit(ActivitySystem* AcSystem)
 
     set<int> RecommendAcSet;
 
-    for (auto RelatedCommodityInformaitonReader : SaveRelatedCommodityInformaitonReaderList)
+    for (auto RelatedCommodityInformation : SaveRelatedCommodityInformationList)
     {
         for (int i = 0; i < AcSystem->DiscountActivityList.size(); i++)
         {
-            if (AcSystem->DiscountActivityList[i]->IsSatisfy(RelatedCommodityInformaitonReader))
+            if (AcSystem->DiscountActivityList[i]->IsSatisfy(RelatedCommodityInformation))
                 RecommendAcSet.insert(i);
         }
     }
@@ -36,15 +37,15 @@ void AcVisitor_Recommend::Visit(ActivitySystem* AcSystem)
     RecommendActivityCode = RecommendCode;
 }
 
-AcVisitor_CalPrice::AcVisitor_CalPrice(map<CommodityInformaitonReader*, int>& BuyCommodityInformaitonReaderMap)
+AcVisitor_CalPrice::AcVisitor_CalPrice(map<CommodityInformation*, int>& BuyCommodityInformationMap)
 {
-    for (auto BuyCommodityInformaitonReader : BuyCommodityInformaitonReaderMap)
+    for (auto BuyCommodityInformation : BuyCommodityInformationMap)
     {
-        SaveBuyCommodityInformaitonReaderMap.insert(BuyCommodityInformaitonReader);
+        SaveBuyCommodityInformationMap.insert(BuyCommodityInformation);
     }
 }
 
-AcVisitor_CP_Discount::AcVisitor_CP_Discount(map<CommodityInformaitonReader*, int>& BuyCommodityInformaitonReaderMap) : AcVisitor_CalPrice(BuyCommodityInformaitonReaderMap)
+AcVisitor_CP_Discount::AcVisitor_CP_Discount(map<CommodityInformation*, int>& BuyCommodityInformationMap) : AcVisitor_CalPrice(BuyCommodityInformationMap)
 {
 }
 
@@ -55,15 +56,16 @@ void AcVisitor_CP_Discount::Visit(ActivitySystem* AcSystem)
     DecisionCode.push_back('1'); // 1代表所选方案为打折活动类
 
     float TotalMinPrice = 0.0f;
-
-    for (auto BuyCommodityInformaitonReader : SaveBuyCommodityInformaitonReaderMap)
+    auto* reader=CustomerSet::getInstance()->getCustomer()->getCommodityReader();
+    for (auto BuyCommodityInformation : SaveBuyCommodityInformationMap)
     {
         DecisionCode.push_back(120); // 后续位均代表对应的活动的下标，120即为不使用活动
-        float MinPrice = (BuyCommodityInformaitonReader.first->getPrice()) * BuyCommodityInformaitonReader.second;
+        reader->setCommodityInformation(BuyCommodityInformation.first);
+        float MinPrice = (reader->getPrice()) * BuyCommodityInformation.second;
 
         for (int i = 0; i < AcSystem->DiscountActivityList.size(); i++)
         {
-            float CalPrice = AcSystem->DiscountActivityList[i]->ExecuteActivity(BuyCommodityInformaitonReader.first, BuyCommodityInformaitonReader.second);
+            float CalPrice = AcSystem->DiscountActivityList[i]->ExecuteActivity(BuyCommodityInformation.first, BuyCommodityInformation.second);
             if (CalPrice < MinPrice)
             {
                 MinPrice = CalPrice;
@@ -79,7 +81,7 @@ void AcVisitor_CP_Discount::Visit(ActivitySystem* AcSystem)
     OptimalDecisionCode = DecisionCode;
 }
 
-AcVisitor_CP_FullRedu::AcVisitor_CP_FullRedu(map<CommodityInformaitonReader*, int>& BuyCommodityInformaitonReaderMap) : AcVisitor_CalPrice(BuyCommodityInformaitonReaderMap)
+AcVisitor_CP_FullRedu::AcVisitor_CP_FullRedu(map<CommodityInformation*, int>& BuyCommodityInformationMap) : AcVisitor_CalPrice(BuyCommodityInformationMap)
 {
 }
 
@@ -90,16 +92,17 @@ void AcVisitor_CP_FullRedu::Visit(ActivitySystem* AcSystem)
     DecisionCode.push_back('2'); // 2代表所选方案为满减活动类
 
     float TotalMinPrice = 0.0f;
-
-    for (auto BuyCommodityInformaitonReader : SaveBuyCommodityInformaitonReaderMap)
+    auto* reader=CustomerSet::getInstance()->getCustomer()->getCommodityReader();
+    for (auto BuyCommodityInformation : SaveBuyCommodityInformationMap)
     {
-        TotalMinPrice += (BuyCommodityInformaitonReader.first->getPrice()) * BuyCommodityInformaitonReader.second;
+        reader->setCommodityInformation(BuyCommodityInformation.first);
+        TotalMinPrice += (reader->getPrice()) * BuyCommodityInformation.second;
     }
 
     DecisionCode.push_back(120); // 后续位均代表对应的活动的下标，120即为不使用活动
     for (int i = 0; i < AcSystem->FullReductionActivityList.size(); i++)
     {
-        float CalPrice = AcSystem->FullReductionActivityList[i]->ExecuteActivity(SaveBuyCommodityInformaitonReaderMap);
+        float CalPrice = AcSystem->FullReductionActivityList[i]->ExecuteActivity(SaveBuyCommodityInformationMap);
         if (CalPrice < TotalMinPrice)
         {
             TotalMinPrice = CalPrice;
@@ -165,12 +168,12 @@ void AcVisitor_Browse::Visit(ActivitySystem* AcSystem)
     // 类似 Ad
 }
 
-AcVisitor_Add::AcVisitor_Add(int ID, string Cont, vector<int>& CommodityInformaitonReaderList, float DisRate)
+AcVisitor_Add::AcVisitor_Add(int ID, string Cont, vector<int>& CommodityInformationList, float DisRate)
 {
     AcType = ActivityType::Discount;
     AcID = ID;
     Content = Cont;
-    SatisfyCommodityInformaitonReaderIDList = CommodityInformaitonReaderList;
+    SatisfyCommodityInformationIDList = CommodityInformationList;
     DiscountRate = DisRate;
 }
 
@@ -193,7 +196,7 @@ void AcVisitor_Add::Visit(ActivitySystem* AcSystem)
 
     if (AcType == ActivityType::Discount)
     {
-        AcNode_Discount* ac = new AcNode_Discount(AcID, Content, SatisfyCommodityInformaitonReaderIDList, DiscountRate);
+        AcNode_Discount* ac = new AcNode_Discount(AcID, Content, SatisfyCommodityInformationIDList, DiscountRate);
         AcSystem->DiscountActivityList.push_back(ac);
     }
     else 

@@ -18,7 +18,7 @@ using namespace std;
 // void Order::pay(vector<int> orderid) {
 //     state = "Partial payment succeeded";
 // }
-Order:: Order(map<CommodityInformaitonReader *,int>Items,double price):items(Items),Price(price)
+Order:: Order(map<CommodityInformation *,int>Items,float price,int customerid):items(Items),Price(price),Customerid(customerid)
 {
     time_t t = time(0);
 	char ch[64];
@@ -52,46 +52,49 @@ void Order::pay()//Order状态的改变
     }
 }
 
-void Order::display()//Order内容的展示
-{
-    cout<<"订单条目为："<<endl;
-     for(auto item = items.begin(); item != items.end(); item++) {
-        cout << item->first << " * " << item->second << endl;
-    }
-}
+//void Order::display()//Order内容的展示
+//{
+//    cout<<"订单条目为："<<endl;
+//     for(auto item = items.begin(); item != items.end(); item++) {
+//        cout << item->first << " * " << item->second << endl;
+//    }
+//}
 
 
 
-void Order::setPrice(float price)//order价格改变
-{
-    this->Price=price;
-}
+//void Order::setPrice(float price)//order价格改变
+//{
+//    this->Price=price;
+//}
 
-void OrderList::addorder(Order& order)//向订单列表中加入订单
-{
-    orders.push_back(order);
-}
-
-void OrderList::removeorder(string orderno)//从订单列表中移除订单
-{
-    vector<Order>::iterator it;
-    for (it = orders.begin(); it != orders.end(); ++it) {
-        if (it->getID() == orderno) {
-            it = orders.erase(it);
-            return;
-        }
-    }
-}
-
-void OrderList::display()//订单列表的展示
-{
-    cout << "订单列表包含的订单有：" << endl;
-    for (auto order: this->orders)
-    {
-        cout << order.getID() << " " ;
-        order.Request();
-        cout<< endl;
-    }
-}
+//void OrderList::addorder(Order& order)//向订单列表中加入订单
+//{
+//    orders.push_back(order);
+//}
+//
+//void OrderList::removeorder(string orderno)//从订单列表中移除订单
+//{
+//    vector<Order>::iterator it;
+//    for (it = orders.begin(); it != orders.end(); ++it) {
+//        if (it->getID() == orderno) {
+//            it = orders.erase(it);
+//            return;
+//        }
+//    }
+//}
+//
+//void OrderList::display(int id)//订单列表的展示
+//{
+//    cout << "订单列表包含的订单有：" << endl;
+//    for (auto order: this->orders)
+//    {
+//        if(order.getcustomerid()==id)
+//        {
+//            cout << order.getID() << " " ;
+//            order.Request();
+//            cout<< endl;
+//        }
+//    }
+//}
 
 

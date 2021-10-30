@@ -1,6 +1,7 @@
 #include "shopInterface.h"
 #include <string>
-
+#include"../Customer/Customers.h"
+#include"../Customer/Customer.h"
 infoVisitor infoVisitor;
 filterVisitor filterVisitor;
 
@@ -116,8 +117,8 @@ void shopInterface::initialize() {
     _shopList.push_back(new nullShop("", 0, "", "", 0, 0, defaultRemarkList, defaultGoodsList));
 }
 
-void shopInterface::addRemark(int ID, Customer *customer) {
-    VirtualCustomerInformationReader reader(customer->getInfo());
+void shopInterface::addRemark(int ID) {
+    VirtualCustomerInformationReader* reader=CustomerSet::getInstance()->getCustomer()->getCustomerReader();
     for (auto _shop:_shopList) {
         if (ID == _shop->getShopId()) {
             string _remarkDate, _remarkBody;
@@ -127,7 +128,7 @@ void shopInterface::addRemark(int ID, Customer *customer) {
             getline(cin, _remarkDate);
             getline(cin, _remarkBody);
             cin >> _remarkScore;
-            _shop->addShopRemarks(_remarkDate, reader.getName(), _remarkBody, _remarkScore);
+            _shop->addShopRemarks(_remarkDate, reader->getName(), _remarkBody, _remarkScore);
             return;
         }
     }
@@ -220,6 +221,16 @@ void shopInterface::showCommodityList(map<CommodityInformation *, int> _List) {
     }
 }
 
+CommodityInformation* shopInterface::addCart(int ID) {
+    CommodityInformationReader reader;
+    for(auto _commodity:_commodityList){
+        reader.setCommodityInformation(_commodity.first);
+        if(reader.getID()==ID)
+            return _commodity.first;
+    }
+    return nullptr;
+}
+
 void shopInterface::mainInterface(Customer *customer) {
     showUserShopCmds showUserShopCmds;
     int choice_status, ID;
@@ -234,7 +245,7 @@ void shopInterface::mainInterface(Customer *customer) {
                 break;
             case 2: {
                 cin >> ID;
-                addRemark(ID, customer);
+                addRemark(ID);
                 break;
             }
             case 3: {

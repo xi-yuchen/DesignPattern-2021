@@ -3,7 +3,7 @@
 
 #include<string>
 #include<list>
-#include"shop_seller.h"
+#include"../Seller/seller.h"
 
 using std::string;
 using std::list;
