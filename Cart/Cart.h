@@ -85,7 +85,7 @@ class Order {
     int id = 1123;
     float totalPrice;
 
-    map<CommodityInformationReader*, int> commodityList;
+    map<CommodityInformation*, int> commodityList;
 
 public:
     Order(map<CommodityInformationReader*, int> commodityList, double totalPrice) : totalPrice(totalPrice) { this->commodityList = commodityList; }

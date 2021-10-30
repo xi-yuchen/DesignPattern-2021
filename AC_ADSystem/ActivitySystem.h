@@ -8,7 +8,8 @@ using namespace std;
 
 class AcVisitor;
 
-class CommodityInformaitonReader;
+class CommodityInformationReader;
+class CommodityInformation;
 
 class AcNode//活动父类
 {
@@ -24,17 +25,17 @@ class AcNode_Discount : public AcNode//打折类活动子类
 {
 public:
 
-    AcNode_Discount(int ID, string Cont, vector<int>& CommodityInformaitonReaderIDList, float DisRate);
+    AcNode_Discount(int ID, string Cont, vector<int>& CommodityInformationIDList, float DisRate);
     
-    float ExecuteActivity(CommodityInformaitonReader* BuyCommodityInformaitonReader, int Amount); // 若商品打折，则返回商品打完折的价格，否则返回原价
+    float ExecuteActivity(CommodityInformation* BuyCommodityInformation, int Amount); // 若商品打折，则返回商品打完折的价格，否则返回原价
 
-    bool IsSatisfy(CommodityInformaitonReader* BuyCommodityInformaitonReader);//判断商品是否打折
+    bool IsSatisfy(CommodityInformation* BuyCommodityInformation);//判断商品是否打折
 
 private:
 
-    float CalPrice(CommodityInformaitonReader* BuyCommodityInformaitonReader, int Amount);//返回商品打完折后的价格
+    float CalPrice(CommodityInformation* BuyCommodityInformation, int Amount);//返回商品打完折后的价格
 
-    vector<int> SatisfyCommodityInformaitonReaderIDList;
+    vector<int> SatisfyCommodityInformationIDList;
 
     float DiscountRate;
 };
@@ -45,13 +46,13 @@ public:
 
     AcNode_FullReduction(int ID, string Cont, float Thd, float RedAmount);
 
-    float ExecuteActivity(map<CommodityInformaitonReader*, int>& BuyCommodityInformaitonReader); //若商品达到满减金额，则返回商品满减后的价格，否则返回原价
+    float ExecuteActivity(map<CommodityInformation*, int>& BuyCommodityInformation); //若商品达到满减金额，则返回商品满减后的价格，否则返回原价
 
 private:
 
-    bool IsSatisfy(map<CommodityInformaitonReader*, int>& BuyCommodityInformaitonReader);//判断商品是否满减
+    bool IsSatisfy(map<CommodityInformation*, int>& BuyCommodityInformation);//判断商品是否满减
 
-    float CalPrice(map<CommodityInformaitonReader*, int>& BuyCommodityInformaitonReader);//返回商品满减后的价格
+    float CalPrice(map<CommodityInformation*, int>& BuyCommodityInformation);//返回商品满减后的价格
 
     float Threshold;
     float ReductionAmount;
