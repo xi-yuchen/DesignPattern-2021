@@ -4,6 +4,7 @@
 
 #include "Customer.h"
 using namespace std;
+
 void NormalCustomerBuilder::setCustomerReader() {
     auto *source=new VirtualCustomerInformationReader(_customer->getInfo());
     _customer->setCustomerInformationReader(source);
@@ -40,6 +41,30 @@ Customer* VipCustomerBuilder::getCustomer() {
     return _customer;
 }
 
+
+
+void NullCustomerBuilder::setCustomerReader() {
+    auto* source=new VirtualCustomerInformationReader(_customer->getInfo());
+    _customer->setCustomerInformationReader(source);
+}
+
+void NullCustomerBuilder::setCustomerSetter() {
+    _customer->setCustomerInformationSetter(new VirtualCustomerInformationSetter(_customer->getInfo()));
+    VirtualCustomerInformationSetter* setter=_customer->getCustomerSetter();
+    setter->setId(0);
+    setter->setName("未登录");
+    setter->setEmail("unknown");
+    setter->setPhone("unknown");
+    setter->setPoints(0);
+}
+
+void NullCustomerBuilder::setCommodityReader() {
+    _customer->setCommodityInformationReader(new CommodityInformationReader());
+}
+
+Customer *NullCustomerBuilder::getCustomer() {
+    return _customer;
+}
 
 void Customer::backup() {
     CustomerInformationOriginator originator{};
@@ -105,7 +130,5 @@ void Customer::updateInformation() {
     }
     backup();
 }
-
-
 
 

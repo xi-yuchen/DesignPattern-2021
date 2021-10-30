@@ -17,7 +17,7 @@ public:
     virtual void broadcast()=0;
 };
 
-class WelcomeMessage:AbstractCustomerEvent{
+class WelcomeMessage:public AbstractCustomerEvent{
 private:
     list<Customer*> _customers;
 public:
@@ -26,20 +26,23 @@ public:
     void broadcast() override;
 };
 
+
+
 class CustomerSet{
 private:
     vector<Customer*> _customers;
     int _index;
     static CustomerSet* _instance;
-    CustomerSet(){}
+    CustomerSet(){};
 public:
     static CustomerSet* getInstance(){
         if(_instance==nullptr)
             _instance=new CustomerSet;
         return _instance;
     }
+    void init();
     void addCustomer(Customer* customer);
-    void deleteCustomer(Customer* customer);
+    void deleteCustomer();
     bool switchCustomer(int index);
     Customer* getCustomer();
     vector<Customer*> getCustomers();

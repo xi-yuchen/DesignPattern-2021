@@ -31,9 +31,11 @@ void CustomerSet::addCustomer(Customer *customer) {
     _index = (int) _customers.size() - 1;
 }
 
-void CustomerSet::deleteCustomer(Customer *customer) {
-    remove(_customers.begin(), _customers.end(), customer);
-    return;
+void CustomerSet::deleteCustomer() {
+    remove(_customers.begin(), _customers.end(), this->_customers[_index]);
+    if(_customers.empty())
+        init();
+    _index=0;
 }
 
 bool CustomerSet::switchCustomer(int index) {
@@ -45,6 +47,7 @@ bool CustomerSet::switchCustomer(int index) {
 }
 
 Customer *CustomerSet::getCustomer() {
+    cout<<_index;
     return _customers[_index];
 }
 
@@ -54,3 +57,14 @@ vector<Customer *> CustomerSet::getCustomers() {
 
 
 CustomerSet *CustomerSet::_instance = nullptr;
+
+void CustomerSet::init() {
+    cout<<1;
+    if(_customers.empty()) {
+          AbstractCustomerBuilder *builder = new NullCustomerBuilder;
+          CustomerDirector::makeCustomer(builder);
+          addCustomer(builder->getCustomer());
+    }
+}
+
+
