@@ -10,7 +10,7 @@ void CartCommand::setCart(Cart *cart) {
 
 void AddCommodity::operation() {
 //    cout << "Operating add commodity command" << endl;
-    cart->add(infoReader, amount);
+    cart->add(id, amount);
 }
 
 void RemoveCommodity::operation() {
