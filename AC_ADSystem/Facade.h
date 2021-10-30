@@ -2,7 +2,7 @@
 #include <vector>
 #include <map>
 #include <string>
-#include "Commodity.h"
+#include "../Commodity/Commodity.h"
 using namespace std;
 
 //使用设计模式：外观模式、解释器

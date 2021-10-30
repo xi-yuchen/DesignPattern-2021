@@ -1,6 +1,6 @@
 ﻿#include "AcVisitor.h"
 #include "ActivitySystem.h"
-#include "Commodity.h"
+#include "../Commodity/Commodity.h"
 #include <set>
 #include "../Customer/Customers.h"
 #include "../Customer/Customer.h"
@@ -60,7 +60,7 @@ void AcVisitor_CP_Discount::Visit(ActivitySystem* AcSystem)
     for (auto BuyCommodityInformation : SaveBuyCommodityInformationMap)
     {
         DecisionCode.push_back(120); // 后续位均代表对应的活动的下标，120即为不使用活动
-        reader->setCommodityInformation(BuyCommodityInformation);
+        reader->setCommodityInformation(BuyCommodityInformation.first);
         float MinPrice = (reader->getPrice()) * BuyCommodityInformation.second;
 
         for (int i = 0; i < AcSystem->DiscountActivityList.size(); i++)

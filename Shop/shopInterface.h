@@ -44,7 +44,7 @@ public:
 
     Shop *createShop(string type); // Create a shop by admin.
 
-    void addRemark(int ID, Customer *customer); // Add remarks to a certain shop.
+    void addRemark(int ID); // Add remarks to a certain shop.
 
     void editStorage(int ID); //Edit the shop's storage.
 
@@ -61,6 +61,8 @@ public:
     void showAllGoodsInShops(); // Show users all goods in each shop.
 
     void checkGoods(int ID); // Let users check goods list in one of the shops.
+
+    CommodityInformation *addCart(int ID);
 };
 
 #endif //SOFTWAREARC_SHOPMANAGER_H

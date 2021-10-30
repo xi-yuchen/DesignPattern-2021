@@ -8,7 +8,7 @@ using std::endl;
 
 //===================== Commodity 商品虚基类========================
 
-CommodityInformation::CommodityInformation(int ID, string name, int price, int shopID) {
+CommodityInformation::CommodityInformation(int ID, string name, float price, int shopID) {
     this->ID = ID;
     this->name = name;
     this->price = price;
@@ -33,7 +33,7 @@ bool CommodityInformation::Remove(CommodityInformation* commodity) {
 
 //===================== SingleCommodity 单件商品类 ========================
 
-SingleCommodity::SingleCommodity(int ID, string name, int price, int shopID,int amount)
+SingleCommodity::SingleCommodity(int ID, string name, float price, int shopID,int amount)
 : CommodityInformation(ID, name, price, shopID) {
     this->amount = amount;
 }
@@ -80,7 +80,7 @@ void SingleCommodity::Display() {
     cout << "库存数量: ";
     cout << std::left << std::setw(6) << this->amount;
     cout << "价格: ";
-    cout << std::left << std::setw(6) << this->price;
+    cout << std::left << std::setw(8) << std::setprecision(2) << this->price;
     cout << "商铺ID: ";
     cout << std::left << std::setw(8) << this->shopID;
     cout << endl;
@@ -88,7 +88,7 @@ void SingleCommodity::Display() {
 
 //===================== CompositeCommodity 组合商品类 ========================
 
-CompositeCommodity::CompositeCommodity(int ID, string name, int price, int shopID)
+CompositeCommodity::CompositeCommodity(int ID, string name, float price, int shopID)
 : CommodityInformation(ID, name, price, shopID) { }
 
 /**
@@ -169,7 +169,7 @@ void CompositeCommodity::Display() {
     cout << "商品组合: ";
     cout << std::left << std::setw(10) << this->name;
     cout << "价格: ";
-    cout << std::left << std::setw(6) << this->price;
+    cout << std::left << std::setw(8) << std::setprecision(2) << this->price;
     cout << "商铺ID: ";
     cout << std::left << std::setw(8) << this->shopID;
     cout << endl;
