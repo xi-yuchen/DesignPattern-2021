@@ -189,6 +189,78 @@ Basic/welcome.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Basic/welcome.cpp.s
 .PHONY : Basic/welcome.cpp.s
 
+Commodity/Commodity.obj: Commodity/Commodity.cpp.obj
+.PHONY : Commodity/Commodity.obj
+
+# target to build an object file
+Commodity/Commodity.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Commodity/Commodity.cpp.obj
+.PHONY : Commodity/Commodity.cpp.obj
+
+Commodity/Commodity.i: Commodity/Commodity.cpp.i
+.PHONY : Commodity/Commodity.i
+
+# target to preprocess a source file
+Commodity/Commodity.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Commodity/Commodity.cpp.i
+.PHONY : Commodity/Commodity.cpp.i
+
+Commodity/Commodity.s: Commodity/Commodity.cpp.s
+.PHONY : Commodity/Commodity.s
+
+# target to generate assembly for a file
+Commodity/Commodity.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Commodity/Commodity.cpp.s
+.PHONY : Commodity/Commodity.cpp.s
+
+Commodity/CommodityFactory.obj: Commodity/CommodityFactory.cpp.obj
+.PHONY : Commodity/CommodityFactory.obj
+
+# target to build an object file
+Commodity/CommodityFactory.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Commodity/CommodityFactory.cpp.obj
+.PHONY : Commodity/CommodityFactory.cpp.obj
+
+Commodity/CommodityFactory.i: Commodity/CommodityFactory.cpp.i
+.PHONY : Commodity/CommodityFactory.i
+
+# target to preprocess a source file
+Commodity/CommodityFactory.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Commodity/CommodityFactory.cpp.i
+.PHONY : Commodity/CommodityFactory.cpp.i
+
+Commodity/CommodityFactory.s: Commodity/CommodityFactory.cpp.s
+.PHONY : Commodity/CommodityFactory.s
+
+# target to generate assembly for a file
+Commodity/CommodityFactory.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Commodity/CommodityFactory.cpp.s
+.PHONY : Commodity/CommodityFactory.cpp.s
+
+Commodity/CommodityInterface.obj: Commodity/CommodityInterface.cpp.obj
+.PHONY : Commodity/CommodityInterface.obj
+
+# target to build an object file
+Commodity/CommodityInterface.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Commodity/CommodityInterface.cpp.obj
+.PHONY : Commodity/CommodityInterface.cpp.obj
+
+Commodity/CommodityInterface.i: Commodity/CommodityInterface.cpp.i
+.PHONY : Commodity/CommodityInterface.i
+
+# target to preprocess a source file
+Commodity/CommodityInterface.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Commodity/CommodityInterface.cpp.i
+.PHONY : Commodity/CommodityInterface.cpp.i
+
+Commodity/CommodityInterface.s: Commodity/CommodityInterface.cpp.s
+.PHONY : Commodity/CommodityInterface.s
+
+# target to generate assembly for a file
+Commodity/CommodityInterface.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DPlib.dir\build.make CMakeFiles/DPlib.dir/Commodity/CommodityInterface.cpp.s
+.PHONY : Commodity/CommodityInterface.cpp.s
+
 Customer/ChatRoom.obj: Customer/ChatRoom.cpp.obj
 .PHONY : Customer/ChatRoom.obj
 
@@ -421,6 +493,15 @@ help:
 	@echo ... Basic/welcome.obj
 	@echo ... Basic/welcome.i
 	@echo ... Basic/welcome.s
+	@echo ... Commodity/Commodity.obj
+	@echo ... Commodity/Commodity.i
+	@echo ... Commodity/Commodity.s
+	@echo ... Commodity/CommodityFactory.obj
+	@echo ... Commodity/CommodityFactory.i
+	@echo ... Commodity/CommodityFactory.s
+	@echo ... Commodity/CommodityInterface.obj
+	@echo ... Commodity/CommodityInterface.i
+	@echo ... Commodity/CommodityInterface.s
 	@echo ... Customer/ChatRoom.obj
 	@echo ... Customer/ChatRoom.i
 	@echo ... Customer/ChatRoom.s

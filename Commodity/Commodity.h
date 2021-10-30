@@ -15,6 +15,7 @@ protected:
     string name, type; // 商品名
     int ID, price; // 价格
     Shop* shop; // 商品拥有者(店铺)
+    int shopID;
 
     virtual bool Add(CommodityInformation* commodity);
     virtual bool Remove(CommodityInformation* commodity);
@@ -30,7 +31,7 @@ public:
     friend class CommoditySale;
     friend class CommodityDisplay;
 
-    CommodityInformation(int ID, string name, int price, Shop* shop);
+    CommodityInformation(int ID, string name, int price, int shopID);
 };
 
 class CommodityInformationReader {
@@ -47,6 +48,7 @@ public:
     string getType() { return  source->type; }
     int getPrice() { return source->price; }
     Shop* getShop() { return source->shop; }
+    int getShopID(){return source->shopID;}
 };
 
 class CommodityInformationSetter {
@@ -98,7 +100,7 @@ protected:
     virtual bool HasCommodity(CommodityInformation* commodity);
 
 public:
-    SingleCommodity(int ID, string name, int price, Shop* shop, int amount);
+    SingleCommodity(int ID, string name, int price,int shopID, int amount);
 
     virtual bool Enough(int amount);
     virtual bool Sell(int amount);
@@ -128,7 +130,7 @@ protected:
     virtual bool HasCommodity(CommodityInformation* commodity);
 
 public:
-    CompositeCommodity(int ID, string name, int price, Shop* shop);
+    CompositeCommodity(int ID, string name, int price, int shopID);
 
     bool Add(CommodityInformation* commodity);
     bool Remove(CommodityInformation* commodity);
@@ -139,11 +141,11 @@ public:
 
     // 用于Iterator
     list<CommodityInformation*>* GetCommodityList() { return &commodity_list; };
-    CompositeCommodityIterator& begin() { 
+    CompositeCommodityIterator& begin() {
         CompositeCommodityIterator* iter = new CompositeCommodityIterator(commodity_list.begin());
         return *iter;
     }
-    CompositeCommodityIterator& end() { 
+    CompositeCommodityIterator& end() {
         CompositeCommodityIterator* iter = new CompositeCommodityIterator(commodity_list.end());
         return *iter;
     }

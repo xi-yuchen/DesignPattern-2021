@@ -13,38 +13,44 @@ filterVisitor filterVisitor;
  */
 Shop *ShopFactory::createShop(string type) {
     if (type == "")
-        return new nullShop("unknown", 0, "unknown", "2021-01-01", 0, 0, list<ShopRemark *>(), map<string, int>());
+        return new nullShop("unknown", 0, "unknown", "2021-01-01", 0, 0, list<ShopRemark *>(),
+                            map<CommodityInformation *, int>());
 
     else if (type == "food")
-        return new foodShop("newFoodshop", 1, "food", "2021-01-01", 0, 0, list<ShopRemark *>(), map<string, int>());
+        return new foodShop("newFoodshop", 1, "food", "2021-01-01", 0, 0, list<ShopRemark *>(),
+                            map<CommodityInformation *, int>());
 
     else if (type == "drink")
-        return new drinkShop("newDrinkshop", 2, "drink", "2021-01-01", 0, 0, list<ShopRemark *>(), map<string, int>());
+        return new drinkShop("newDrinkshop", 2, "drink", "2021-01-01", 0, 0, list<ShopRemark *>(),
+                             map<CommodityInformation *, int>());
 
     else if (type == "digital")
         return new digitalShop("newDigitalshop", 3, "digital", "2021-01-01", 0, 0, list<ShopRemark *>(),
-                               map<string, int>());
+                               map<CommodityInformation *, int>());
 
     else if (type == "book")
-        return new bookShop("newBookshop", 4, "book", "2021-01-01", 0, 0, list<ShopRemark *>(), map<string, int>());
+        return new bookShop("newBookshop", 4, "book", "2021-01-01", 0, 0, list<ShopRemark *>(),
+                            map<CommodityInformation *, int>());
 
     else if (type == "daily")
-        return new dailyShop("newDailyshop", 5, "daily", "2021-01-01", 0, 0, list<ShopRemark *>(), map<string, int>());
+        return new dailyShop("newDailyshop", 5, "daily", "2021-01-01", 0, 0, list<ShopRemark *>(),
+                             map<CommodityInformation *, int>());
 
     else if (type == "furniture")
         return new furnitureShop("newfurnitureshop", 6, "furniture", "2021-01-01", 0, 0, list<ShopRemark *>(),
-                                 map<string, int>());
+                                 map<CommodityInformation *, int>());
 
     else if (type == "clothes")
         return new clothesShop("newClothesshop", 7, "clothes", "2021-01-01", 0, 0, list<ShopRemark *>(),
-                               map<string, int>());
+                               map<CommodityInformation *, int>());
 
     else if (type == "stationery")
         return new stationeryShop("newStationeryshop", 8, "stationery", "2021-01-01", 0, 0, list<ShopRemark *>(),
-                                  map<string, int>());
+                                  map<CommodityInformation *, int>());
 
     else if (type == "sport")
-        return new sportShop("newSportshop", 9, "sport", "2021-01-01", 0, 0, list<ShopRemark *>(), map<string, int>());
+        return new sportShop("newSportshop", 9, "sport", "2021-01-01", 0, 0, list<ShopRemark *>(),
+                             map<CommodityInformation *, int>());
 
     return nullptr;
 }
@@ -87,9 +93,8 @@ void shopInterface::initialize() {
     ShopRemark *defaultRemark = new ShopRemark("2021-01-01", "Administrator", "Good.", 5);
     list<ShopRemark *> defaultRemarkList;
     defaultRemarkList.push_back(defaultRemark);
-    map<string, int> defaultGoodsList;
+    map<CommodityInformation *, int> defaultGoodsList;
     //TODO:
-    defaultGoodsList["testItem"] += 10;
     _shopList.push_back(
             new foodShop("芜湖肉蛋葱鸡专营店", 1, "food", "2013-09-18", 10029, 0, defaultRemarkList, defaultGoodsList));
     _shopList.push_back(
@@ -163,28 +168,34 @@ void shopInterface::filterShopByScore() {
     cout << endl;
 }
 
-void shopInterface::manageGoods(int ID) {
-    map<string, int> _tempList;
-    string _item;
-    int _changeNum;
-    cin >> _item;
-    cin >> _changeNum;//>0 add, <0 minus;
+//TODO:重做商品管理（需要耦合完成以后）
+void shopInterface::manageGoods(int ID, shopInterface &shopInterface) {
+    CommodityInformationReader reader;
     for (auto _shop:_shopList) {
         if (_shop->getShopId() == ID) {
-            _tempList = _shop->getItemList();
-            _tempList[_item] += _changeNum;
-            _shop->setItemList(_tempList);
+            {
+                for (auto _commodity:shopInterface.getCommodityList()) {
+                    reader.setCommodityInformation(_commodity.first);
+                    if (reader.getShopID() == ID) {
+                        map<CommodityInformation *, int> temp = _shop->getItemList();
+                        temp[_commodity.first]++;
+                        _shop->setItemList(temp);
+                    }
+                }
+            }
         }
     }
 
 }
 
 void shopInterface::showAllGoodsInShops() {
+    CommodityInformationReader reader;
     for (Shop *_shop:_shopList) {
         cout << "店铺：" << _shop->getShopName() << endl;
         cout << "货品菜单：" << endl;
         for (const auto &_metaItem:_shop->getItemList()) {
-            cout << _metaItem.first << ": " << _metaItem.second << endl;
+            reader.setCommodityInformation(_metaItem.first);
+            cout << reader.getName() << ": " << _metaItem.second << endl;
         }
         cout << endl;
     }
@@ -198,6 +209,14 @@ void shopInterface::checkGoods(int ID) {
             }
         }
         cout << endl;
+    }
+}
+
+void shopInterface::showCommodityList(map<CommodityInformation *, int> _List) {
+    CommodityInformationReader reader;
+    for (auto _commodity:_List) {
+        reader.setCommodityInformation(_commodity.first);
+        cout << reader.getName() << " ￥" << reader.getPrice() << endl;
     }
 }
 
@@ -242,3 +261,5 @@ void shopInterface::mainInterface(Customer *customer) {
         }
     }
 }
+
+
