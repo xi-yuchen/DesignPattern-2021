@@ -45,10 +45,9 @@ class AddCommodity : public CartCommand {
 private:
 //    SelectedCommodity* commodity;
 //    Cart* cart;
-    CommodityInformationReader *infoReader;
-    int amount;
+    int id, amount;
 public:
-    AddCommodity(CommodityInformationReader *infoReader, int amount) : infoReader(infoReader), amount(amount) {}
+    AddCommodity(int id, int amount) : id(id), amount(amount) {}
     void operation();
 };
 
