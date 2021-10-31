@@ -32,11 +32,11 @@ private:
 
 public:
 
-    const map<CommodityInformation *, int> &getCommodityList() const { return _commodityList; }
+    map<CommodityInformation *, int> &getCommodityList() { return _commodityList; }
 
     void showCommodityList(map<CommodityInformation *, int> List);
 
-    void setCommodityList(const map<CommodityInformation *, int> &commodityList) {_commodityList = commodityList;}
+    void setCommodityList(const map<CommodityInformation *, int> &commodityList) { _commodityList = commodityList; }
 
     const list<Shop *> &getShopList() const { return _shopList; };
 
@@ -44,7 +44,7 @@ public:
 
     Shop *createShop(string type); // Create a shop by admin.
 
-    void addRemark(int ID); // Add remarks to a certain shop.
+    void addRemark(int, Customer *customer); // Add remarks to a certain shop.
 
     void editStorage(int ID); //Edit the shop's storage.
 
@@ -57,6 +57,8 @@ public:
     void filterShopByScore(); // Filter all the shops by their score.
 
     void manageGoods(int ID, shopInterface &shopInterface); // Manage situation of goods of shop found by ID.
+
+    void prepareGoods(int ID);
 
     void showAllGoodsInShops(); // Show users all goods in each shop.
 

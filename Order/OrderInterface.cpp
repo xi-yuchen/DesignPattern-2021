@@ -6,19 +6,22 @@
 using namespace std;
 
 void OrderInterface::Initialize() {
-    ;
+
 }
 
-void OrderInterface::CreateOrder(map<CommodityInformation *,int>Items,float price,int customerid)
-{
-    Order *p=new Order(Items,price,customerid);
+
+void OrderInterface::CreateOrder(int customerID, map<CommodityInformation *, int> Items, float price) {
+    Order *p = new Order(customerID, Items, price);
     orderlist.push_back(order);
 }
 
+void OrderInterface::AddOrder(Order *order) {
+    orderlist.push_back(order);
+}
 
-void OrderInterface::removeorder(string orderno)//从订单列表中移除订单
+void OrderInterface::RemoveOrder(string orderno)//从订单列表中移除订单
 {
-    vector<Order*>::iterator it;
+    vector<Order *>::iterator it;
     for (it = orderlist.begin(); it != orderlist.end(); ++it) {
         if ((*it)->getID() == orderno) {
             orderlist.erase(it);
@@ -30,13 +33,11 @@ void OrderInterface::removeorder(string orderno)//从订单列表中移除订单
 void OrderInterface::display(int id)//订单列表的展示
 {
     cout << "订单列表包含的订单有：" << endl;
-    for (auto order: this->orderlist)
-    {
-        if((*order).getcustomerid()==id)
-        {
-            cout << (*order).getID() << " " ;
+    for (auto order: this->orderlist) {
+        if ((*order).getcustomerid() == id) {
+            cout << (*order).getID() << " ";
             (*order).Request();
-            cout<< endl;
+            cout << endl;
         }
     }
 }

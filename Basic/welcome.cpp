@@ -26,6 +26,12 @@ void showUserInfoCmds::showUserCmds() {
     cout << "0 - 退出" << endl;
 }
 
+void showUserAddCartCmds::showUserCmds() {
+    cout << endl;
+    cout << "1 - 请输入商品ID与数量，将之加入购物车！" << endl;
+    cout << "0 - 退出" << endl;
+}
+
 void showUserInterfaceCmds::showUserCmds() {
     cout << endl;
     cout << "欢迎光临天猫双十一购物节！请选择操作！" << endl;
@@ -41,7 +47,7 @@ void showUserInterfaceCmds::showUserCmds() {
     cout << "0 - 退出" << endl;
 }
 
-void Initial(){
+void Initial() {
     shopInterface shopInterface;
     shopInterface.initialize();
 }

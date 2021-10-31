@@ -6,14 +6,18 @@
 //#include "../Basic/welcome.h"
 class OrderInterface {
 private:
-    vector<Order*>orderlist;
+    vector<Order*> orderlist;
     Order* order;
 public:
     void Initialize();
-    void CreateOrder(map<CommodityInformation *,int>Items,float price,int customerid);
-    void addorder(Order &order);//在订单中增加一个订单项
-    void removeorder(string orderno);//在订单中删除一个订单项
+    void CreateOrder(int customerID,map<CommodityInformation *,int>Items,float price);
+    void AddOrder(Order *order);//在订单中增加一个订单项
+    void RemoveOrder(string orderID);//在订单中删除一个订单项
     void display(int id);
+
+    const vector<Order *> &getOrderlist() const {return orderlist;}
+
+    void setOrderlist(const vector<Order *> &orderlist) {OrderInterface::orderlist = orderlist;}
     //Order* getOrder();
 
 };

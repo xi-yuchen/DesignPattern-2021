@@ -70,7 +70,6 @@ void AcVisitor_CP_Discount::Visit(ActivitySystem* AcSystem)
             {
                 MinPrice = CalPrice;
                 DecisionCode[DecisionCode.length() - 1] =static_cast<char>(i);
-
             }
         }
 

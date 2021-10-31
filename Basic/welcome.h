@@ -31,5 +31,20 @@ public:
     void showUserCmds();
 };
 
+class showUserAddCartCmds : public showCmds {
+public:
+    void showUserCmds();
+};
+
+class showUserCheckCartCmds : public showCmds {
+public:
+    void showUserCmds();
+};
+
+class showUserPayCartCmds : public showCmds {
+public:
+    void showUserCmds();
+};
+
 void Initial();
 #endif //DESIGNPATTERN_2021_WELCOME_H

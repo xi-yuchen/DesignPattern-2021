@@ -169,7 +169,7 @@ public:
 class filterVisitor : public Visitor {
 public:
     void visit(Shop *shop) {
-        cout << shop->getShopId() << " - Shop Name: " << shop->getShopName() << endl;
+        cout << shop->getShopId() << " - 店铺名称: " << shop->getShopName() << endl;
     }
 };
 

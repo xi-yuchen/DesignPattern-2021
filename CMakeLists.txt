@@ -3,11 +3,11 @@ project(DesignPattern_2021)
 set(CMAKE_CXX_STANDARD 14)
 
 aux_source_directory(./Customer/ SRC_LIST_CUSTOMER)
-#aux_source_directory(./Cart/ SRC_LIST_CART)
+aux_source_directory(./Cart/ SRC_LIST_CART)
 aux_source_directory(./Basic/ SRC_LIST_BASIC)
 aux_source_directory(./AC_ADSystem/ SRC_LIST_AD)
 aux_source_directory(./Commodity/ SRC_LIST_COMMODITY)
-#aux_source_directory(./Order/ SRC_LIST_ORDER)
+aux_source_directory(./Order/ SRC_LIST_ORDER)
 #aux_source_directory(./Seller/ SRC_LIST_SELLER)
 aux_source_directory(./Shop/ SRC_LIST_SHOP)
 
