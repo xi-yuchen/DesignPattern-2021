@@ -8,7 +8,7 @@ using namespace std;
 
 Order::Order(int customerID, map<CommodityInformation *, int> Items, float price) : Customerid(customerID),
                                                                                     items(Items), Price(price) {
-    time_t t = time(nullptr);
+    time_t t = time(0);
     char ch[64];
     strftime(ch, sizeof(ch), "%Y%m%d%H%M%S", localtime(&t)); //年-月-日 时-分-秒
     orderid.assign(ch + 2);

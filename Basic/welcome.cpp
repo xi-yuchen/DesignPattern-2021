@@ -55,6 +55,7 @@ void showUserOrderCmds::showUserCmds() {
     cout << "1 - 查看您进行中的订单" << endl;
     cout << "2 - 支付全部未支付的订单" << endl;
     cout << "3 - 查看所有订单" << endl;
+    cout << "0 - 退出" << endl;
 }
 
 void Initial() {
