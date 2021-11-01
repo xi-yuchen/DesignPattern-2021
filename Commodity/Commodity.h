@@ -10,6 +10,12 @@ using std::list;
 
 class Shop;
 
+template<class return_T, class parameter_T> // 设计模式: Command
+class Command {
+public:
+    virtual return_T execute(parameter_T) = 0;
+};
+
 class CommodityInformation {
 protected:
     string name, type; // 商品名
@@ -75,7 +81,7 @@ public:
     bool removeCommodity(CommodityInformation* commodity) { return source->Remove(commodity); }
 };
 
-class CommoditySale {
+class CommoditySale : Command<bool, int> { // 设计模式: command
 private:
     CommodityInformation* source;
 public:
@@ -85,10 +91,10 @@ public:
         source = info;
     }
     bool ifEnough(int amount) { return source->Enough(amount); }
-    bool execute(int amount) { return source->Sell(amount); }
+    virtual bool execute(int amount) { return source->Sell(amount); }
 };
 
-class CommodityDisplay {
+class CommodityDisplay : Command<void, void> { // 设计模式: command
 private:
     CommodityInformation* source;
 public:
@@ -97,10 +103,10 @@ public:
     void setCommodityInformation(CommodityInformation* info){
         source = info;
     }
-    void execute() { source->Display(); }
+    virtual void execute() { source->Display(); }
 };
 
-class SingleCommodity : public CommodityInformation {
+class SingleCommodity : public CommodityInformation { // 设计模式: composite, 桥接模式
 protected:
     int amount; // 商品库存数量
 
@@ -114,7 +120,7 @@ public:
     virtual void Display();
 };
 
-class CompositeCommodity;
+class CompositeCommodity;  // 设计模式: iterator
 class CompositeCommodityIterator : public std::iterator<std::input_iterator_tag, CompositeCommodity> {
 protected:
     list<CommodityInformation*>::iterator current;
@@ -130,7 +136,7 @@ public:
     CommodityInformation& operator* () { return **current; }
 };
 
-class CompositeCommodity : public CommodityInformation {
+class CompositeCommodity : public CommodityInformation { // 设计模式: composite
 protected:
     list<CommodityInformation*> commodity_list;
 
