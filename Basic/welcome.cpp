@@ -34,7 +34,6 @@ void showUserCartCmds::showUserCmds() {
     cout << "3 - 删除购物车中指定商品" << endl;
     cout << "4 - 减少购物车中指定商品" << endl;
     cout << "5 - 结算购物车" << endl;
-    cout << "6 - 显示活动优惠" << endl;
     cout << "0 - 退出" << endl;
 }
 
@@ -48,6 +47,14 @@ void showUserInterfaceCmds::showUserCmds() {
     cout << "5 - 购物车" << endl;
     cout << "6 - 查看订单列表" << endl;
     cout << "0 - 退出" << endl;
+}
+
+void showUserOrderCmds::showUserCmds() {
+    cout << endl;
+    cout << "您正在查看您的订单信息！" << endl;
+    cout << "1 - 查看您进行中的订单" << endl;
+    cout << "2 - 支付全部未支付的订单" << endl;
+    cout << "3 - 查看所有订单" << endl;
 }
 
 void Initial() {

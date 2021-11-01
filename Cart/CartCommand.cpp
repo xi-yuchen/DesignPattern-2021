@@ -54,13 +54,6 @@ CalculateOptionalPrice::CalculateOptionalPrice(int id, int amount) {
 }
 
 void CalculateOptionalPrice::operation() {
-    CommodityInformationReader reader;
-    setCommodities(cart.getCommodityList());
-    for (auto _cmd:getCommodities()) {
-        reader.setCommodityInformation(_cmd.first);
-        cout << reader.getName() << " " << _cmd.second;
-    }
-    cout << "enter" << endl;
     cart.calculateOptionalPrice(getCommodities());
 }
 

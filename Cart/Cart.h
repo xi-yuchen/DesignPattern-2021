@@ -192,7 +192,11 @@ public:
     }
 //    void setCustomer(Customer *customer) { this->customer = customer; }
 
-    void connectOrderList(OrderInterface orderInterface);
+//    void connectOrderList(OrderInterface orderInterface);
+
+    OrderInterface &getOrderInterface(){return orderInterface;}
+
+    void setOrderInterface(OrderInterface &_orderInterface) {orderInterface = _orderInterface;}
 
     void connectActivities(Facade *activities);
 

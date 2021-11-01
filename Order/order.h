@@ -27,14 +27,14 @@ class ConcreteStateA : public State {
 public:
     int value() { return 1; }
 
-    virtual void Handle(Order *pOrder) { cout << "Unpaid"; }
+    void Handle(Order *pOrder) { cout << "未支付" << endl; }
 };
 
 class ConcreteStateB : public State {
 public:
     int value() { return 2; }
 
-    virtual void Handle(Order *pOrder) { cout << "Paid"; }
+    void Handle(Order *pOrder) { cout << "已支付" << endl; }
 };
 
 class Order {
@@ -48,17 +48,17 @@ private:
 public:
     Order(int customerID, map<CommodityInformation *, int> Items, float price);
 
-    // string state = "no";
-    int getOrderedAmount() { return items.size(); }
+    int getAmount() const { return amount; }
+
+    const map<CommodityInformation *, int> &getItems() const { return items; }
 
     string getID() const { return orderid; }
 
     int getcustomerid() { return Customerid; }
 
-    //void setPrice(float price);
-
-
     void Request();
+
+    int getPayState() { return m_pState->value(); }
 
     void pay();
 

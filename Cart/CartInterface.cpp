@@ -5,11 +5,12 @@
 
 using namespace std;
 
-void CartInterface::MainInterface(shopInterface shopInterface, Customer *customer) {
+void CartInterface::MainInterface(shopInterface shopInterface, Customer *customer, OrderInterface &orderInterface) {
     int choice_status, ID;
     showUserCartCmds showUserCartCmds;
     cart.setCustomer(customer);
     cart.setShopInterface(shopInterface);
+    cart.setOrderInterface(orderInterface);
     while (true) {
         showUserCartCmds.showUserCmds();
         cin >> choice_status;
@@ -46,26 +47,27 @@ void CartInterface::MainInterface(shopInterface shopInterface, Customer *custome
                 int payCommodityID, payCommodityNum;
                 cout << "1-全部结算 2-结算指定ID全部商品 3-结算指定ID商品指定数量: " << endl;
                 cin >> choiceSub5;
-                if (choiceSub5 == 1)
+                if (choiceSub5 == 1){
                     cart.pay();
+                    orderInterface.setOrderlist(cart.getOrderInterface().getOrderlist());
+                }
                 else if (choiceSub5 == 2) {
                     cout << "请输入要结算商品的ID: " << endl;
                     cin >> payCommodityID;
                     cart.pay(payCommodityID);
+                    orderInterface.setOrderlist(cart.getOrderInterface().getOrderlist());
                 } else if (choiceSub5 == 3) {
                     cout << "请输入要结算商品的ID与数量: " << endl;
                     cin >> payCommodityID;
                     cin >> payCommodityNum;
                     cart.pay(payCommodityID, payCommodityNum);
+                    orderInterface.setOrderlist(cart.getOrderInterface().getOrderlist());
                 } else
                     cout << "该命令不存在!" << endl;
                 break;
             }
             case 6: {
-                CalculateOptionalPrice calculateOptionalPrice;
-                calculateOptionalPrice.setCart(cart);
-                calculateOptionalPrice.setCustomer(customer);
-                calculateOptionalPrice.operation();
+//
                 break;
             }
             default:
