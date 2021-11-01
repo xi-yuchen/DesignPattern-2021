@@ -54,13 +54,6 @@ CalculateOptionalPrice::CalculateOptionalPrice(int id, int amount) {
 }
 
 void CalculateOptionalPrice::operation() {
-    CommodityInformationReader reader;
-    setCommodities(cart.getCommodityList());
-    for (auto _cmd:getCommodities()) {
-        reader.setCommodityInformation(_cmd.first);
-        cout << reader.getName() << " " << _cmd.second;
-    }
-    cout << "enter" << endl;
     cart.calculateOptionalPrice(getCommodities());
 }
 
@@ -68,11 +61,8 @@ void ExecuteCommands::setCart(Cart _cart) {
     cart = _cart;
 }
 
-void ExecuteCommands::addCommand(CartCommand *command, Customer *customer) {
+void ExecuteCommands::addCommand(CartCommand *command) {
     commands.push_back(command);
-    if (!commands.empty()) {
-        this->cart.setCustomer(customer);
-    }
 }
 
 void ExecuteCommands::removeCommand(CartCommand *command) {
@@ -81,8 +71,8 @@ void ExecuteCommands::removeCommand(CartCommand *command) {
 
 void ExecuteCommands::execute() {
     for (auto command : commands) {
-        (*command).setCart(cart);
-        (*command).operation();
+        command->setCart(cart);
+        command->operation();
     }
     commands.clear();
 }

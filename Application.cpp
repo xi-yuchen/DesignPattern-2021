@@ -26,6 +26,7 @@ int main() {
 
     Facade facade;
     CartInterface cartInterface;
+    OrderInterface orderInterface;
     while (true) {
         cout << "欢迎来到天猫双十一购物节！请选择您的身份！1 - 顾客 & 2 - 商家 & 0 - 退出" << endl;
         cin >> loginStatus;
@@ -57,14 +58,11 @@ int main() {
                         break;
                     }
                     case 5: {
-                        cartInterface.MainInterface(shopInterface, customerList->getCustomer());
+                        cartInterface.MainInterface(shopInterface, customerList->getCustomer(),orderInterface);
                         break;
                     }
                     case 6: {
-
-                        break;
-                    }
-                    case 7: {
+                        orderInterface.MainInterface(customerList->getCustomer());
                         break;
                     }
                     case 0: {

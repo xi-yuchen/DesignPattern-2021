@@ -32,6 +32,8 @@ public:
 
     void setCustomer(Customer *customer);
 
+    const Cart &getCart() const {return cart;}
+
     friend class ExecuteCommands;
 };
 
@@ -40,19 +42,20 @@ private:
     list<CartCommand *> commands;
     Cart cart;
 public:
+
     void setCart(Cart cart);
 
-    void addCommand(CartCommand *, Customer *customer);
+    void addCommand(CartCommand *);
 
     void removeCommand(CartCommand *command);
 
     void execute();
+
+    const Cart &getCart() const {return cart;}
 };
 
 class AddCommodity : public CartCommand {
 private:
-//    SelectedCommodity* commodity;
-//    Cart* cart;
     int id, amount;
 public:
     AddCommodity(int id, int amount) : id(id), amount(amount) {}

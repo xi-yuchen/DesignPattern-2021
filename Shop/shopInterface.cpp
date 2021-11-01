@@ -1,5 +1,6 @@
 #include "shopInterface.h"
 #include <string>
+#include <ctime>
 #include"../Customer/Customers.h"
 #include"../Customer/Customer.h"
 
@@ -120,13 +121,16 @@ void shopInterface::initialize() {
 
 void shopInterface::addRemark(int ID, Customer *customer) {
     VirtualCustomerInformationReader *reader = customer->getCustomerReader();
+    time_t t = time(0);
+    char ch[64];
+    strftime(ch, sizeof(ch), "%Y-%m-%d %H:%M:%S", localtime(&t));
     for (auto _shop:_shopList) {
         if (ID == _shop->getShopId()) {
             string _remarkDate, _remarkBody;
             int _remarkScore;
-            cout << "请输入评价时间，评价内容以及评价分数:" << endl;
+            cout << "请输入您的评价内容与评分:" << endl;
             cin.ignore();
-            getline(cin, _remarkDate);
+            _remarkDate.assign(ch + 2);
             getline(cin, _remarkBody);
             cin >> _remarkScore;
             _shop->addShopRemarks(_remarkDate, reader->getName(), _remarkBody, _remarkScore);
