@@ -19,6 +19,7 @@
 #include <vector>
 #include <map>
 #include <iostream>
+
 using namespace std;
 
 
@@ -177,7 +178,7 @@ using namespace std;
 
 class Cart {
 private:
-    map<CommodityInformation*, int> commodityList;
+    map<CommodityInformation *, int> commodityList;
 
     OrderInterface orderInterface;
     Facade *activities;
@@ -186,36 +187,44 @@ private:
     CommodityInformationReader *infoReader;
     shopInterface interface;
 public:
-//    Cart() {
-//        customer = CustomerSet::getInstance()->getCustomer();
-//        infoReader = customer->getCommodityReader();
-//    }
+    Cart() {
+        activities = new Facade();
+    }
 //    void setCustomer(Customer *customer) { this->customer = customer; }
 
     void connectOrderList(OrderInterface orderInterface);
+
     void connectActivities(Facade *activities);
+
     void setShopInterface(shopInterface interface);
+
     void setCustomer(Customer *customer);
 
-    float calculateOptionalPrice(map<CommodityInformation*, int> commodities);
+    float calculateOptionalPrice(map<CommodityInformation *, int> commodities);
 
     void add(int id, int amount);
+
     void remove(int id);
+
     void remove(int id, int amount);
+
     void display();
 
     //map<CommodityInformation*, int> getCommodity();
 
     const map<CommodityInformation *, int> &getCommodityList() const;
+
     const map<CommodityInformation *, int> &getCommodityList(int ID) const;
-    const map<CommodityInformation *, int> &getCommodityList(int ID,int amount) const;
-   //map<CommodityInformation*, int> getCommodity(int id);
+
+    const map<CommodityInformation *, int> &getCommodityList(int ID, int amount) const;
+    //map<CommodityInformation*, int> getCommodity(int id);
     //map<CommodityInformation*, int> getCommodity(int id, int amount);
 
     void pay();
-    void pay(int id);
-    void pay(int id, int amount);
 
+    void pay(int id);
+
+    void pay(int id, int amount);
 
 
     static void displayCommodityInfo(CommodityInformation *commodityInfo);

@@ -47,7 +47,6 @@ bool CustomerSet::switchCustomer(int index) {
 }
 
 Customer *CustomerSet::getCustomer() {
-    cout<<_index;
     return _customers[_index];
 }
 

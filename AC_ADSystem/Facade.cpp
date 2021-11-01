@@ -194,7 +194,6 @@ void Facade::AddAcF(int ID, string Cont, float Thd, float RedAmount)
 float Facade::CalOptimalDecision(map<CommodityInformation*, int>& BuyCommodityInformationMap) // 策略模式
 {
     AcVisitor_CalPrice* CalPriceVisitor;
-
     CalPriceVisitor = new AcVisitor_CP_Discount(BuyCommodityInformationMap);// 策略1，使用打折活动
     AcSystemInstance->Accept(CalPriceVisitor);
     float OptimalPrice = CalPriceVisitor->OptimalPrice;
@@ -209,7 +208,6 @@ float Facade::CalOptimalDecision(map<CommodityInformation*, int>& BuyCommodityIn
         OptimalPrice = CalPriceVisitor->OptimalPrice;
         OptimalDecisionCode = CalPriceVisitor->OptimalDecisionCode;
     }
-
     ActivityInterpreter->MakeInterpretation(OptimalDecisionCode); // 进行解释
 
     cout << "###最优价格为： " << OptimalPrice << endl;

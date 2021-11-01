@@ -61,7 +61,7 @@ void CalculateOptionalPrice::operation() {
         cout << reader.getName() << " " << _cmd.second;
     }
     cout << "enter" << endl;
-    cout << "您选择的商品的最优价格是: " << cart.calculateOptionalPrice(getCommodities()) << endl;
+    cart.calculateOptionalPrice(getCommodities());
 }
 
 void ExecuteCommands::setCart(Cart _cart) {
