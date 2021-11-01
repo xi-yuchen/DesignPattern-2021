@@ -14,9 +14,8 @@ class CartInterface {
 private:
     Cart cart;
 public:
-    void MainInterface(shopInterface shopInterface);
-
-    CartInterface();
+    void MainInterface(shopInterface shopInterface, Customer* customer);
+    const Cart &getCart() const {return cart;}
 };
 
 #endif //DESIGNPATTERN_2021_CARTINTERFACE_H

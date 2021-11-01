@@ -23,21 +23,29 @@ using std::list;
 
 class CartCommand {
 protected:
-    Cart* cart;
+    Cart cart;
 public:
 //    CartCommand(Cart *cart) : cart(cart) {}
     virtual void operation() = 0;
-    void setCart(Cart *cart);
+
+    void setCart(Cart cart);
+
+    void setCustomer(Customer *customer);
+
+    friend class ExecuteCommands;
 };
 
 class ExecuteCommands {
 private:
-    list<CartCommand*> commands;
-    Cart *cart;
+    list<CartCommand *> commands;
+    Cart cart;
 public:
-    void setCart(Cart *cart);
-    void addCommand(CartCommand *command);
+    void setCart(Cart cart);
+
+    void addCommand(CartCommand *, Customer *customer);
+
     void removeCommand(CartCommand *command);
+
     void execute();
 };
 
@@ -48,7 +56,8 @@ private:
     int id, amount;
 public:
     AddCommodity(int id, int amount) : id(id), amount(amount) {}
-    void operation();
+
+    void operation() override;
 };
 
 class RemoveCommodity : public CartCommand {
@@ -56,8 +65,9 @@ private:
     int id;
 //    Cart* cart;
 public:
-    RemoveCommodity(int id) : id(id) {}
-    void operation();
+    explicit RemoveCommodity(int id) : id(id) {}
+
+    void operation() override;
 };
 
 class RemoveSomeCommodity : public CartCommand {
@@ -66,7 +76,8 @@ private:
 //    Cart* cart;
 public:
     RemoveSomeCommodity(int id, int amount) : id(id), amount(amount) {}
-    void operation();
+
+    void operation() override;
 };
 
 class DisplayCart : public CartCommand {
@@ -74,7 +85,7 @@ class DisplayCart : public CartCommand {
 //    Cart* cart;
 public:
 //    explicit DisplayCart() {}
-    void operation();
+    void operation() override;
 };
 
 class PayAll : public CartCommand {
@@ -82,7 +93,7 @@ class PayAll : public CartCommand {
 //    Cart* cart;
 public:
 //    explicit PayAll() {}
-    void operation();
+    void operation() override;
 };
 
 class PaySingleCommodity : public CartCommand {
@@ -90,8 +101,9 @@ private:
     int id;
 //    Cart* cart;
 public:
-    PaySingleCommodity(int id) : id(id) {}
-    void operation();
+    explicit PaySingleCommodity(int id) : id(id) {}
+
+    void operation() override;
 };
 
 class PaySomeCommodity : public CartCommand {
@@ -100,7 +112,25 @@ private:
 //    Cart* cart;
 public:
     PaySomeCommodity(int id, int amount) : id(id), amount(amount) {}
-    void operation();
+
+    void operation() override;
+};
+
+class CalculateOptionalPrice : public CartCommand {
+private:
+    map<CommodityInformation *, int> commodities;
+public:
+    CalculateOptionalPrice();
+
+    explicit CalculateOptionalPrice(int id);
+
+    CalculateOptionalPrice(int id, int amount);
+
+    void operation() override;
+
+    const map<CommodityInformation *, int> &getCommodities() const { return commodities; }
+
+    void setCommodities(const map<CommodityInformation *, int> &_commodities) { commodities = _commodities; }
 };
 
 #endif //CART_CARTCOMMAND_H

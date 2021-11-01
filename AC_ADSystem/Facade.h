@@ -33,7 +33,6 @@ public:
     void RecommendActivity(map<CommodityInformation*, int>& RelatedCommodityInformationReaderMap);//打印与商品相关的所有活动
 
 private:
-    
     AdvertisingSystem* AdSystemInstance;
     ActivitySystem* AcSystemInstance;
     Interpreter* ActivityInterpreter;

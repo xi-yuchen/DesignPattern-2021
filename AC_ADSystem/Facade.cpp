@@ -195,7 +195,7 @@ float Facade::CalOptimalDecision(map<CommodityInformation*, int>& BuyCommodityIn
 {
     AcVisitor_CalPrice* CalPriceVisitor;
 
-    CalPriceVisitor = new AcVisitor_CP_Discount(BuyCommodityInformationMap); // 策略1，使用打折活动
+    CalPriceVisitor = new AcVisitor_CP_Discount(BuyCommodityInformationMap);// 策略1，使用打折活动
     AcSystemInstance->Accept(CalPriceVisitor);
     float OptimalPrice = CalPriceVisitor->OptimalPrice;
     string OptimalDecisionCode = CalPriceVisitor->OptimalDecisionCode;

@@ -31,17 +31,7 @@ public:
     void showUserCmds();
 };
 
-class showUserAddCartCmds : public showCmds {
-public:
-    void showUserCmds();
-};
-
-class showUserCheckCartCmds : public showCmds {
-public:
-    void showUserCmds();
-};
-
-class showUserPayCartCmds : public showCmds {
+class showUserCartCmds : public showCmds {
 public:
     void showUserCmds();
 };

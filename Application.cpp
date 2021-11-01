@@ -57,7 +57,7 @@ int main() {
                         break;
                     }
                     case 5: {
-                        cartInterface.MainInterface(shopInterface);
+                        cartInterface.MainInterface(shopInterface, customerList->getCustomer());
                         break;
                     }
                     case 6: {

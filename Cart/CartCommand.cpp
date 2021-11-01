@@ -4,45 +4,75 @@
 
 #include "CartCommand.h"
 
-void CartCommand::setCart(Cart *cart) {
-    this->cart = cart;
+void CartCommand::setCart(Cart _cart) {
+    cart = _cart;
+}
+
+void CartCommand::setCustomer(Customer *customer) {
+    cart.setCustomer(customer);
 }
 
 void AddCommodity::operation() {
 //    cout << "Operating add commodity command" << endl;
-    cart->add(id, amount);
+    cart.add(id, amount);
 }
 
 void RemoveCommodity::operation() {
-    cart->remove(id);
+    cart.remove(id);
 }
 
 void RemoveSomeCommodity::operation() {
-    cart->remove(id, amount);
+    cart.remove(id, amount);
 }
 
 void DisplayCart::operation() {
-    cart->display();
+    cart.display();
 }
 
 void PayAll::operation() {
-    cart->pay();
+    cart.pay();
 }
 
 void PaySingleCommodity::operation() {
-    cart->pay(id);
+    cart.pay(id);
 }
 
 void PaySomeCommodity::operation() {
-    cart->pay(id, amount);
+    cart.pay(id, amount);
 }
 
-void ExecuteCommands::setCart(Cart *cart) {
-    this->cart = cart;
+CalculateOptionalPrice::CalculateOptionalPrice() {
+    setCommodities(cart.getCommodityList());
 }
 
-void ExecuteCommands::addCommand(CartCommand *command) {
+CalculateOptionalPrice::CalculateOptionalPrice(int id) {
+    setCommodities(cart.getCommodityList(id));
+}
+
+CalculateOptionalPrice::CalculateOptionalPrice(int id, int amount) {
+    setCommodities(cart.getCommodityList(id, amount));
+}
+
+void CalculateOptionalPrice::operation() {
+    CommodityInformationReader reader;
+    setCommodities(cart.getCommodityList());
+    for (auto _cmd:getCommodities()) {
+        reader.setCommodityInformation(_cmd.first);
+        cout << reader.getName() << " " << _cmd.second;
+    }
+    cout << "enter" << endl;
+    cout << "您选择的商品的最优价格是: " << cart.calculateOptionalPrice(getCommodities()) << endl;
+}
+
+void ExecuteCommands::setCart(Cart _cart) {
+    cart = _cart;
+}
+
+void ExecuteCommands::addCommand(CartCommand *command, Customer *customer) {
     commands.push_back(command);
+    if (!commands.empty()) {
+        this->cart.setCustomer(customer);
+    }
 }
 
 void ExecuteCommands::removeCommand(CartCommand *command) {
@@ -51,7 +81,7 @@ void ExecuteCommands::removeCommand(CartCommand *command) {
 
 void ExecuteCommands::execute() {
     for (auto command : commands) {
-        (*command).setCart(this->cart);
+        (*command).setCart(cart);
         (*command).operation();
     }
     commands.clear();
