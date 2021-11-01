@@ -4,25 +4,25 @@
 
 #include "Cart.h"
 
-void Cart::connectOrderList(OrderList *orderList) {
-    this->orderList = orderList;
+void Cart::connectOrderList(OrderInterface orderInterface) {
+    this->orderInterface = orderInterface;
 }
 
 void Cart::connectActivities(Facade *activities) {
     this->activities = activities;
 }
 
-void Cart::setShopInterface(shopInterface *interface) {
+void Cart::setShopInterface(shopInterface interface) {
     this->interface = interface;
 }
 
-void Cart::setCustomer() {
-    customer = CustomerSet::getInstance()->getCustomer();
+void Cart::setCustomer(Customer *_customer) {
+    customer = _customer;
     infoReader = customer->getCommodityReader();
 }
 
 void Cart::add(int id, int amount) {
-    CommodityInformation* info = interface->addCart(id);
+    CommodityInformation *info = interface.addCart(id);
     if (info != nullptr) {
         CommoditySale *sale = new CommoditySale(info);
         if (sale->execute(amount)) {
@@ -39,7 +39,7 @@ void Cart::add(int id, int amount) {
 void Cart::remove(int id) {
     bool hasID = false;
     for (auto it = commodityList.begin(); it != commodityList.end(); ++it) {
-        CommodityInformationReader *reader=new CommodityInformationReader(*(this->infoReader));
+        CommodityInformationReader *reader = new CommodityInformationReader(*(this->infoReader));
         reader->setCommodityInformation(it->first);
         if (reader->getID() == id) {
             hasID = true;
@@ -54,7 +54,7 @@ void Cart::remove(int id) {
 void Cart::remove(int id, int amount) {
     bool hasID = false;
     for (auto it = commodityList.begin(); it != commodityList.end(); ++it) {
-        CommodityInformationReader *reader=new CommodityInformationReader(*(this->infoReader));
+        CommodityInformationReader *reader = new CommodityInformationReader(*(this->infoReader));
         reader->setCommodityInformation(it->first);
         if (reader->getID() == id) {
             hasID = true;
@@ -74,7 +74,7 @@ void Cart::remove(int id, int amount) {
 }
 
 void Cart::displayCommodityInfo(CommodityInformation *info) {
-    CommodityInformationReader *reader=new CommodityInformationReader(info);
+    CommodityInformationReader *reader = new CommodityInformationReader(info);
     cout << reader->getID() << "\t" << reader->getName() << "\t" << reader->getPrice();
 }
 
@@ -91,59 +91,60 @@ void Cart::display() {
     }
 }
 
-map<CommodityInformation*, int> Cart::getCommodity() {
-    return this->commodityList;
-}
+//map<CommodityInformation *, int> Cart::getCommodity() {
+//    return commodityList;
+//}
 
-map<CommodityInformation*, int> Cart::getCommodity(int id) {
-    map<CommodityInformation*, int> commodities;
-    for (auto it = commodityList.begin(); it != commodityList.end(); ++it) {
-        CommodityInformationReader *reader=new CommodityInformationReader(*(this->infoReader));
-        reader->setCommodityInformation(it->first);
-        if (reader->getID() == id) {
-            commodities[it->first] = it->second;
-//            it = commodityList.erase(it);
-            break;
-        }
-    }
-    if (commodities.empty())
-        cout << "在您的购物车中没有找到该商品！" << endl;
-    return commodities;
-}
+//map<CommodityInformation *, int> Cart::getCommodity(int id) {
+//    map<CommodityInformation *, int> commodities;
+//    for (auto it = commodityList.begin(); it != commodityList.end(); ++it) {
+//        CommodityInformationReader *reader = new CommodityInformationReader(*(this->infoReader));
+//        reader->setCommodityInformation(it->first);
+//        if (reader->getID() == id) {
+//            commodities[it->first] = it->second;
+////            it = commodityList.erase(it);
+//            break;
+//        }
+//    }
+//    if (commodities.empty())
+//        cout << "在您的购物车中没有找到该商品！" << endl;
+//    return commodities;
+//}
 
-map<CommodityInformation*, int> Cart::getCommodity(int id, int amount) {
-    map<CommodityInformation*, int> commodities;
-    for (auto it = commodityList.begin(); it != commodityList.end(); ++it) {
-        CommodityInformationReader *reader=new CommodityInformationReader(*(this->infoReader));
-        reader->setCommodityInformation(it->first);
-        if (reader->getID() == id) {
-//            if (it->second < amount) {
-//                cout << "您的购物车中的 " << reader->getName() << " 数量不足！" << endl;
-//                return commodities;
-//            }
-            commodities[it->first] = amount;
-            break;
-        }
-    }
-    if (commodities.empty())
-        cout << "在您的购物车中没有找到该商品！" << endl;
-    return commodities;
-}
+//map<CommodityInformation *, int> Cart::getCommodity(int id, int amount) {
+//    map<CommodityInformation *, int> commodities;
+//    for (auto it = commodityList.begin(); it != commodityList.end(); ++it) {
+//        CommodityInformationReader *reader = new CommodityInformationReader(*(this->infoReader));
+//        reader->setCommodityInformation(it->first);
+//        if (reader->getID() == id) {
+////            if (it->second < amount) {
+////                cout << "您的购物车中的 " << reader->getName() << " 数量不足！" << endl;
+////                return commodities;
+////            }
+//            commodities[it->first] = amount;
+//            break;
+//        }
+//    }
+//    if (commodities.empty())
+//        cout << "在您的购物车中没有找到该商品！" << endl;
+//    return commodities;
+//}
 
 void Cart::pay() {
-    Order *order = new Order(this->customer->getCustomerReader()->getID(), this->commodityList, this->calculateOptionalPrice(this->commodityList));
-    this->orderList->addOrder(order);
+    Order *order = new Order(this->customer->getCustomerReader()->getID(), this->commodityList,
+                             this->calculateOptionalPrice(this->commodityList));
+    this->orderInterface.AddOrder(order);
     commodityList.clear();
 }
 
-float Cart::calculateOptionalPrice(map<CommodityInformation*, int> commodities) {
-    return activities->CalOptionalDecision(commodities);
+float Cart::calculateOptionalPrice(map<CommodityInformation *, int> commodities) {
+    return activities->CalOptimalDecision(commodities);
 }
 
 void Cart::pay(int id) {
-    map<CommodityInformation*, int> commodities;
+    map<CommodityInformation *, int> commodities;
     for (auto it = commodityList.begin(); it != commodityList.end(); ++it) {
-        CommodityInformationReader *reader=new CommodityInformationReader(*(this->infoReader));
+        CommodityInformationReader *reader = new CommodityInformationReader(*(this->infoReader));
         reader->setCommodityInformation(it->first);
         if (reader->getID() == id) {
             commodities[it->first] = it->second;
@@ -151,14 +152,15 @@ void Cart::pay(int id) {
             break;
         }
     }
-    Order *order = new Order(this->customer->getCustomerReader()->getID(),commodities, this->calculateOptionalPrice(commodities));
-    this->orderList->addOrder(order);
+    Order *order = new Order(this->customer->getCustomerReader()->getID(), commodities,
+                             this->calculateOptionalPrice(commodities));
+    this->orderInterface.AddOrder(order);
 }
 
 void Cart::pay(int id, int amount) {
-    map<CommodityInformation*, int> commodities;
+    map<CommodityInformation *, int> commodities;
     for (auto it = commodityList.begin(); it != commodityList.end(); ++it) {
-        CommodityInformationReader *reader=new CommodityInformationReader(*(this->infoReader));
+        CommodityInformationReader *reader = new CommodityInformationReader(*(this->infoReader));
         reader->setCommodityInformation(it->first);
         if (reader->getID() == id) {
             if (it->second < amount) {
@@ -167,10 +169,50 @@ void Cart::pay(int id, int amount) {
             }
             it->second -= amount;
             commodities[it->first] = amount;
-            Order *order = new Order(this->customer->getCustomerReader()->getID(),commodities, this->calculateOptionalPrice(commodities));
-            this->orderList->addOrder(order);
+            Order *order = new Order(this->customer->getCustomerReader()->getID(), commodities,
+                                     this->calculateOptionalPrice(commodities));
+            this->orderInterface.AddOrder(order);
             break;
         }
     }
 
+}
+
+const map<CommodityInformation *, int> &Cart::getCommodityList() const {
+    return commodityList;
+}
+
+const map<CommodityInformation *, int> &Cart::getCommodityList(int ID) const {
+        map<CommodityInformation *, int> commodities;
+        for (auto it = commodityList.begin(); it != commodityList.end(); ++it) {
+            CommodityInformationReader *reader = new CommodityInformationReader(*(this->infoReader));
+            reader->setCommodityInformation(it->first);
+            if (reader->getID() == ID) {
+                commodities[it->first] = it->second;
+    //            it = commodityList.erase(it);
+                break;
+            }
+        }
+        if (commodities.empty())
+            cout << "在您的购物车中没有找到该商品！" << endl;
+        return commodities;
+}
+
+const map<CommodityInformation *, int> &Cart::getCommodityList(int ID,int amount) const{
+        map<CommodityInformation *, int> commodities;
+        for (auto it = commodityList.begin(); it != commodityList.end(); ++it) {
+            CommodityInformationReader *reader = new CommodityInformationReader(*(this->infoReader));
+            reader->setCommodityInformation(it->first);
+            if (reader->getID() == ID) {
+    //            if (it->second < amount) {
+    //                cout << "您的购物车中的 " << reader->getName() << " 数量不足！" << endl;
+    //                return commodities;
+    //            }
+                commodities[it->first] = amount;
+                break;
+            }
+        }
+        if (commodities.empty())
+            cout << "在您的购物车中没有找到该商品！" << endl;
+        return commodities;
 }

@@ -1,20 +1,20 @@
 #include "shop.h"
 
 void Shop::showShopInformation() {
-    cout << "Shop ID: " << _shopID << endl;
-    cout << "Shop Name: " + _shopName << endl;
-    cout << "Shop Type: " + _shopType << endl;
-    cout << "Shop Date: " + _shopDate << endl;
-    cout << "Shop Storage: " << _shopStorage << endl;
-    cout << "Shop Remark Score:" << this->getTotalRemarkScore() << endl;
-    cout << "--Remark Starts Here--" << endl;
+    cout << "店铺ID: " << _shopID << endl;
+    cout << "店铺名称: " + _shopName << endl;
+    cout << "开店日期: " + _shopDate << endl;
+    cout << "店铺库存: " << _shopStorage << endl;
+    cout << "店铺评分: " << this->getTotalRemarkScore() << endl;
+    cout << "--以下是评价--" << endl;
     for (ShopRemark *shopRemark:_shopRemarks) {
-        cout << shopRemark->getRemarkDate() << endl;
-        cout << shopRemark->getRemarkUser() << endl;
-        cout << shopRemark->getRemarkBody() << endl;
-
+        cout << "*" << endl;
+        cout << "评价日期: " << shopRemark->getRemarkDate() << endl;
+        cout << "评价用户: " << shopRemark->getRemarkUser() << endl;
+        cout << "评价内容: " << shopRemark->getRemarkBody() << endl;
+        cout << "*" << endl << endl;
     }
-    cout << "--Remark Ends Here--" << endl;
+    cout << "--评价到底了--" << endl;
     cout << endl;
 }
 
@@ -23,7 +23,8 @@ void foodShop::accept(Visitor &v) {
 }
 
 foodShop::foodShop(const string &shopName, int shopId, const string &shopType, const string &shopDate, int shopStorage,
-                   double shopScore, const list<ShopRemark *> &shopRemarks, const map<CommodityInformation*, int> &itemList) : Shop(
+                   double shopScore, const list<ShopRemark *> &shopRemarks,
+                   const map<CommodityInformation *, int> &itemList) : Shop(
         shopName, shopId, shopType, shopDate, shopStorage, shopScore, shopRemarks, itemList) {}
 
 
@@ -33,8 +34,9 @@ void drinkShop::accept(Visitor &v) {
 
 drinkShop::drinkShop(const string &shopName, int shopId, const string &shopType, const string &shopDate,
                      int shopStorage, double shopScore, const list<ShopRemark *> &shopRemarks,
-                     const map<CommodityInformation*, int> &itemList) : Shop(shopName, shopId, shopType, shopDate, shopStorage,
-                                                                  shopScore, shopRemarks, itemList) {}
+                     const map<CommodityInformation *, int> &itemList) : Shop(shopName, shopId, shopType, shopDate,
+                                                                              shopStorage,
+                                                                              shopScore, shopRemarks, itemList) {}
 
 
 void digitalShop::accept(Visitor &v) {
@@ -43,8 +45,9 @@ void digitalShop::accept(Visitor &v) {
 
 digitalShop::digitalShop(const string &shopName, int shopId, const string &shopType, const string &shopDate,
                          int shopStorage, double shopScore, const list<ShopRemark *> &shopRemarks,
-                         const map<CommodityInformation*, int> &itemList) : Shop(shopName, shopId, shopType, shopDate, shopStorage,
-                                                                      shopScore, shopRemarks, itemList) {}
+                         const map<CommodityInformation *, int> &itemList) : Shop(shopName, shopId, shopType, shopDate,
+                                                                                  shopStorage,
+                                                                                  shopScore, shopRemarks, itemList) {}
 
 
 void bookShop::accept(Visitor &v) {
@@ -52,7 +55,8 @@ void bookShop::accept(Visitor &v) {
 }
 
 bookShop::bookShop(const string &shopName, int shopId, const string &shopType, const string &shopDate, int shopStorage,
-                   double shopScore, const list<ShopRemark *> &shopRemarks, const map<CommodityInformation*, int> &itemList) : Shop(
+                   double shopScore, const list<ShopRemark *> &shopRemarks,
+                   const map<CommodityInformation *, int> &itemList) : Shop(
         shopName, shopId, shopType, shopDate, shopStorage, shopScore, shopRemarks, itemList) {}
 
 
@@ -62,8 +66,9 @@ void dailyShop::accept(Visitor &v) {
 
 dailyShop::dailyShop(const string &shopName, int shopId, const string &shopType, const string &shopDate,
                      int shopStorage, double shopScore, const list<ShopRemark *> &shopRemarks,
-                     const map<CommodityInformation*, int> &itemList) : Shop(shopName, shopId, shopType, shopDate, shopStorage,
-                                                                  shopScore, shopRemarks, itemList) {}
+                     const map<CommodityInformation *, int> &itemList) : Shop(shopName, shopId, shopType, shopDate,
+                                                                              shopStorage,
+                                                                              shopScore, shopRemarks, itemList) {}
 
 
 void furnitureShop::accept(Visitor &v) {
@@ -72,8 +77,10 @@ void furnitureShop::accept(Visitor &v) {
 
 furnitureShop::furnitureShop(const string &shopName, int shopId, const string &shopType, const string &shopDate,
                              int shopStorage, double shopScore, const list<ShopRemark *> &shopRemarks,
-                             const map<CommodityInformation*, int> &itemList) : Shop(shopName, shopId, shopType, shopDate, shopStorage,
-                                                                          shopScore, shopRemarks, itemList) {}
+                             const map<CommodityInformation *, int> &itemList) : Shop(shopName, shopId, shopType,
+                                                                                      shopDate, shopStorage,
+                                                                                      shopScore, shopRemarks,
+                                                                                      itemList) {}
 
 
 void clothesShop::accept(Visitor &v) {
@@ -82,8 +89,9 @@ void clothesShop::accept(Visitor &v) {
 
 clothesShop::clothesShop(const string &shopName, int shopId, const string &shopType, const string &shopDate,
                          int shopStorage, double shopScore, const list<ShopRemark *> &shopRemarks,
-                         const map<CommodityInformation*, int> &itemList) : Shop(shopName, shopId, shopType, shopDate, shopStorage,
-                                                                      shopScore, shopRemarks, itemList) {}
+                         const map<CommodityInformation *, int> &itemList) : Shop(shopName, shopId, shopType, shopDate,
+                                                                                  shopStorage,
+                                                                                  shopScore, shopRemarks, itemList) {}
 
 
 void stationeryShop::accept(Visitor &v) {
@@ -92,9 +100,11 @@ void stationeryShop::accept(Visitor &v) {
 
 stationeryShop::stationeryShop(const string &shopName, int shopId, const string &shopType, const string &shopDate,
                                int shopStorage, double shopScore, const list<ShopRemark *> &shopRemarks,
-                               const map<CommodityInformation*, int> &itemList) : Shop(shopName, shopId, shopType, shopDate,
-                                                                            shopStorage, shopScore, shopRemarks,
-                                                                            itemList) {}
+                               const map<CommodityInformation *, int> &itemList) : Shop(shopName, shopId, shopType,
+                                                                                        shopDate,
+                                                                                        shopStorage, shopScore,
+                                                                                        shopRemarks,
+                                                                                        itemList) {}
 
 
 void sportShop::accept(Visitor &v) {
@@ -103,8 +113,9 @@ void sportShop::accept(Visitor &v) {
 
 sportShop::sportShop(const string &shopName, int shopId, const string &shopType, const string &shopDate,
                      int shopStorage, double shopScore, const list<ShopRemark *> &shopRemarks,
-                     const map<CommodityInformation*, int> &itemList) : Shop(shopName, shopId, shopType, shopDate, shopStorage,
-                                                                  shopScore, shopRemarks, itemList) {}
+                     const map<CommodityInformation *, int> &itemList) : Shop(shopName, shopId, shopType, shopDate,
+                                                                              shopStorage,
+                                                                              shopScore, shopRemarks, itemList) {}
 
 
 void nullShop::accept(Visitor &v) {
@@ -112,5 +123,6 @@ void nullShop::accept(Visitor &v) {
 }
 
 nullShop::nullShop(const string &shopName, int shopId, const string &shopType, const string &shopDate, int shopStorage,
-                   double shopScore, const list<ShopRemark *> &shopRemarks, const map<CommodityInformation*, int> &itemList) : Shop(
+                   double shopScore, const list<ShopRemark *> &shopRemarks,
+                   const map<CommodityInformation *, int> &itemList) : Shop(
         shopName, shopId, shopType, shopDate, shopStorage, shopScore, shopRemarks, itemList) {}

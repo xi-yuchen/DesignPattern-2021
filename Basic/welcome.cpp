@@ -26,6 +26,18 @@ void showUserInfoCmds::showUserCmds() {
     cout << "0 - 退出" << endl;
 }
 
+void showUserCartCmds::showUserCmds() {
+    cout << endl;
+    cout << "您正在查看您的购物车信息！" << endl;
+    cout << "1 - 查看购物车" << endl;
+    cout << "2 - 将指定商品加入购物车" << endl;
+    cout << "3 - 删除购物车中指定商品" << endl;
+    cout << "4 - 减少购物车中指定商品" << endl;
+    cout << "5 - 结算购物车" << endl;
+    cout << "6 - 显示活动优惠" << endl;
+    cout << "0 - 退出" << endl;
+}
+
 void showUserInterfaceCmds::showUserCmds() {
     cout << endl;
     cout << "欢迎光临天猫双十一购物节！请选择操作！" << endl;
@@ -33,15 +45,12 @@ void showUserInterfaceCmds::showUserCmds() {
     cout << "2 - 店铺" << endl;
     cout << "3 - 商品" << endl;
     cout << "4 - 活动与广告" << endl;
-    cout << "5 - 计算折扣与满减" << endl;
-    cout << "6 - 将指定商品加入购物车" << endl;
-    cout << "7 - 查看购物车" << endl;
-    cout << "8 - 结算购物车" << endl;
-    cout << "9 - 查看订单列表" << endl;
+    cout << "5 - 购物车" << endl;
+    cout << "6 - 查看订单列表" << endl;
     cout << "0 - 退出" << endl;
 }
 
-void Initial(){
+void Initial() {
     shopInterface shopInterface;
     shopInterface.initialize();
 }

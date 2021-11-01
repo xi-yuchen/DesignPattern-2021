@@ -6,12 +6,12 @@
 #define SOFTWARE_DESIGN_PATTERNS_TASK_CART_H
 
 
-#include "Commodity.h"
-#include "Facade.h"
-#include "Order.h"
-
-#include "Customer.h"
-#include "shopInterface.h"
+#include "../Commodity/Commodity.h"
+#include "../AC_ADSystem/Facade.h"
+#include "../Order/OrderInterface.h"
+#include "../Customer/Customer.h"
+#include "../Customer/Customers.h"
+#include "../Shop/shopInterface.h"
 
 #include <list>
 #include <sstream>
@@ -19,6 +19,7 @@
 #include <vector>
 #include <map>
 #include <iostream>
+
 using namespace std;
 
 
@@ -177,46 +178,54 @@ using namespace std;
 
 class Cart {
 private:
-    map<CommodityInformation*, int> commodityList;
+    map<CommodityInformation *, int> commodityList;
 
-    OrderList *orderList;
+    OrderInterface orderInterface;
     Facade *activities;
 
     Customer *customer;
     CommodityInformationReader *infoReader;
-    shopInterface *interface;
+    shopInterface interface;
 public:
-//    Cart() {
-//        customer = CustomerSet::getInstance()->getCustomer();
-//        infoReader = customer->getCommodityReader();
-//    }
-
-    Cart() = default;
-
+    Cart() {
+        activities = new Facade();
+    }
 //    void setCustomer(Customer *customer) { this->customer = customer; }
 
-    void connectOrderList(OrderList *orderList);
-    void connectActivities(Facade *activities);
-//    void setShopInterface(shopInterface *interface) {
-//        this->interface = interface;
-//    }
-    void setShopInterface(shopInterface *interface);
-    void setCustomer();
+    void connectOrderList(OrderInterface orderInterface);
 
-    float calculateOptionalPrice(map<CommodityInformation*, int> commodities);
+    void connectActivities(Facade *activities);
+
+    void setShopInterface(shopInterface interface);
+
+    void setCustomer(Customer *customer);
+
+    float calculateOptionalPrice(map<CommodityInformation *, int> commodities);
 
     void add(int id, int amount);
+
     void remove(int id);
+
     void remove(int id, int amount);
+
     void display();
 
-    map<CommodityInformation*, int> getCommodity();
-    map<CommodityInformation*, int> getCommodity(int id);
-    map<CommodityInformation*, int> getCommodity(int id, int amount);
+    //map<CommodityInformation*, int> getCommodity();
+
+    const map<CommodityInformation *, int> &getCommodityList() const;
+
+    const map<CommodityInformation *, int> &getCommodityList(int ID) const;
+
+    const map<CommodityInformation *, int> &getCommodityList(int ID, int amount) const;
+    //map<CommodityInformation*, int> getCommodity(int id);
+    //map<CommodityInformation*, int> getCommodity(int id, int amount);
 
     void pay();
+
     void pay(int id);
+
     void pay(int id, int amount);
+
 
     static void displayCommodityInfo(CommodityInformation *commodityInfo);
 

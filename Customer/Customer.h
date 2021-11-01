@@ -63,6 +63,19 @@ public:
     virtual Customer* getCustomer()=0;
 };
 
+class NullCustomerBuilder:public AbstractCustomerBuilder{
+private:
+    Customer *_customer;
+public:
+    NullCustomerBuilder(){
+        _customer=new Customer();
+    };
+    void setCustomerReader() override;
+    void setCustomerSetter() override;
+    void setCommodityReader() override;
+    Customer* getCustomer() override;
+};
+
 class NormalCustomerBuilder:public AbstractCustomerBuilder{
 private:
     Customer *_customer;
@@ -97,6 +110,7 @@ public:
         builder->setCustomerSetter();
     }
 };
+
 
 
 class ChatRoom {
