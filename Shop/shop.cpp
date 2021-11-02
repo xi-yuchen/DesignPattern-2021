@@ -1,5 +1,6 @@
 #include "shop.h"
 
+// 店铺类成员函数：展示店铺的详细信息
 void Shop::showShopInformation() {
     cout << "店铺ID: " << _shopID << endl;
     cout << "店铺名称: " + _shopName << endl;
@@ -17,7 +18,10 @@ void Shop::showShopInformation() {
     cout << "--评价到底了--" << endl;
     cout << endl;
 }
-
+/*
+ * 以下是各派生类的accept函数以及构造函数的具体实现
+ * 按.h文件所述共有10个，内容基本相同，后续不再赘述
+ */
 void foodShop::accept(Visitor &v) {
     return v.visit(this);
 }
