@@ -13,7 +13,6 @@ void CartCommand::setCustomer(Customer *customer) {
 }
 
 void AddCommodity::operation() {
-//    cout << "Operating add commodity command" << endl;
     cart.add(id, amount);
 }
 

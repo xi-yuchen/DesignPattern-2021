@@ -20,9 +20,9 @@ void Cart::setCustomer(Customer *_customer) {
 void Cart::add(int id, int amount) {
     CommodityInformation *info = interface.addCart(id);
     if (info != nullptr) {
+        // 调用该CommodityInformation(商品信息)的商品库存类的销售Command类的execute()方法，返回值为库存是否充足
         CommoditySale *sale = new CommoditySale(info);
         if (sale->execute(amount)) {
-//        if(1) {
             this->commodityList[info] += amount;
         } else {
             cout << "该商品库存不足！" << endl;
@@ -35,6 +35,7 @@ void Cart::add(int id, int amount) {
 void Cart::remove(int id) {
     bool hasID = false;
     for (auto it = commodityList.begin(); it != commodityList.end(); ++it) {
+        // 按用户的CommodityInformationReader(读取商品信息类)读取 => 对于普通用户和VIP用户的价格不同
         CommodityInformationReader *reader = new CommodityInformationReader(*(this->infoReader));
         reader->setCommodityInformation(it->first);
         if (reader->getID() == id) {
@@ -91,6 +92,7 @@ void Cart::pay() {
     Order *order = new Order(this->customer->getCustomerReader()->getID(), this->commodityList,
                              this->calculateOptionalPrice(this->commodityList));
     OrderInterface tempOrderInterface = getOrderInterface();
+    // 获取链接的订单界面的订单列表，将新订单加入其中
     vector<Order *> tempOrderList = tempOrderInterface.getOrderlist();
     tempOrderList.push_back(order);
     tempOrderInterface.setOrderlist(tempOrderList);
@@ -99,6 +101,7 @@ void Cart::pay() {
 }
 
 float Cart::calculateOptionalPrice(map<CommodityInformation *, int> commodities) {
+    // 调用活动子系统提供的接口
     return activities->CalOptimalDecision(commodities);
 }
 
@@ -158,7 +161,6 @@ const map<CommodityInformation *, int> &Cart::getCommodityList(int ID) const {
         reader->setCommodityInformation(it->first);
         if (reader->getID() == ID) {
             commodities[it->first] = it->second;
-            //            it = commodityList.erase(it);
             break;
         }
     }
@@ -173,10 +175,6 @@ const map<CommodityInformation *, int> &Cart::getCommodityList(int ID, int amoun
         CommodityInformationReader *reader = new CommodityInformationReader(*(this->infoReader));
         reader->setCommodityInformation(it->first);
         if (reader->getID() == ID) {
-            //            if (it->second < amount) {
-            //                cout << "您的购物车中的 " << reader->getName() << " 数量不足！" << endl;
-            //                return commodities;
-            //            }
             commodities[it->first] = amount;
             break;
         }
