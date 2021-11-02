@@ -6,8 +6,13 @@
 
 using namespace std;
 
-Order::Order(int customerID, map<CommodityInformation *, int> Items, float price) : Customerid(customerID),
-                                                                                    items(Items), Price(price) {
+//===================== Order 订单类 ========================
+
+/**
+ * 功能: 构造订单类
+ * 参数：用户id,订单条目，价格
+ */
+Order::Order(int customerID, map<CommodityInformation *, int> Items, float price) : Customerid(customerID),items(Items), Price(price) {
     time_t t = time(0);
     char ch[64];
     strftime(ch, sizeof(ch), "%Y%m%d%H%M%S", localtime(&t)); //年-月-日 时-分-秒
@@ -16,14 +21,21 @@ Order::Order(int customerID, map<CommodityInformation *, int> Items, float price
     m_pState = pStateA;
 }
 
-void Order::Request()//Order状态的打印
+/**
+ * 功能: 打印order状态
+ */
+void Order::Request()
 {
     if (m_pState) {
         m_pState->Handle(this);
     }
 }
 
-void Order::pay()//Order状态的改变
+/**
+ * 功能: 支付（改变order状态）
+ * 如果order“未支付”改变状态为“已支付”，如果order“已支付”，提示无法重复支付
+ */
+void Order::pay()
 {
     int i = m_pState->value();
     if (i == 1) {

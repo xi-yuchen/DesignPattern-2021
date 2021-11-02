@@ -6,14 +6,14 @@
 
 #include "../Basic/welcome.h"
 
-class OrderInterface {
+class OrderInterface {//订单接口类
 private:
-    vector<Order *> orderlist;
+    vector<Order *> orderlist;//订单列表
 public:
     void CreateOrder(int customerID, map<CommodityInformation *, int> Items, float price);
 
-    void AddOrder(Order *order);//在订单中增加一个订单项
-    void RemoveOrder(string orderID);//在订单中删除一个订单项
+    void AddOrder(Order *order);
+    void RemoveOrder(string orderID);
     void display(int id);
     void displayUnpaid(int id);
     void pay();
