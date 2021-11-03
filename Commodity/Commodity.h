@@ -81,7 +81,7 @@ public:
     bool removeCommodity(CommodityInformation* commodity) { return source->Remove(commodity); }
 };
 
-class CommoditySale : Command<bool, int> { // 设计模式: command
+class CommoditySale { // 设计模式: command
 private:
     CommodityInformation* source;
 public:
@@ -94,7 +94,7 @@ public:
     virtual bool execute(int amount) { return source->Sell(amount); }
 };
 
-class CommodityDisplay : Command<void, void> { // 设计模式: command
+class CommodityDisplay { // 设计模式: command
 private:
     CommodityInformation* source;
 public:
