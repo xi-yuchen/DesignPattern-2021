@@ -152,3 +152,34 @@ void proxyShop::display() {
     }
     shop->showShopInformation();
 }
+
+shopDecorator::shopDecorator(const string &shopName, int shopId, const string &shopType, const string &shopDate,
+                             int shopStorage, double shopScore, const list<ShopRemark *> &shopRemarks,
+                             const map<CommodityInformation *, int> &itemList, Shop *decoratedShop) : Shop(shopName,
+                                                                                                           shopId,
+                                                                                                           shopType,
+                                                                                                           shopDate,
+                                                                                                           shopStorage,
+                                                                                                           shopScore,
+                                                                                                           shopRemarks,
+                                                                                                           itemList),
+                                                                                                      decoratedShop(
+                                                                                                              decoratedShop) {}
+
+void shopDecorator::accept(Visitor &v) {
+    return v.visit(this);
+}
+
+AddStarShopDecorator::AddStarShopDecorator(const string &shopName, int shopId, const string &shopType,
+                                           const string &shopDate, int shopStorage, double shopScore,
+                                           const list<ShopRemark *> &shopRemarks,
+                                           const map<CommodityInformation *, int> &itemList, Shop *decoratedShop)
+                                           : shopDecorator(shopName, shopId, shopType, shopDate, shopStorage, shopScore, shopRemarks, itemList,
+                                                           decoratedShop) {}
+
+void AddStarShopDecorator::accept(Visitor &v) {
+    setRemarkScore(10.00);
+    //return v.visit(this);
+}
+
+

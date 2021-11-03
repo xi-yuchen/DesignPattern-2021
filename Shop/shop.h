@@ -33,7 +33,7 @@ public:
     ShopRemark(const string &remarkDate, const string &remarkUser, const string &remarkBody, double remarkScore)
             : _remarkDate(remarkDate), _remarkUser(remarkUser), _remarkBody(remarkBody), _remarkScore(remarkScore) {}
 
-            //获取评论日期
+    //获取评论日期
     const string &getRemarkDate() const {
         return _remarkDate;
     }
@@ -73,7 +73,7 @@ private:
     int _shopStorage;
     double _shopScore;
     list<ShopRemark *> _shopRemarks;
-    map<CommodityInformation*, int> _itemList;
+    map<CommodityInformation *, int> _itemList;
 
 public:
     // 店铺中要用到的方法
@@ -82,7 +82,8 @@ public:
     virtual void accept(Visitor &v) = 0;
 
     Shop(const string &shopName, int shopId, const string &shopType, const string &shopDate, int shopStorage,
-         double shopScore, const list<ShopRemark *> &shopRemarks, const map<CommodityInformation*, int> &itemList) : _shopName(
+         double shopScore, const list<ShopRemark *> &shopRemarks, const map<CommodityInformation *, int> &itemList)
+            : _shopName(
             shopName), _shopID(shopId), _shopType(shopType), _shopDate(shopDate), _shopStorage(shopStorage), _shopScore(
             shopScore), _shopRemarks(shopRemarks), _itemList(itemList) {}
 
@@ -135,11 +136,11 @@ public:
         _shopRemarks.push_back(new ShopRemark(remarkDate, remarkUser, remarkBody, remarkScore));
     }
 
-    const map<CommodityInformation*, int> &getItemList() const {
+    const map<CommodityInformation *, int> &getItemList() const {
         return _itemList;
     }
 
-    void setItemList(const map<CommodityInformation*, int> &itemList) {
+    void setItemList(const map<CommodityInformation *, int> &itemList) {
         _itemList = itemList;
     }
 
@@ -200,7 +201,7 @@ public:
     void accept(Visitor &v);
 
     foodShop(const string &shopName, int shopId, const string &shopType, const string &shopDate, int shopStorage,
-             double shopScore, const list<ShopRemark *> &shopRemarks, const map<CommodityInformation*, int> &itemList);
+             double shopScore, const list<ShopRemark *> &shopRemarks, const map<CommodityInformation *, int> &itemList);
 };
 
 class clothesShop : public Shop {
@@ -208,7 +209,8 @@ public:
     void accept(Visitor &v);
 
     clothesShop(const string &shopName, int shopId, const string &shopType, const string &shopDate, int shopStorage,
-                double shopScore, const list<ShopRemark *> &shopRemarks, const map<CommodityInformation*, int> &itemList);
+                double shopScore, const list<ShopRemark *> &shopRemarks,
+                const map<CommodityInformation *, int> &itemList);
 };
 
 class drinkShop : public Shop {
@@ -216,7 +218,8 @@ public:
     void accept(Visitor &v);
 
     drinkShop(const string &shopName, int shopId, const string &shopType, const string &shopDate, int shopStorage,
-              double shopScore, const list<ShopRemark *> &shopRemarks, const map<CommodityInformation*, int> &itemList);
+              double shopScore, const list<ShopRemark *> &shopRemarks,
+              const map<CommodityInformation *, int> &itemList);
 };
 
 class digitalShop : public Shop {
@@ -225,7 +228,8 @@ public:
     void accept(Visitor &v);
 
     digitalShop(const string &shopName, int shopId, const string &shopType, const string &shopDate, int shopStorage,
-                double shopScore, const list<ShopRemark *> &shopRemarks, const map<CommodityInformation*, int> &itemList);
+                double shopScore, const list<ShopRemark *> &shopRemarks,
+                const map<CommodityInformation *, int> &itemList);
 };
 
 class bookShop : public Shop {
@@ -234,7 +238,7 @@ public:
     void accept(Visitor &v);
 
     bookShop(const string &shopName, int shopId, const string &shopType, const string &shopDate, int shopStorage,
-             double shopScore, const list<ShopRemark *> &shopRemarks, const map<CommodityInformation*, int> &itemList);
+             double shopScore, const list<ShopRemark *> &shopRemarks, const map<CommodityInformation *, int> &itemList);
 };
 
 class dailyShop : public Shop {
@@ -243,7 +247,8 @@ public:
     void accept(Visitor &v);
 
     dailyShop(const string &shopName, int shopId, const string &shopType, const string &shopDate, int shopStorage,
-              double shopScore, const list<ShopRemark *> &shopRemarks, const map<CommodityInformation*, int> &itemList);
+              double shopScore, const list<ShopRemark *> &shopRemarks,
+              const map<CommodityInformation *, int> &itemList);
 };
 
 class furnitureShop : public Shop {
@@ -252,7 +257,8 @@ public:
     void accept(Visitor &v);
 
     furnitureShop(const string &shopName, int shopId, const string &shopType, const string &shopDate, int shopStorage,
-                  double shopScore, const list<ShopRemark *> &shopRemarks, const map<CommodityInformation*, int> &itemList);
+                  double shopScore, const list<ShopRemark *> &shopRemarks,
+                  const map<CommodityInformation *, int> &itemList);
 };
 
 class stationeryShop : public Shop {
@@ -261,7 +267,8 @@ public:
     void accept(Visitor &v);
 
     stationeryShop(const string &shopName, int shopId, const string &shopType, const string &shopDate, int shopStorage,
-                   double shopScore, const list<ShopRemark *> &shopRemarks, const map<CommodityInformation*, int> &itemList);
+                   double shopScore, const list<ShopRemark *> &shopRemarks,
+                   const map<CommodityInformation *, int> &itemList);
 };
 
 class sportShop : public Shop {
@@ -270,7 +277,8 @@ public:
     void accept(Visitor &v);
 
     sportShop(const string &shopName, int shopId, const string &shopType, const string &shopDate, int shopStorage,
-              double shopScore, const list<ShopRemark *> &shopRemarks, const map<CommodityInformation*, int> &itemList);
+              double shopScore, const list<ShopRemark *> &shopRemarks,
+              const map<CommodityInformation *, int> &itemList);
 };
 
 /*
@@ -286,15 +294,16 @@ public:
     void accept(Visitor &v);
 
     nullShop(const string &shopName, int shopId, const string &shopType, const string &shopDate, int shopStorage,
-             double shopScore, const list<ShopRemark *> &shopRemarks, const map<CommodityInformation*, int> &itemList);
+             double shopScore, const list<ShopRemark *> &shopRemarks, const map<CommodityInformation *, int> &itemList);
 };
+
 /*
  * 设计模式 - 代理模式 Proxy Mode
  * 用一个对象包含一个同等的对象，即可以包含的对象为代理，对被包含的对象进行操作。
  * 代理对象拥有被包含对象所有的操作和属性，还额外包含了被包含对象的属性。
  * 对代理对象进行的操作可以等效于直接对包含对象进行操作，此处操作为输出店铺的信息。
  */
-class proxyShop:public Shop{
+class proxyShop : public Shop {
 private:
     Shop *shop;
 public:
@@ -306,4 +315,30 @@ public:
 
     void display();
 };
+
+class shopDecorator : public Shop {
+protected:
+    Shop *decoratedShop;
+public:
+    virtual void accept(Visitor &v);
+
+    shopDecorator(const string &shopName, int shopId, const string &shopType, const string &shopDate, int shopStorage,
+                  double shopScore, const list<ShopRemark *> &shopRemarks,
+                  const map<CommodityInformation *, int> &itemList, Shop *decoratedShop);
+};
+
+class AddStarShopDecorator : public shopDecorator {
+public:
+
+    void accept(Visitor &v);
+
+    void execute() {
+        decoratedShop->setRemarkScore(10.00);
+    }
+
+    AddStarShopDecorator(const string &shopName, int shopId, const string &shopType, const string &shopDate,
+                         int shopStorage, double shopScore, const list<ShopRemark *> &shopRemarks,
+                         const map<CommodityInformation *, int> &itemList, Shop *decoratedShop);
+};
+
 #endif //SOFTWAREARC_SHOP_H

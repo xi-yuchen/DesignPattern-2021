@@ -4,6 +4,7 @@
 #include"../Customer/Customers.h"
 #include"../Customer/Customer.h"
 
+typedef Shop *SpShop;
 /*
  * 预先声明Visitor以供后续使用，因为派生类也在这里定义，无法同时定义和声明，所以在此预先声明
  */
@@ -81,6 +82,52 @@ Shop *ShopFactory::createShop(string type) {
 }
 
 /*
+ * 设计模式：原型模式 Prototype
+ * 因为商店是初始化的，不需要大规模、频繁的变化，所以可以使用原型模式以完成浅拷贝
+ * 现在原型模式自带的商店缓存中加入所有的已有商店，然后在实际初始化的时候直接使用已有的商店即可。
+ * 确保已有的商店都是可以找到的，找不到返回空指针nullptr即可。
+ */
+void shopCache::loadCache() {
+    ShopRemark *defaultRemark = new ShopRemark("2021-01-01", "Administrator", "Good.", 5);
+    list<ShopRemark *> defaultRemarkList;
+    defaultRemarkList.push_back(defaultRemark);
+    map<CommodityInformation *, int> defaultGoodsList;
+    Shop *shop1 = new foodShop("芜湖肉蛋葱鸡专营店", 1, "food", "2013-09-18", 0, 0, defaultRemarkList, defaultGoodsList);
+    _shopMap[shop1] = 1;
+    Shop *shop2 = new drinkShop("芜湖美汁汁儿专营店", 2, "drink", "2013-09-18", 0, 0, defaultRemarkList, defaultGoodsList);
+    _shopMap[shop2] = 2;
+    Shop *shop3 = new digitalShop("芜湖外设专营店", 3, "digital", "2013-09-18", 0, 0, defaultRemarkList, defaultGoodsList);
+    _shopMap[shop3] = 3;
+    Shop *shop4 = new bookShop("芜湖杀人书专营店", 4, "book", "2013-09-18", 0, 0, defaultRemarkList, defaultGoodsList);
+    _shopMap[shop4] = 4;
+    Shop *shop5 = new dailyShop("芜湖日用品专营店", 5, "daily", "2013-09-18", 0, 0, defaultRemarkList, defaultGoodsList);
+    _shopMap[shop5] = 5;
+    Shop *shop6 = new furnitureShop("芜湖厨具专营店", 6, "furniture", "2013-09-18", 0, 0, defaultRemarkList, defaultGoodsList);
+    _shopMap[shop6] = 6;
+    Shop *shop7 = new clothesShop("芜湖发病棉袄专营店", 7, "clothes", "2004-12-01", 0, 0, defaultRemarkList, defaultGoodsList);
+    _shopMap[shop7] = 7;
+    Shop *shop8 = new stationeryShop("芜湖文具专营店", 8, "stationery", "2013-09-18", 0, 0, defaultRemarkList,
+                                     defaultGoodsList);
+    _shopMap[shop8] = 8;
+    Shop *shop9 = new sportShop("芜湖运动设备专营店", 9, "sport", "2013-09-18", 0, 0, defaultRemarkList, defaultGoodsList);
+    _shopMap[shop9] = 9;
+    Shop *shop0 = new nullShop("芜湖空商店", 0, "", "", 0, 0, defaultRemarkList, defaultGoodsList);
+    _shopMap[shop0] = 0;
+    Shop *shop10 = new AddStarShopDecorator("芜湖装饰器高分空商店", 10, "", "", 0, 10, defaultRemarkList, defaultGoodsList,
+                                            new nullShop("", 0, "", "", 0, 0, defaultRemarkList, defaultGoodsList));
+    _shopMap[shop10] = 10;
+}
+
+// 原型模式的寻找商店
+Shop *shopCache::cloneShop(int shopID) {
+    for (auto _map:_shopMap) {
+        if (_map.second == shopID)
+            return _map.first;
+    }
+    return nullptr;
+}
+
+/*
  * 工厂模式创建店铺函数的具体实现
  */
 Shop *shopInterface::createShop(string type) {
@@ -116,32 +163,14 @@ void shopInterface::checkShop(int ID) {
 /*
  * 店铺整合接口类
  * 预先生成10个店铺并初始化所有店铺数据；
+ * 从原型模式的商店数据缓存中直接读取后生成即可。
  */
 void shopInterface::initialize() {
-    ShopRemark *defaultRemark = new ShopRemark("2021-01-01", "Administrator", "Good.", 5);
-    list<ShopRemark *> defaultRemarkList;
-    defaultRemarkList.push_back(defaultRemark);
-    ShopFactory shopFactory;
-    map<CommodityInformation *, int> defaultGoodsList;
-    _shopList.push_back(
-            new foodShop("芜湖肉蛋葱鸡专营店", 1, "food", "2013-09-18", 0, 0, defaultRemarkList, defaultGoodsList));
-    _shopList.push_back(
-            new drinkShop("芜湖美汁汁儿专营店", 2, "drink", "2013-09-18", 0, 0, defaultRemarkList, defaultGoodsList));
-    _shopList.push_back(
-            new digitalShop("芜湖外设专营店", 3, "digital", "2013-09-18", 0, 0, defaultRemarkList, defaultGoodsList));
-    _shopList.push_back(
-            new bookShop("芜湖杀人书专营店", 4, "book", "2013-09-18", 0, 0, defaultRemarkList, defaultGoodsList));
-    _shopList.push_back(
-            new dailyShop("芜湖日用品专营店", 5, "daily", "2013-09-18", 0, 0, defaultRemarkList, defaultGoodsList));
-    _shopList.push_back(
-            new furnitureShop("芜湖厨具专营店", 6, "furniture", "2013-09-18", 0, 0, defaultRemarkList, defaultGoodsList));
-    _shopList.push_back(
-            new clothesShop("芜湖发病棉袄专营店", 7, "clothes", "2004-12-01", 0, 0, defaultRemarkList, defaultGoodsList));
-    _shopList.push_back(
-            new stationeryShop("芜湖文具专营店", 8, "stationery", "2013-09-18", 0, 0, defaultRemarkList, defaultGoodsList));
-    _shopList.push_back(
-            new sportShop("芜湖运动设备专营店", 9, "sport", "2013-09-18", 0, 0, defaultRemarkList, defaultGoodsList));
-    _shopList.push_back(new nullShop("", 0, "", "", 0, 0, defaultRemarkList, defaultGoodsList));
+    shopCache shopCache;
+    shopCache.loadCache();
+    for (int i = 0; i <= 10; i++) {
+        _shopList.push_back(shopCache.cloneShop(i));
+    }
 }
 
 /*

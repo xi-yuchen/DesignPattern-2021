@@ -92,5 +92,14 @@ public:
     // 将指定ID的商品加入购物车
     CommodityInformation *addCart(int ID);
 };
-
+/*
+ * 原型模式 Prototype
+ */
+class shopCache{
+private:
+    map<Shop*,int> _shopMap; //原型模式所需的商店缓存数据池
+public:
+    Shop* cloneShop(int shopID);//获取数据池中所缓存的店铺
+    void loadCache();// 预先设置缓存的函数
+};
 #endif //SOFTWAREARC_SHOPMANAGER_H
