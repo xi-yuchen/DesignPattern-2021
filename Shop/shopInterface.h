@@ -14,13 +14,22 @@ using namespace std;
 #include "../Basic/welcome.h"
 #include "../Customer/Customer.h"
 #include "../Commodity/Commodity.h"
+/*
+ * 设计模式-抽象工厂模式 Abstract Factory Mode
+ * 抽象工厂是比工厂更高级的存在，从面向对象的角度来说工厂继承了抽象工厂，是抽象工厂的派生子类和具体实现。
+ * 所以抽象工厂设置为所有工厂的基类，获取对象的函数声明为虚函数，具体使用工厂时从抽象工厂中派生。
+ */
+class AbstractFactory {
+public:
+    virtual Shop *createShop(string type) = 0;
+};
 
 /*
  * 设计模式-工厂模式 Factory Mode
  * 顾名思义，工厂模式是用来生产对应的对象的。
  * 该工厂只有一个函数，参数为店铺的类型，可以根据用户提供的类型生产对应的店铺对象。
  */
-class ShopFactory {
+class ShopFactory : public AbstractFactory {
 public:
     Shop *createShop(string type);
 };

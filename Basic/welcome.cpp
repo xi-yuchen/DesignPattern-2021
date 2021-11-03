@@ -1,6 +1,3 @@
-//
-// Created by liruijie666 on 2021/10/30.
-//
 #include "welcome.h"
 
 using namespace std;
@@ -56,6 +53,15 @@ void showUserOrderCmds::showUserCmds() {
     cout << "2 - 支付全部未支付的订单" << endl;
     cout << "3 - 查看所有订单" << endl;
     cout << "0 - 退出" << endl;
+}
+
+void showUserCmdsAdapter::displayExistingCommands() {
+    vector<string> _AdapterCommands = {"用户命令", "店铺命令", "商品命令", "购物车命令", "订单命令"};
+    concreteCommands.setConcreteCommands(_AdapterCommands);
+    cout << "已有的用户可以使用的命令提示集合: " << endl;
+    for (string _commands:concreteCommands.getConcreteCommands()) {
+        cout << _commands << endl;
+    }
 }
 
 void Initial() {

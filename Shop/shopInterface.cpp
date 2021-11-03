@@ -18,6 +18,15 @@ filterVisitor filterVisitor;
  *      在函数运行中预先对参数为空或null做判断，如果为真则也生成一个对象，但是对象中的值都是没有意义的值。而非给用户只输出错误信息。
  *      这样做无论什么情况都可以按照生成对象的标准化来处理。
  */
+
+/*
+ * 设计模式 - 代理模式 Proxy Mode
+ * 用一个对象包含一个同等的对象，即可以包含的对象为代理，对被包含的对象进行操作。
+ * 代理对象拥有被包含对象所有的操作和属性，还额外包含了被包含对象的属性。
+ * 对代理对象进行的操作可以等效于直接对包含对象进行操作，此处操作为输出店铺的信息。
+ */
+
+// 其中包含生成空对象和代理对象的对应操作
 Shop *ShopFactory::createShop(string type) {
     if (type == "")
         return new nullShop("unknown", rand() % 10000 + 10, "unknown", "2021-01-01", 0, 0, list<ShopRemark *>(),
@@ -63,6 +72,11 @@ Shop *ShopFactory::createShop(string type) {
         return new sportShop("newSportshop", rand() % 10000 + 10, "sport", "2021-01-01", 0, 0, list<ShopRemark *>(),
                              map<CommodityInformation *, int>());
 
+    else if (type == "proxy")
+        return new proxyShop("unknown", rand() % 10000 + 10, "unknown", "2021-01-01", 0, 0, list<ShopRemark *>(),
+                             map<CommodityInformation *, int>(), nullptr);
+
+    //非上述情况时，制造不出有意义的值，所以停止制造即可。
     return nullptr;
 }
 

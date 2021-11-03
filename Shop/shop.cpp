@@ -18,6 +18,7 @@ void Shop::showShopInformation() {
     cout << "--评价到底了--" << endl;
     cout << endl;
 }
+
 /*
  * 以下是各派生类的accept函数以及构造函数的具体实现
  * 按.h文件所述共有10个，内容基本相同，后续不再赘述
@@ -130,3 +131,24 @@ nullShop::nullShop(const string &shopName, int shopId, const string &shopType, c
                    double shopScore, const list<ShopRemark *> &shopRemarks,
                    const map<CommodityInformation *, int> &itemList) : Shop(
         shopName, shopId, shopType, shopDate, shopStorage, shopScore, shopRemarks, itemList) {}
+
+void proxyShop::accept(Visitor &v) {
+    return v.visit(this);
+}
+
+proxyShop::proxyShop(const string &shopName, int shopId, const string &shopType, const string &shopDate,
+                     int shopStorage, double shopScore, const list<ShopRemark *> &shopRemarks,
+                     const map<CommodityInformation *, int> &itemList, Shop *shop) : Shop(shopName, shopId, shopType,
+                                                                                          shopDate, shopStorage,
+                                                                                          shopScore, shopRemarks,
+                                                                                          itemList), shop(shop) {}
+
+
+void proxyShop::display() {
+    // 创建代理对象
+    if (shop == nullptr) {
+        shop = new nullShop("unknown", rand() % 10000 + 10, "unknown", "2021-01-01", 0, 0, list<ShopRemark *>(),
+                            map<CommodityInformation *, int>());
+    }
+    shop->showShopInformation();
+}

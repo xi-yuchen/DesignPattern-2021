@@ -288,5 +288,22 @@ public:
     nullShop(const string &shopName, int shopId, const string &shopType, const string &shopDate, int shopStorage,
              double shopScore, const list<ShopRemark *> &shopRemarks, const map<CommodityInformation*, int> &itemList);
 };
+/*
+ * 设计模式 - 代理模式 Proxy Mode
+ * 用一个对象包含一个同等的对象，即可以包含的对象为代理，对被包含的对象进行操作。
+ * 代理对象拥有被包含对象所有的操作和属性，还额外包含了被包含对象的属性。
+ * 对代理对象进行的操作可以等效于直接对包含对象进行操作，此处操作为输出店铺的信息。
+ */
+class proxyShop:public Shop{
+private:
+    Shop *shop;
+public:
+    void accept(Visitor &v);
 
+    proxyShop(const string &shopName, int shopId, const string &shopType, const string &shopDate, int shopStorage,
+              double shopScore, const list<ShopRemark *> &shopRemarks, const map<CommodityInformation *, int> &itemList,
+              Shop *shop);
+
+    void display();
+};
 #endif //SOFTWAREARC_SHOP_H
