@@ -1,5 +1,5 @@
 #include<iostream>
-#include "Basic/welcome.h"
+#include "Welcome/welcome.h"
 #include "Shop/shopInterface.h"
 #include "Customer/CustomerMain.h"
 #include "Commodity/CommodityInterface.h"
@@ -12,7 +12,7 @@ using namespace std;
 int main() {
     int loginStatus, choice, choiceSub1;
     showUserInterfaceCmds showUserInterfaceCmds;
-
+    // == 创建公共店铺类的接口类以供不同子系统和功能模块同时读取
     shopInterface shopInterface;
     shopInterface.initialize();
 
@@ -29,6 +29,7 @@ int main() {
     CartInterface cartInterface;
     OrderInterface orderInterface;
 
+    // 初始化三级责任链模式的所有节点
     AbstractLogger *normal_log = new NormalLogger;
     AbstractLogger *success_log = new SuccessLogger;
     AbstractLogger *error_log = new ErrorLogger;
@@ -46,6 +47,12 @@ int main() {
                     normal_log->writeLog(1);
                     break;
                 }
+                /*
+                 * 设计模式：依赖注入 Dependence Injection
+                 * 一个类的接口函数调用另一个类，使得在业务逻辑层面，调用类成为客户端client，被调用类成为服务器server。
+                 * 依赖注入可以使用3种方式实现：通过参数传入、通过构造函数传入、setter函数
+                 * 主过程内使用了通过参数传入的方式，然后进入具体函数调用后，即可使用通过构造函数传入、setter函数等完成。
+                 */
                 switch (choiceSub1) {
                     case 1: {
                         customerInterface.setCustomerSet(customerList);

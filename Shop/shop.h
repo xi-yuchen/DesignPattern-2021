@@ -23,6 +23,7 @@ class ShopRemark;//声明使用商家评论类
  */
 class ShopRemark {
 private:
+    // 评论日期、评论用户、评论内容、评价分数
     string _remarkDate;
     string _remarkUser;
     string _remarkBody;
@@ -77,73 +78,90 @@ private:
 
 public:
     // 店铺中要用到的方法
+    //展示信息
     void showShopInformation();
 
+    //visitor模式的accept函数
     virtual void accept(Visitor &v) = 0;
 
+    //基类构造函数
     Shop(const string &shopName, int shopId, const string &shopType, const string &shopDate, int shopStorage,
          double shopScore, const list<ShopRemark *> &shopRemarks, const map<CommodityInformation *, int> &itemList)
             : _shopName(
             shopName), _shopID(shopId), _shopType(shopType), _shopDate(shopDate), _shopStorage(shopStorage), _shopScore(
             shopScore), _shopRemarks(shopRemarks), _itemList(itemList) {}
 
+            // 获取店铺名称
     const string &getShopName() const {
         return _shopName;
     }
-
+    //获取店铺ID
     int getShopId() const {
         return _shopID;
     }
 
+    // 获取店铺类型
     const string &getShopType() const {
         return _shopType;
     }
 
+    // 获取店铺日期
     const string &getShopDate() const {
         return _shopDate;
     }
 
+    // 获取店铺库存
     int getShopStorage() const {
         return _shopStorage;
     }
 
+    // 获取店铺评论
     const list<ShopRemark *> &getShopRemarks() const {
         return _shopRemarks;
     }
 
+    // 设置店铺名称
     void setShopName(const string &shopName) {
         _shopName = shopName;
     }
 
+    // 设置店铺ID
     void setShopId(int shopId) {
         _shopID = shopId;
     }
 
+    // 设置店铺类型
     void setShopType(const string &shopType) {
         _shopType = shopType;
     }
 
+    // 设置店铺日期
     void setShopDate(const string &shopDate) {
         _shopDate = shopDate;
     }
 
+    // 设置店铺库存
     void setShopStorage(int shopStorage) {
         _shopStorage = shopStorage;
     }
 
+    // 添加评论
     void
     addShopRemarks(const string &remarkDate, const string &remarkUser, const string &remarkBody, double remarkScore) {
         _shopRemarks.push_back(new ShopRemark(remarkDate, remarkUser, remarkBody, remarkScore));
     }
 
+    // 获取商品目录
     const map<CommodityInformation *, int> &getItemList() const {
         return _itemList;
     }
 
+    // 设置商品目录
     void setItemList(const map<CommodityInformation *, int> &itemList) {
         _itemList = itemList;
     }
 
+    //获取店铺评分
     double getTotalRemarkScore() const {
         double totalScore = 0.00;
         for (auto _remark:_shopRemarks) {
@@ -156,6 +174,7 @@ public:
             return totalScore / len;
     }
 
+    // 设置店铺评分
     void setRemarkScore(double shopScore) {
         _shopScore = shopScore;
     }
@@ -171,14 +190,14 @@ class Visitor {
 public:
     virtual void visit(Shop *shop) = 0;
 };
-
+// 输出信息的子类visitor
 class infoVisitor : public Visitor {
 public:
     void visit(Shop *shop) {
         shop->showShopInformation();
     }
 };
-
+// 过滤商店输出信息的子类visitor
 class filterVisitor : public Visitor {
 public:
     void visit(Shop *shop) {
@@ -196,6 +215,7 @@ public:
  *      构造函数：生成对应的派生子类
  * 店铺类型: food, drink, digital, book, daily, furniture, clothes, stationery, sports, null.
  */
+// foodShop子类与构造函数
 class foodShop : public Shop {
 public:
     void accept(Visitor &v);
@@ -204,6 +224,7 @@ public:
              double shopScore, const list<ShopRemark *> &shopRemarks, const map<CommodityInformation *, int> &itemList);
 };
 
+// clothesShop子类与构造函数
 class clothesShop : public Shop {
 public:
     void accept(Visitor &v);
@@ -213,6 +234,7 @@ public:
                 const map<CommodityInformation *, int> &itemList);
 };
 
+// drinkShop子类与构造函数
 class drinkShop : public Shop {
 public:
     void accept(Visitor &v);
@@ -222,6 +244,7 @@ public:
               const map<CommodityInformation *, int> &itemList);
 };
 
+// digitalShop子类与构造函数
 class digitalShop : public Shop {
 public:
 
@@ -232,6 +255,7 @@ public:
                 const map<CommodityInformation *, int> &itemList);
 };
 
+// bookShop子类与构造函数
 class bookShop : public Shop {
 public:
 
@@ -241,6 +265,7 @@ public:
              double shopScore, const list<ShopRemark *> &shopRemarks, const map<CommodityInformation *, int> &itemList);
 };
 
+// dailyShop子类与构造函数
 class dailyShop : public Shop {
 public:
 
@@ -251,6 +276,7 @@ public:
               const map<CommodityInformation *, int> &itemList);
 };
 
+// furnitureShop子类与构造函数
 class furnitureShop : public Shop {
 public:
 
@@ -261,6 +287,7 @@ public:
                   const map<CommodityInformation *, int> &itemList);
 };
 
+// stationery子类与构造函数
 class stationeryShop : public Shop {
 public:
 
@@ -271,6 +298,7 @@ public:
                    const map<CommodityInformation *, int> &itemList);
 };
 
+// sportShop子类与构造函数
 class sportShop : public Shop {
 public:
 
@@ -288,6 +316,7 @@ public:
  *      在函数运行中预先对参数为空或null做判断，如果为真则也生成一个对象，但是对象中的值都是没有意义的值。而非给用户只输出错误信息。
  *      这样做无论什么情况都可以按照生成对象的标准化来处理。
  */
+// nullShop与构造函数
 class nullShop : public Shop {
 public:
 
@@ -303,6 +332,7 @@ public:
  * 代理对象拥有被包含对象所有的操作和属性，还额外包含了被包含对象的属性。
  * 对代理对象进行的操作可以等效于直接对包含对象进行操作，此处操作为输出店铺的信息。
  */
+// proxyShop与构造函数
 class proxyShop : public Shop {
 private:
     Shop *shop;
@@ -313,9 +343,10 @@ public:
               double shopScore, const list<ShopRemark *> &shopRemarks, const map<CommodityInformation *, int> &itemList,
               Shop *shop);
 
-    void display();
+    void display();// 展示商店的函数
 };
 
+// 商店装饰器基类
 class shopDecorator : public Shop {
 protected:
     Shop *decoratedShop;
@@ -327,6 +358,7 @@ public:
                   const map<CommodityInformation *, int> &itemList, Shop *decoratedShop);
 };
 
+// 商店装饰器基类的子类 - 修改评论分数
 class AddStarShopDecorator : public shopDecorator {
 public:
 

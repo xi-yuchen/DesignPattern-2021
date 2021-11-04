@@ -21,7 +21,7 @@ void Shop::showShopInformation() {
 
 /*
  * 以下是各派生类的accept函数以及构造函数的具体实现
- * 按.h文件所述共有10个，内容基本相同，后续不再赘述
+ * 按.h文件所述共有10个，内容基本与其中相同，后续不再赘述
  */
 void foodShop::accept(Visitor &v) {
     return v.visit(this);
