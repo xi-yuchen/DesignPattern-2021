@@ -4,40 +4,60 @@
 
 #include "CartCommand.h"
 
-void CartCommand::setCart(Cart *cart) {
-    this->cart = cart;
+void CartCommand::setCart(Cart _cart) {
+    cart = _cart;
+}
+
+void CartCommand::setCustomer(Customer *customer) {
+    cart.setCustomer(customer);
 }
 
 void AddCommodity::operation() {
-    cart->add(commodity);
+    cart.add(id, amount);
 }
 
 void RemoveCommodity::operation() {
-    cart->remove(id);
+    cart.remove(id);
 }
 
 void RemoveSomeCommodity::operation() {
-    cart->remove(id, amount);
+    cart.remove(id, amount);
 }
 
 void DisplayCart::operation() {
-    cart->display();
+    cart.display();
 }
 
 void PayAll::operation() {
-    cart->pay();
+    cart.pay();
 }
 
 void PaySingleCommodity::operation() {
-    cart->pay(id);
+    cart.pay(id);
 }
 
 void PaySomeCommodity::operation() {
-    cart->pay(id, amount);
+    cart.pay(id, amount);
 }
 
-void ExecuteCommands::setCart(Cart *cart) {
-    this->cart = cart;
+CalculateOptionalPrice::CalculateOptionalPrice() {
+    setCommodities(cart.getCommodityList());
+}
+
+CalculateOptionalPrice::CalculateOptionalPrice(int id) {
+    setCommodities(cart.getCommodityList(id));
+}
+
+CalculateOptionalPrice::CalculateOptionalPrice(int id, int amount) {
+    setCommodities(cart.getCommodityList(id, amount));
+}
+
+void CalculateOptionalPrice::operation() {
+    cart.calculateOptionalPrice(getCommodities());
+}
+
+void ExecuteCommands::setCart(Cart _cart) {
+    cart = _cart;
 }
 
 void ExecuteCommands::addCommand(CartCommand *command) {
@@ -50,7 +70,8 @@ void ExecuteCommands::removeCommand(CartCommand *command) {
 
 void ExecuteCommands::execute() {
     for (auto command : commands) {
-        (*command).setCart(this->cart);
-        (*command).operation();
+        command->setCart(cart);
+        command->operation();
     }
+    commands.clear();
 }

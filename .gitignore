@@ -18,3 +18,15 @@ Cart/cmake-build-debug/Cart
 *.includecache
 *.internal
 Cart/main.cpp
+*.exe
+*.exe
+cmake-build-debug/CMakeFiles/3.20.2/CompilerIdC/CMakeCCompilerId.c
+cmake-build-debug/Makefile
+cmake-build-debug/Makefile
+cmake-build-debug/CMakeFiles/Makefile2
+cmake-build-debug/CMakeFiles/3.20.2/CompilerIdCXX/CMakeCXXCompilerId.cpp
+cmake-build-debug/CMakeFiles/3.20.2/CompilerIdCXX/a.exe
+cmake-build-debug/CMakeFiles/3.20.2/CompilerIdC/CMakeCCompilerId.c
+cmake-build-debug/CMakeFiles/3.20.2/CompilerIdC/a.exe
+cmake-build-debug/Makefile
+cmake-build-debug/CMakeFiles/Makefile2

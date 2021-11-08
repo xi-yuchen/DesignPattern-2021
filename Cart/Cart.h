@@ -5,81 +5,80 @@
 #ifndef SOFTWARE_DESIGN_PATTERNS_TASK_CART_H
 #define SOFTWARE_DESIGN_PATTERNS_TASK_CART_H
 
-#include "SelectedCommodity.h"
+#include "../Commodity/Commodity.h"
+#include "../AC_ADSystem/Facade.h"
+#include "../Order/OrderInterface.h"
+#include "../Customer/Customer.h"
+#include "../Customer/Customers.h"
+#include "../Shop/shopInterface.h"
 
 #include <list>
 #include <sstream>
-#include <unordered_map>
+//#include <unordered_map>
+#include <vector>
+#include <map>
 #include <iostream>
 
 using namespace std;
 
-//class Store;
-
-
 /**
- * 感觉订单类和订单列表类按照Order和OrderList来写更符合业务逻辑，所以我就这样写了
- * 接口和那边是能对上的
- *
- * 然后对于广告类，那边对于促销活动的分类太多了，接口好多好复杂，不知道该用什么形式呈现在购物车里，所以暂时就没有对接
- * （意思就是Observer模式在这里就暂时没有写）
+ * Cart/购物车：主要包含Cart类/CartCommand类/CartInterface类
+ * Cart类 => 声明购物车内部的基本逻辑/供外界调用的接口
+ * CartCommand类 => 为用户调用声明的命令类，用户通过构造命令类的实例间接对购物车进行操作
+ * CartInterface类 => 在本项目中所有用户对于购物车的相关操作集成的界面类
  */
-
-/**
- * 2021.10.26 12：40修改
- * 调整了Cart中的SelectedCommodity的存储方式 => 从直接存储实例改成了存储指针
- * 因为之前列表元素存指针的时候不知道迭代器怎么调用成员函数（现在知道怎么写了）
- * 然后给广告类的接口就可以实现了，但暂时没写
- */
-
-class SelectedCommodity;
-
-/**
- * 构造函数不允许声明为虚函数，所以只能在Order(订单类)内部先声明一个list
- */
-
-class Order {
-    list<SelectedCommodity*> commodityList;
-//    int id = 1123;
-public:
-    Order(list<SelectedCommodity*> commodityList) { this->commodityList = commodityList; }
-//    int getID() const { return id; }
-};
-
-/**
- * OrderList(订单列表类)是一个纯抽象类(接口)
- */
-class OrderList {
-//    list<Order*> orderList;
-public:
-    virtual void addOrder(Order &order); // 这里是接口
-//    void addOrder(Order *order) {
-//        orderList.push_back(order);
-//    }
-//    void display() {
-//        cout << "This is the list of you orders:" << endl;
-//        for (auto order : orderList)
-//            cout << (*order).getID() << endl;
-//    }
-};
 
 class Cart {
 private:
-    list<SelectedCommodity*> commodityList;
-    OrderList* orderList;
+    // 从shopInterface类实例获取的整个商场的商品信息
+    map<CommodityInformation *, int> commodityList;
+    // 与订单功能的界面类进行交互
+    OrderInterface orderInterface;
+    // 调用商品类的接口
+    Facade *activities;
+    // 存储使用购物车的用户
+    Customer *customer;
+    // 该用户的读取商品信息的操作
+    CommodityInformationReader *infoReader;
+    // 调用商店类的接口
+    shopInterface interface;
 public:
-    void connectOrderList(OrderList *orderList);
-
-    void add(SelectedCommodity *commodity);
+    Cart() {
+        activities = new Facade();
+    }
+    // 链接订单相关的界面类
+    OrderInterface &getOrderInterface(){return orderInterface;}
+    void setOrderInterface(OrderInterface &_orderInterface) {orderInterface = _orderInterface;}
+    // 链接活动类
+    void connectActivities(Facade *activities);
+    // 链接商店界面类
+    void setShopInterface(shopInterface interface);
+    // 获取当前用户
+    void setCustomer(Customer *customer);
+    // 调用活动类的接口：计算最优惠价格
+    float calculateOptionalPrice(map<CommodityInformation *, int> commodities);
+    // 按数量增加某ID的商品
+    void add(int id, int amount);
+    // 移除购物车内某ID的所有商品
     void remove(int id);
+    // 按数量移除购物车内某ID的商品
     void remove(int id, int amount);
+    // 展示购物车内的所有商品信息
     void display();
+    // 获取所有商品的map => 提供给calculateOptionalPrice()方法调用
+    const map<CommodityInformation *, int> &getCommodityList() const;
+    // 获取某ID的商品的map => 提供给calculateOptionalPrice()方法调用
+    const map<CommodityInformation *, int> &getCommodityList(int ID) const;
+    // 获取按数量获取某ID的商品的map => 提供给calculateOptionalPrice()成员方法调用
+    const map<CommodityInformation *, int> &getCommodityList(int ID, int amount) const;
+    // 结算购物车内所有商品
     void pay();
+    // 结算购物车内某ID的商品
     void pay(int id);
+    // 按数量结算购物车内某ID的商品
     void pay(int id, int amount);
-
-    // 给广告类提供的接口（虽然格式不太对），暂时不懂业务逻辑也不知道在购物车类里要怎么实现广告这个模块，就先这样搁着了
-    list<SelectedCommodity*> getAllCommodity() { return commodityList; }
+    // 展示某商品的所有信息 => 提供给display()成员方法调用
+    static void displayCommodityInfo(CommodityInformation *commodityInfo);
 };
 
 #endif //SOFTWARE_DESIGN_PATTERNS_TASK_CART_H
